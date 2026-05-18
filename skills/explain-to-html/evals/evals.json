@@ -4,13 +4,13 @@
     {
       "id": "explain-code-html",
       "prompt": "この関数の処理内容と注意点を、/tmp配下の単体HTMLファイルとして解説して。",
-      "expected_output": "/tmp/codex-explain-*.html が作成される。HTMLはUTF-8、inline CSS/inline JavaScriptのみ、外部依存なし。HTMLにはdata-review-target付きのコンポーネント、コメント用のreview-toggle、改善プロンプト出力用のreview-exportが含まれ、チャットには絶対パスと短い要約が返る。",
+      "expected_output": "/tmp/codex-explain-*.html が作成される。HTMLはUTF-8、inline CSS/inline JavaScriptのみ、外部依存なし。HTMLにはdata-review-target付きのコンポーネント、自由位置コメント用のreview-toggle、改善プロンプト出力用のreview-exportが含まれ、チャットには絶対パスと短い要約が返る。",
       "files": []
     },
     {
       "id": "interactive-comments-and-improvement-prompt",
       "prompt": "この設計メモをHTMLで解説して。各セクションにコメントを入れられて、そのコメントを改善依頼プロンプトとして出力できるようにして。",
-      "expected_output": "/tmp/codex-explain-*.html が作成される。HTMLにはセクション単位のdata-review-target/data-review-label、コメントピンまたはコメントパネル、localStorage保存、コメントの対象箇所とコメント内容をセットにした改善プロンプトの表示/コピー機能が含まれる。",
+      "expected_output": "/tmp/codex-explain-*.html が作成される。HTMLにはセクション単位のdata-review-target/data-review-label、任意位置クリックで置けるコメントピン、コメント編集/削除、localStorage保存、target idとx/y位置とコメント内容をセットにしたコンパクトな改善プロンプトの表示/コピー機能が含まれる。",
       "files": []
     },
     {
