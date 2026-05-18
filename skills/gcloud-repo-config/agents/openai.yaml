@@ -1,0 +1,4 @@
+interface:
+  display_name: "Gcloud Repo Config"
+  short_description: "Use repo-local gcloud named configurations safely."
+  default_prompt: "Use this skill to set up or use the correct gcloud named configuration for this repository."

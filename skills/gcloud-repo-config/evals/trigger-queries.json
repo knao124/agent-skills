@@ -1,0 +1,42 @@
+[
+  {
+    "query": "このrepoではどのgcloud configを使うべきか、.codex/gcloud.local.tomlを見て切り替えて",
+    "should_trigger": true
+  },
+  {
+    "query": "repoごとにgcloud auth loginのアカウントとプロジェクトを切り替える初期設定をして",
+    "should_trigger": true
+  },
+  {
+    "query": "AI agent用にCLOUDSDK_ACTIVE_CONFIG_NAMEを使ってgcloudを実行する運用をセットアップしたい",
+    "should_trigger": true
+  },
+  {
+    "query": "このリポジトリ用のgcloud named configurationを作って、projectとaccountを聞きながら設定して",
+    "should_trigger": true
+  },
+  {
+    "query": "gcloudのservice account impersonationをこのrepoのlocal設定に保存して使って",
+    "should_trigger": true
+  },
+  {
+    "query": "gcloud auth loginの有効期限を説明して",
+    "should_trigger": false
+  },
+  {
+    "query": "このCloud Run serviceのログを調べて障害原因を分析して",
+    "should_trigger": false
+  },
+  {
+    "query": "Google Cloud SDKをインストールする方法を教えて",
+    "should_trigger": false
+  },
+  {
+    "query": "ADCとgcloud auth loginの違いをブラウザで見られるHTMLにまとめて",
+    "should_trigger": false
+  },
+  {
+    "query": "このrepoでgit worktreeを切ってから修正を始めて",
+    "should_trigger": false
+  }
+]
