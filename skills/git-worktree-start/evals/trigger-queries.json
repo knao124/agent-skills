@@ -1,0 +1,42 @@
+[
+  {
+    "query": "このrepoで修正作業を始めたい。mainを最新化して作業用worktreeとcodexブランチを作って",
+    "should_trigger": true
+  },
+  {
+    "query": "バグ修正を実装する前に専用のgit worktreeを切って",
+    "should_trigger": true
+  },
+  {
+    "query": "origin/mainからcodex/xxxブランチのworktreeを作ってから編集して",
+    "should_trigger": true
+  },
+  {
+    "query": "この機能追加を別worktreeで進めたい",
+    "should_trigger": true
+  },
+  {
+    "query": "今の作業ツリーを汚さずにrefactor用ブランチを用意して",
+    "should_trigger": true
+  },
+  {
+    "query": "git logを見せて",
+    "should_trigger": false
+  },
+  {
+    "query": "このPRをレビューして。変更はしないで",
+    "should_trigger": false
+  },
+  {
+    "query": "現在のブランチ名を確認して",
+    "should_trigger": false
+  },
+  {
+    "query": "このファイルの中身を説明して",
+    "should_trigger": false
+  },
+  {
+    "query": "作業後にコミットを作って",
+    "should_trigger": false
+  }
+]

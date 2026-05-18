@@ -1,0 +1,36 @@
+name: Validate Agent Skills
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Agent Skills validator
+        run: python -m pip install --upgrade pip skills-ref
+
+      - name: Validate skill directories
+        run: scripts/validate-skills.sh --skip-gh
+
+      - name: Validate gh skill discovery
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh --version
+          gh skill publish --dry-run
