@@ -20,6 +20,14 @@
     "should_trigger": true
   },
   {
+    "query": "この設計をHTMLで解説して、セクションごとにコメントして改善プロンプトを出せるようにして",
+    "should_trigger": true
+  },
+  {
+    "query": "レビューコメントを付けられるインタラクティブな解説HTMLを作って",
+    "should_trigger": true
+  },
+  {
     "query": "このコードを一言で説明して。ファイルは作らないで",
     "should_trigger": false
   },
