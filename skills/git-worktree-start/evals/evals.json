@@ -1,0 +1,17 @@
+{
+  "skill_name": "git-worktree-start",
+  "evals": [
+    {
+      "id": "start-clean-worktree",
+      "prompt": "mainをorigin/mainにfast-forward同期し、codex/fix-login-timeoutブランチの専用worktreeを作成してから作業を始めて。",
+      "expected_output": "git fetch、base branchのff-only pull、origin/mainからのgit worktree add -bが実行され、作業worktreeの絶対パスとブランチ名が報告される。",
+      "files": []
+    },
+    {
+      "id": "protect-dirty-worktree",
+      "prompt": "今のworktreeに未コミット変更がある状態で、新しい修正作業用のworktreeを作って。",
+      "expected_output": "未コミット変更を破壊せず、既存worktreeを再利用しない。必要なら別のclean worktreeまたはorigin/baseから新規worktreeを作る。",
+      "files": []
+    }
+  ]
+}

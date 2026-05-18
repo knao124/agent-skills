@@ -1,0 +1,17 @@
+{
+  "skill_name": "explain-to-html",
+  "evals": [
+    {
+      "id": "explain-code-html",
+      "prompt": "この関数の処理内容と注意点を、/tmp配下の単体HTMLファイルとして解説して。",
+      "expected_output": "/tmp/codex-explain-*.html が作成される。HTMLはUTF-8、inline CSSのみ、外部依存なしで、チャットには絶対パスと短い要約が返る。",
+      "files": []
+    },
+    {
+      "id": "respect-plain-text-only",
+      "prompt": "この設定を説明して。ただしファイルは作らず、チャットだけで返して。",
+      "expected_output": "HTMLファイルを作成せず、チャット内で簡潔に説明する。",
+      "files": []
+    }
+  ]
+}

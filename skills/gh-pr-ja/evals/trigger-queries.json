@@ -1,0 +1,42 @@
+[
+  {
+    "query": "この差分でPRを作りたい。日本語でタイトルと本文を書いて",
+    "should_trigger": true
+  },
+  {
+    "query": "既存PRの本文を、背景・問題・対策の方針・実際にやったことの構成に直して",
+    "should_trigger": true
+  },
+  {
+    "query": "レビューで指摘された運用リスクをPR説明に追記して、自然な日本語に整えて",
+    "should_trigger": true
+  },
+  {
+    "query": "Files changed に日本語の意図コメントを追加してほしい",
+    "should_trigger": true
+  },
+  {
+    "query": "複数のPR本文のトーンと構成を同じ日本語フォーマットに揃えて",
+    "should_trigger": true
+  },
+  {
+    "query": "このコミットメッセージを英語で短く直して",
+    "should_trigger": false
+  },
+  {
+    "query": "GitHub Actions の失敗原因を調べて修正して",
+    "should_trigger": false
+  },
+  {
+    "query": "READMEを日本語に翻訳して",
+    "should_trigger": false
+  },
+  {
+    "query": "Issue の再現手順を整理してコメントして",
+    "should_trigger": false
+  },
+  {
+    "query": "PRをマージしてmainをpullして",
+    "should_trigger": false
+  }
+]

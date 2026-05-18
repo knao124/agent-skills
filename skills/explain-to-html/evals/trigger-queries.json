@@ -1,0 +1,42 @@
+[
+  {
+    "query": "この関数を解説して。ブラウザで見られるHTMLにして",
+    "should_trigger": true
+  },
+  {
+    "query": "このdiffを説明して、/tmpにHTMLとして保存して",
+    "should_trigger": true
+  },
+  {
+    "query": "この設定ファイルの意味を解説して",
+    "should_trigger": true
+  },
+  {
+    "query": "このコマンドが何をしているか説明して。HTMLで見たい",
+    "should_trigger": true
+  },
+  {
+    "query": "このコードを解説して、あとで共有できるファイルにして",
+    "should_trigger": true
+  },
+  {
+    "query": "このコードを一言で説明して。ファイルは作らないで",
+    "should_trigger": false
+  },
+  {
+    "query": "READMEに使い方の説明を追記して",
+    "should_trigger": false
+  },
+  {
+    "query": "このHTMLのCSSを修正して",
+    "should_trigger": false
+  },
+  {
+    "query": "このログを要約してチャットで返して",
+    "should_trigger": false
+  },
+  {
+    "query": "ブラウザでlocalhostを開いて動作確認して",
+    "should_trigger": false
+  }
+]
