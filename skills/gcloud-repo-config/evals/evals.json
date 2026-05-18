@@ -1,0 +1,23 @@
+{
+  "skill_name": "gcloud-repo-config",
+  "evals": [
+    {
+      "id": "use-existing-selector",
+      "prompt": "repoに.codex/gcloud.local.tomlがある。そこに書かれたconfigurationを使ってgcloud projects describeを実行して。",
+      "expected_output": "repo-local selectorを読み、named configurationを検証し、gcloud config configurations activateを使わずにCLOUDSDK_ACTIVE_CONFIG_NAMEまたは--configuration付きでgcloudを実行する。",
+      "files": []
+    },
+    {
+      "id": "interactive-initial-setup",
+      "prompt": "このrepo用のgcloud named configurationを初期設定して。projectやaccountは必要なら質問して。",
+      "expected_output": "project ID、Google account、configuration名、service account impersonationの要否、region/zone、ADCの要否をユーザーに確認し、同意後にgcloud configと.codex/gcloud.local.tomlを作る。",
+      "files": []
+    },
+    {
+      "id": "adc-boundary",
+      "prompt": "repoのアプリコードもGoogle client libraryを使うので、このgcloud local設定で認証を切り替えて。",
+      "expected_output": "gcloud named configurationとADCは別物だと説明し、CLI用設定だけで足りるかADC設定も必要かを確認してから進める。",
+      "files": []
+    }
+  ]
+}
