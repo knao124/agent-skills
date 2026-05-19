@@ -10,7 +10,7 @@
     {
       "id": "interactive-comments-and-improvement-prompt",
       "prompt": "この設計メモをHTMLで解説して。各セクションにコメントを入れられて、そのコメントを改善依頼プロンプトとして出力できるようにして。",
-      "expected_output": "/tmp/codex-explain-*.html が作成される。HTMLにはセクション単位のdata-review-target/data-review-label、コメントアイコン型カーソル、任意位置クリックで置けるコメントピン、コメント編集/削除、保存後に入力欄を空にする挙動、localStorage保存、target idとx/y位置とコメント内容をセットにしたコンパクトな改善プロンプトの表示/コピー機能が含まれる。",
+      "expected_output": "/tmp/codex-explain-*.html が作成される。HTMLにはセクション単位のdata-review-target/data-review-label、コメントアイコン型カーソル、コメント/改善プロンプトボタンのインラインSVGアイコン、Escでコメントモードを解除する挙動、任意位置クリックで置けるコメントピン、コメント編集/削除、保存後に入力欄を空にする挙動、localStorage保存、target idとx/y位置とコメント内容をセットにしたコンパクトな改善プロンプトの表示/コピー機能が含まれる。",
       "files": []
     },
     {
