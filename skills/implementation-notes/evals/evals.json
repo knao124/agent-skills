@@ -1,0 +1,23 @@
+{
+  "skill_name": "implementation-notes",
+  "evals": [
+    {
+      "id": "create-running-notes",
+      "prompt": "Implement a feature from a short spec and keep implementation-notes.html updated with design decisions, deviations, tradeoffs, open questions, and validation.",
+      "expected_output": "A code change plus a standalone implementation-notes.html file near the implementation root. The notes include the required sections, record spec interpretations and validation, and the final response mentions the notes path.",
+      "files": []
+    },
+    {
+      "id": "preserve-existing-notes",
+      "prompt": "Continue an implementation in a repository that already has implementation-notes.html. Add the current work session without deleting prior notes.",
+      "expected_output": "The existing HTML notes are preserved and updated with a new or current dated session. User-authored history remains intact, and obsolete entries are marked rather than silently removed.",
+      "files": []
+    },
+    {
+      "id": "document-ambiguity",
+      "prompt": "Implement an ambiguous spec where one behavior is not fully defined. Proceed with a reasonable assumption and capture what should be confirmed.",
+      "expected_output": "The implementation proceeds if safe, records the assumption as a design decision or open question, documents any tradeoff, and updates validation status before replying.",
+      "files": []
+    }
+  ]
+}

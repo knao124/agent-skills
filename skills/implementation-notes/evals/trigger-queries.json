@@ -1,0 +1,42 @@
+[
+  {
+    "query": "Implement the checkout redesign spec and maintain a running implementation-notes.html with design decisions, deviations, tradeoffs, and open questions.",
+    "should_trigger": true
+  },
+  {
+    "query": "この仕様を実装して。曖昧なところの解釈やトレードオフは implementation-notes.html に残しながら進めて",
+    "should_trigger": true
+  },
+  {
+    "query": "Use the viral implementation-notes prompt while building this feature.",
+    "should_trigger": true
+  },
+  {
+    "query": "Spec may be incomplete. As you work, keep an HTML decision log of assumptions, deviations from the spec, and questions for me.",
+    "should_trigger": true
+  },
+  {
+    "query": "Implement this API change and document any intentional departures from the spec in implementation notes.",
+    "should_trigger": true
+  },
+  {
+    "query": "このコードを解説するHTMLを/tmpに作って",
+    "should_trigger": false
+  },
+  {
+    "query": "この差分でPRを作りたい。日本語でタイトルと本文を書いて",
+    "should_trigger": false
+  },
+  {
+    "query": "implementation-notes.html の内容を要約して",
+    "should_trigger": false
+  },
+  {
+    "query": "実装後にREADMEへ設計判断の概要を追記して",
+    "should_trigger": false
+  },
+  {
+    "query": "この軽微なtypoだけ直して。追加のドキュメントは不要です",
+    "should_trigger": false
+  }
+]
