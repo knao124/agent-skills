@@ -31,6 +31,7 @@ skills/
 | `explain-to-html` | 解説を `/tmp` 配下の standalone HTML として作成する | コード、diff、設定、コマンドの解説をブラウザで見られるHTMLとして保存・共有したいと頼まれたとき |
 | `gcloud-repo-config` | repo ごとの `gcloud` named configuration を安全に初期設定、検証、利用する | repo 固有の `gcloud` named configuration、`.codex/gcloud.local.toml`、`CLOUDSDK_ACTIVE_CONFIG_NAME`、service account impersonation の設定や利用を頼まれたとき |
 | `implementation-notes` | 仕様実装時に判断・逸脱・トレードオフ・未確認事項を `implementation-notes.html` に必ず残す | SPEC、受け入れ条件、設計doc、仕様に沿った機能実装など、実装判断を記録すべき依頼が来たとき |
+| `tweet-explainer` | X/Tweet URLをブラウザ優先、`~/.x-token` のApp-only token fallbackで読み、`explain-to-html` で解説HTMLを作る | X投稿やX ArticleのURLを読んで、要約・解説・HTML記事化を頼まれたとき |
 
 ## Install
 
@@ -42,6 +43,7 @@ gh skill preview knao124/agent-skills git-worktree-start
 gh skill preview knao124/agent-skills explain-to-html
 gh skill preview knao124/agent-skills gcloud-repo-config
 gh skill preview knao124/agent-skills implementation-notes
+gh skill preview knao124/agent-skills tweet-explainer
 ```
 
 Codex の user scope に入れる例:
@@ -52,6 +54,7 @@ gh skill install knao124/agent-skills git-worktree-start --agent codex --scope u
 gh skill install knao124/agent-skills explain-to-html --agent codex --scope user
 gh skill install knao124/agent-skills gcloud-repo-config --agent codex --scope user
 gh skill install knao124/agent-skills implementation-notes --agent codex --scope user
+gh skill install knao124/agent-skills tweet-explainer --agent codex --scope user
 ```
 
 チーム配布時は release tag に pin する。
