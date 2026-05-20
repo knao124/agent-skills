@@ -30,6 +30,7 @@ skills/
 | `git-worktree-start` | [dotfiles/.codex/skills/git-worktree-start](https://github.com/knao124/dotfiles/tree/main/.codex/skills/git-worktree-start) | code change 前に clean な git worktree と `codex/` branch を用意する |
 | `explain-to-html` | [dotfiles/.codex/skills/explain-to-html](https://github.com/knao124/dotfiles/tree/main/.codex/skills/explain-to-html) | 解説を `/tmp` 配下の standalone HTML として作成する |
 | `gcloud-repo-config` | this repository | repo ごとの `gcloud` named configuration を安全に初期設定、検証、利用する |
+| `implementation-notes` | this repository | 仕様実装時に判断・逸脱・トレードオフ・未確認事項を `implementation-notes.html` に必ず残す |
 
 ## Install
 
@@ -40,6 +41,7 @@ gh skill preview knao124/agent-skills gh-pr-ja
 gh skill preview knao124/agent-skills git-worktree-start
 gh skill preview knao124/agent-skills explain-to-html
 gh skill preview knao124/agent-skills gcloud-repo-config
+gh skill preview knao124/agent-skills implementation-notes
 ```
 
 Codex の user scope に入れる例:
@@ -49,6 +51,7 @@ gh skill install knao124/agent-skills gh-pr-ja --agent codex --scope user
 gh skill install knao124/agent-skills git-worktree-start --agent codex --scope user
 gh skill install knao124/agent-skills explain-to-html --agent codex --scope user
 gh skill install knao124/agent-skills gcloud-repo-config --agent codex --scope user
+gh skill install knao124/agent-skills implementation-notes --agent codex --scope user
 ```
 
 チーム配布時は release tag に pin する。
