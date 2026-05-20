@@ -39,6 +39,7 @@ The generated page is also an interactive review surface. Readers must be able t
 4. Draft a short structure before writing:
    - title
    - summary
+   - for complex designs, workflows, or architecture topics: a brief "Before Reading" section that defines the central unit/object, actors, purpose, chapter order, and domain terms before using them
    - main sections
    - optional risks, tradeoffs, or next steps
 5. Write the HTML file to `/tmp`.
@@ -70,19 +71,27 @@ Use short labels in the review UI, such as `コメント`, `改善プロンプ�
   - target summary
   - source or referenced target line when useful
 - `main`
+  - `Before Reading` for complex explanations: purpose, target unit/object, actors, chapter order, and terminology
   - `Overview`
   - `How It Works`
   - `Important Details`
   - `Examples` when concrete examples improve comprehension
   - `Risks / Notes` when there are caveats
 - `footer`
-  - referenced files, commands, or links when useful
+  - referenced files, commands, or links when useful; for external references, include what each source was used to confirm and how it affected the explanation
 - fixed review toolbar
   - `コメント` toggle
   - `改善プロンプト` export button
 - review side panel and export dialog near the end of `body`
 
 Prefer short sections and readable spacing over decorative styling.
+
+## Explanation Quality Rules
+
+- For process, architecture, infrastructure, or design explanations, orient the reader before details: define the unit of work, actors, goal, chapter order, and specialized terms near the top.
+- Choose labels that reflect the domain model. If a common term is misleading for the current explanation, define a better term before using it.
+- Do not end with a bare link list. When references are included, state what was learned or confirmed from each source and which part of the explanation it supports.
+- If a reference only inspired a comparison or future option, say that instead of presenting it as a direct implementation source.
 
 ## HTML Template
 
