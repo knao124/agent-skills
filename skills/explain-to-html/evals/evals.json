@@ -14,6 +14,12 @@
       "files": []
     },
     {
+      "id": "architecture-orientation-and-references",
+      "prompt": "このインフラ設計方針をHTMLで解説して。公式ドキュメントの参考リンクも入れて。",
+      "expected_output": "/tmp/codex-explain-*.html が作成される。複雑な設計解説として、冒頭付近に目的、対象単位、登場人物、章立て、専門用語を整理する導入セクションがある。参考リンクはURLだけの一覧ではなく、各リンクについて何を参考にしたか、本文のどこにどう反映したかが説明される。HTMLにはdata-review-target付きのコンポーネント、review-toggle、review-exportが含まれる。",
+      "files": []
+    },
+    {
       "id": "respect-plain-text-only",
       "prompt": "この設定を説明して。ただしファイルは作らず、チャットだけで返して。",
       "expected_output": "HTMLファイルを作成せず、チャット内で簡潔に説明する。",
