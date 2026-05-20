@@ -1,6 +1,6 @@
 ---
 name: implementation-notes
-description: Use this skill when Codex is asked to implement a specification or code change while maintaining a running implementation-notes.html file, implementation notes, design log, decision log, deviations from a spec, tradeoff record, or open-question tracker. Trigger on requests to capture design decisions, deviations, tradeoffs, and open questions during implementation.
+description: Use this skill as a mandatory overlay whenever Codex is asked to implement a SPEC, written requirements, issue acceptance criteria, design doc, or feature/change described as a spec. It requires Codex to create or update implementation-notes.html during implementation, even when the user did not explicitly ask for notes. Capture how the implementation interprets or diverges from the spec, including design decisions, deviations, tradeoffs, open questions, and validation. Do not trigger for read-only explanation/review or trivial typo/mechanical edits with no spec.
 license: MIT
 ---
 
@@ -8,7 +8,18 @@ license: MIT
 
 ## Overview
 
-Use this skill to keep a durable `implementation-notes.html` file alongside implementation work. The notes are for user-relevant interpretation of the spec: decisions, deviations, tradeoffs, open questions, and validation state, not a complete command log.
+Use this skill to force a durable `implementation-notes.html` file alongside spec implementation work. The notes are required output for any non-trivial spec implementation, not an optional extra the user must request.
+
+The notes are for user-relevant interpretation of the spec: decisions, deviations, tradeoffs, open questions, and validation state. They are not a complete command log.
+
+## Trigger Boundary
+
+- Use this skill when implementing a spec, requirements list, issue with acceptance criteria, design doc, migration plan, product behavior description, or similar written target.
+- Use this skill even if the prompt only says `Implement <SPEC>` and does not mention notes.
+- Use this skill when continuing an existing spec implementation.
+- Do not use this skill for read-only explanation, code review, PR writing, or summarization.
+- Do not use this skill for trivial typo, formatting, rename, or mechanical edits when there is no meaningful spec interpretation.
+- If the user explicitly forbids creating extra files or documentation, follow the user and state that the notes requirement was waived by explicit instruction.
 
 ## Output Contract
 
@@ -19,6 +30,7 @@ Use this skill to keep a durable `implementation-notes.html` file alongside impl
 - Include these sections: `Summary`, `Design Decisions`, `Deviations`, `Tradeoffs`, `Open Questions`, and `Validation`.
 - If a section has no entries, write `None currently` or an equivalent explicit empty state.
 - Do not include hidden reasoning or private chain-of-thought. Record observable choices, assumptions, rationale, impact, and evidence.
+- Treat missing or stale notes as incomplete work. Before the final response, verify that `implementation-notes.html` reflects the final implementation and validation state.
 
 ## Workflow
 

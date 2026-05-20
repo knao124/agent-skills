@@ -30,7 +30,7 @@ skills/
 | `git-worktree-start` | [dotfiles/.codex/skills/git-worktree-start](https://github.com/knao124/dotfiles/tree/main/.codex/skills/git-worktree-start) | code change 前に clean な git worktree と `codex/` branch を用意する |
 | `explain-to-html` | [dotfiles/.codex/skills/explain-to-html](https://github.com/knao124/dotfiles/tree/main/.codex/skills/explain-to-html) | 解説を `/tmp` 配下の standalone HTML として作成する |
 | `gcloud-repo-config` | this repository | repo ごとの `gcloud` named configuration を安全に初期設定、検証、利用する |
-| `implementation-notes` | this repository | 仕様実装中に判断・逸脱・トレードオフ・未確認事項を `implementation-notes.html` に残す |
+| `implementation-notes` | this repository | 仕様実装時に判断・逸脱・トレードオフ・未確認事項を `implementation-notes.html` に必ず残す |
 
 ## Install
 
