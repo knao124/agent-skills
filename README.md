@@ -27,7 +27,7 @@ skills/
 | Skill | 内容 | Trigger |
 | --- | --- | --- |
 | `gh-pr-ja` | 日本語のPRタイトル・本文・diffコメントを作成、整理する | PR作成、PR本文の書き換え、レビューやインシデント文脈の追記、Files changed への日本語コメント追加を頼まれたとき |
-| `git-worktree-start` | code change 前に clean な git worktree と `codex/` branch を用意する | 実装・修正・refactor・PR作業を始める前に、専用 worktree や `codex/` branch の作成を頼まれたとき |
+| `git-worktree-start` | code change 前に clean な git worktree と `codex/` branch を用意する | 実装・修正・refactor・ドキュメント更新など、ファイル変更を伴う作業やそれをPR化する作業を始めるとき |
 | `explain-to-html` | 解説を `/tmp` 配下の standalone HTML として作成する | コード、diff、設定、コマンドの解説をブラウザで見られるHTMLとして保存・共有したいと頼まれたとき |
 | `gcloud-repo-config` | repo ごとの `gcloud` named configuration を安全に初期設定、検証、利用する | repo 固有の `gcloud` named configuration、`.codex/gcloud.local.toml`、`CLOUDSDK_ACTIVE_CONFIG_NAME`、service account impersonation の設定や利用を頼まれたとき |
 | `implementation-notes` | 仕様実装時に判断・逸脱・トレードオフ・未確認事項を `implementation-notes.html` に必ず残す | SPEC、受け入れ条件、設計doc、仕様に沿った機能実装など、実装判断を記録すべき依頼が来たとき |
