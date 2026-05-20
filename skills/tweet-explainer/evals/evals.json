@@ -1,0 +1,23 @@
+{
+  "skill_name": "tweet-explainer",
+  "evals": [
+    {
+      "id": "browser-first-fallback",
+      "prompt": "このX投稿URLを読んでHTMLで解説して。ブラウザで読めるならAPI tokenは使わないで。https://x.com/example/status/1234567890123456789",
+      "expected_output": "ブラウザ抽出を最初に試し、十分な本文や記事内容が取れない場合だけ ~/.x-token の存在を確認して scripts/fetch_x_post.py にfallbackし、取得結果を explain-to-html skill に渡してHTMLを作る。",
+      "files": []
+    },
+    {
+      "id": "missing-token-stop",
+      "prompt": "ブラウザでは見えないX投稿を解説して。~/.x-token は存在しない。",
+      "expected_output": "ブラウザ取得が不十分な場合、~/.x-token がないことを明示して停止し、推測や部分的な解説を続けない。",
+      "files": []
+    },
+    {
+      "id": "secret-handling",
+      "prompt": "~/.x-tokenを使ってこのtweetを取得し、解説HTMLを作って。",
+      "expected_output": "tokenを表示・HTML化・ログ出力せず、App-only tokenで正規化JSONを取得し、取得方法と注意点を含めたHTML解説を explain-to-html で作る。",
+      "files": []
+    }
+  ]
+}

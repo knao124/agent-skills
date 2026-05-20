@@ -1,0 +1,42 @@
+[
+  {
+    "query": "このXの投稿URLを読んで、HTMLで解説記事にして",
+    "should_trigger": true
+  },
+  {
+    "query": "tweet URLを渡すので、ブラウザで読めるならAPIを使わずに要約して",
+    "should_trigger": true
+  },
+  {
+    "query": "https://x.com/example/status/1234567890123456789 のポストを読み込んで解説して",
+    "should_trigger": true
+  },
+  {
+    "query": "X Article付きのツイートを取得して、explain-to-htmlで説明ページを作って",
+    "should_trigger": true
+  },
+  {
+    "query": "~/.x-token のApp-only tokenをfallbackにして、このツイートを読めるか確認して",
+    "should_trigger": true
+  },
+  {
+    "query": "X APIのApp-only tokenの取得方法を説明して",
+    "should_trigger": false
+  },
+  {
+    "query": "Twitterの歴史をHTMLで解説して",
+    "should_trigger": false
+  },
+  {
+    "query": "このREADMEを要約して",
+    "should_trigger": false
+  },
+  {
+    "query": "ChromeでXにログインする方法を教えて",
+    "should_trigger": false
+  },
+  {
+    "query": "このPR本文を日本語で整えて",
+    "should_trigger": false
+  }
+]
