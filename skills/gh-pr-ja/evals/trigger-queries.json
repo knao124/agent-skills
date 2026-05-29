@@ -20,6 +20,10 @@
     "should_trigger": true
   },
   {
+    "query": "UI変更のPRをスクリーンショット付きで作って",
+    "should_trigger": true
+  },
+  {
     "query": "このコミットメッセージを英語で短く直して",
     "should_trigger": false
   },

@@ -42,7 +42,9 @@ If a section has no content, omit it. Keep the first four sections whenever they
 - In `問題`, describe the broken behavior, missing guardrail, or operational risk. Focus on what was wrong before the change.
 - In `対策の方針`, explain the design choice and the guardrails being introduced. Separate benign cases from real errors when that distinction matters.
 - In `実際にやったこと`, list concrete code, query, config, or test changes. Do not repeat rationale here.
-- If the PR includes UI changes, add a `スクリーンショット` section to the PR description. Attach or paste the screenshot in the description; do not commit screenshot files just to include them in the PR.
+- UI changes require screenshots in the PR description. Treat changes to user-visible screens, components, layout, styling, copy, icons, images, interaction states, or responsive behavior as UI changes; when unsure, treat the PR as a UI change.
+- For UI changes, the `スクリーンショット` section must contain an actual pasted or attached image rendered by GitHub Markdown, such as `![label](https://github.com/user-attachments/assets/...)`. A local file path, placeholder, `なし`, `不要`, or text-only explanation does not satisfy this requirement.
+- Do not open or update a UI-change PR until the screenshot is captured and can be pasted or attached. If screenshot capture is blocked by auth, environment, data, or tooling, stop and report the blocker instead of creating a PR without the image. Only skip this rule when the user explicitly says to omit screenshots for that PR.
 - In `実行したコマンド`, list the exact verification commands and whether each succeeded.
 - In `結果`, state the current state such as `成功`, remaining risk, or follow-up.
 
@@ -52,11 +54,13 @@ If a section has no content, omit it. Keep the first four sections whenever they
    identify the base branch, run `git fetch origin`, and rebase or merge the working branch onto the latest `origin/<base>` using the repository's standard flow. If conflicts appear, resolve them before drafting the PR body or running `gh pr create`. If the base branch advances again while the PR is open, repeat this step before finalizing the PR.
 2. Gather the evidence needed to justify the PR:
    `git diff`, tests, CI results, review comments, incident logs, monitoring links, and latest occurrence timestamps.
-   For UI changes, capture the relevant before/after or after-change screenshots for the PR description without committing those image files.
+   Inspect the diff for UI changes. If there are UI changes, capture the relevant before/after or after-change screenshots for the PR description without committing those image files.
+   Confirm the screenshots are attached or pasted as GitHub-rendered images before proceeding.
 3. Decide the title:
    keep it short, in Japanese, and consistent with the repository's commit or PR prefix conventions such as `fix:` or `feat:` when those conventions exist.
 4. Draft the body using the default section order.
-5. Open or update the PR.
+   For UI changes, include the `スクリーンショット` section with the actual image Markdown; never leave a placeholder to fill in later.
+5. Open or update the PR only after the body satisfies the screenshot requirement for UI changes.
 6. After the PR exists, inspect the `Files changed` tab and add Japanese comments to the important diff hunks:
    cover changes whose intent is not immediately obvious from the code, especially guard conditions, error handling, operational workarounds, schema changes, and behavior changes.
 7. Remove fluff:
