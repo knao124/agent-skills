@@ -1,0 +1,26 @@
+[
+  {
+    "query": "Codex同士で2往復相談して、この設計の漏れを見て",
+    "should_trigger": true
+  },
+  {
+    "query": "このPR方針を別Codexに3往復レビューしてもらって",
+    "should_trigger": true
+  },
+  {
+    "query": "実装前にCodex CLIへ1往復だけセカンドオピニオンを聞いて",
+    "should_trigger": true
+  },
+  {
+    "query": "この差分を専用worktreeで実装役Codexに直させて",
+    "should_trigger": false
+  },
+  {
+    "query": "Claude CodeからCodex CLIを呼ぶ方法を説明して",
+    "should_trigger": false
+  },
+  {
+    "query": "この未commit差分を普通にコードレビューして",
+    "should_trigger": false
+  }
+]
