@@ -1,0 +1,4 @@
+interface:
+  display_name: "Codex Delegate"
+  short_description: "専用worktreeで実装役Codexへ作業委譲する"
+  default_prompt: "Use $codex-delegate to discuss the implementation plan for 2 rounds, then delegate the work to a worker Codex."

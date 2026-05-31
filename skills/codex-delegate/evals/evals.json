@@ -1,0 +1,17 @@
+{
+  "skill_name": "codex-delegate",
+  "evals": [
+    {
+      "id": "design-then-implementation",
+      "prompt": "実装役Codexに2往復設計相談してから、この機能を専用worktreeで実装させて。",
+      "expected_output": "実装前に2往復の設計相談を厳密に行い、その後に作業依頼書を確定する。実装は専用worktree/branch上のworker Codexに委譲し、最後にdiffとテスト結果を指示役Codexが確認する。",
+      "files": []
+    },
+    {
+      "id": "worktree-guardrail",
+      "prompt": "現在の作業ツリーは触らず、Codexに実装だけ任せたい。",
+      "expected_output": "現在のworktreeを直接編集せず、originのbase branchからcodex/ prefixのbranchを持つ専用worktreeを作る。実装役Codexはそのworktree内だけで編集する。",
+      "files": []
+    }
+  ]
+}

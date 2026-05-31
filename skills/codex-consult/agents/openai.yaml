@@ -1,0 +1,4 @@
+interface:
+  display_name: "Codex Consult"
+  short_description: "Codex同士で明示回数の設計相談と反論レビューを行う"
+  default_prompt: "Use $codex-consult to review this design with another Codex for 2 rounds."

@@ -1,0 +1,17 @@
+{
+  "skill_name": "codex-consult",
+  "evals": [
+    {
+      "id": "two-round-consultation",
+      "prompt": "Codex同士で2往復相談して、この設計方針のリスクと代替案を見て。",
+      "expected_output": "相談役Codexを2回呼ぶ計画を立て、2往復目には元の文脈、1往復目の要約、指示役Codexの反論・補完を再投入する。最終報告は生ログではなく統合見解になる。",
+      "files": []
+    },
+    {
+      "id": "no-editing",
+      "prompt": "この設計を3往復レビューして。ファイルは触らないで。",
+      "expected_output": "相談役Codexには実装やファイル編集を禁止し、read-onlyを基本にcodex execを実行する。3往復を厳密に行い、4往復以上は確認対象として扱う。",
+      "files": []
+    }
+  ]
+}

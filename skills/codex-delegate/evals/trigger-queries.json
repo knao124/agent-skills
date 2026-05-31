@@ -1,0 +1,26 @@
+[
+  {
+    "query": "実装役Codexに2往復設計相談してから専用worktreeで実装させて",
+    "should_trigger": true
+  },
+  {
+    "query": "この修正をCodexに委譲して。作業場所は新しいworktreeで",
+    "should_trigger": true
+  },
+  {
+    "query": "Codex同士で3往復方針を詰めて、その後worker Codexに実装してもらって",
+    "should_trigger": true
+  },
+  {
+    "query": "Codex同士で2往復相談だけして。ファイルは触らない",
+    "should_trigger": false
+  },
+  {
+    "query": "このPR本文を日本語で書いて",
+    "should_trigger": false
+  },
+  {
+    "query": "git worktreeを作る標準手順を確認して",
+    "should_trigger": false
+  }
+]
