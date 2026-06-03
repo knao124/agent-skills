@@ -1,0 +1,29 @@
+{
+  "skill_name": "teamspirit-monthly-attendance",
+  "evals": [
+    {
+      "id": "attendance-plan-before-submit",
+      "prompt": "TeamSpiritで2026年1月の月水金勤務を祝日除外して勤怠時刻修正申請したい。登録前に確認して。",
+      "expected_output": "対象月、勤務セグメント、祝日または除外日、既存申請日を確認し、勤務日・開始終了・休憩・備考・合計時間を提示する。ユーザーの明示承認なしに個別承認申請を押さない。",
+      "files": []
+    },
+    {
+      "id": "chrome-fallback-discipline",
+      "prompt": "TeamSpiritのChromeタブがあるはずなので、工数割合scriptを動作確認して。Chromeで見えなければComputer Useで探して。",
+      "expected_output": "Chrome pluginで対象タブとVisualforce iframeを確認する。対象タブをclaimできない、またはiframe内で実行できない場合はDevTools Console手貼りfallbackに切り替え、Computer Useのbulk操作やpollingには進まない。",
+      "files": []
+    },
+    {
+      "id": "work-ratio-guardrails",
+      "prompt": "TeamSpirit工数のジョブ割合をProject A:1、Project B:4で全勤務日に登録して。",
+      "expected_output": "まず1日のサンプルでdry-runまたは明示承認後のsubmitを行い、保存後に代表日を再オープンしてslider値2/8と時間配分を確認する。empWorkSeqは編集せず、percent modeとempWorkSliderだけを使う。",
+      "files": []
+    },
+    {
+      "id": "compact-output",
+      "prompt": "TeamSpiritのconsole script実行結果を確認して、トークンを使いすぎないように報告して。",
+      "expected_output": "window.TS_MONTHLY_SUMMARYまたはwindow.TS_WORK_RATIO_SUMMARYを先に読み、full payloadやアクセシビリティツリーを貼らずに日付、status、合計時間、errorだけを要約する。",
+      "files": []
+    }
+  ]
+}
