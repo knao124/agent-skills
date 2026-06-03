@@ -1,6 +1,7 @@
 // TeamSpirit monthly attendance correction helper.
 // Paste this entire file into DevTools Console in the TeamSpirit Visualforce iframe.
-// Edit CONFIG first. Default mode is dry-run and cannot submit.
+// Edit CONFIG first from the local private config plus the current request.
+// Default sample mode is dry-run and cannot submit.
 (async () => {
   "use strict";
 

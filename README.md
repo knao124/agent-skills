@@ -32,7 +32,7 @@ skills/
 | `git-worktree-start` | code change 前に clean な git worktree と `codex/` branch を用意する | 実装・修正・refactor・ドキュメント更新など、ファイル変更を伴う作業やそれをPR化する作業を始めるとき |
 | `explain-to-html` | 解説を `/tmp` 配下の standalone HTML として作成する | コード、diff、設定、コマンドの解説をブラウザで見られるHTMLとして保存・共有したいと頼まれたとき |
 | `gcloud-repo-config` | repo ごとの `gcloud` named configuration を安全に初期設定、検証、利用する | repo 固有の `gcloud` named configuration、`.codex/gcloud.local.toml`、`CLOUDSDK_ACTIVE_CONFIG_NAME`、service account impersonation の設定や利用を頼まれたとき |
-| `teamspirit-monthly-attendance` | TeamSpirit/Salesforce の月次勤怠時刻修正と工数割合登録を console script で厳密に支援する | TeamSpirit 勤怠表、勤怠時刻修正申請、承認申請、工数割合、Chrome/Console 自動化を頼まれたとき |
+| `teamspirit-monthly-attendance` | ローカル設定を使い、TeamSpirit/Salesforce の月次勤怠時刻修正と工数割合登録を console script で厳密に支援する | TeamSpirit 勤怠表、勤怠時刻修正申請、承認申請、工数割合、Chrome/Console 自動化を頼まれたとき |
 | `tweet-explainer` | X/Tweet URLをブラウザ優先、`~/.x-token` のApp-only token fallbackで読み、`explain-to-html` で解説HTMLを作る | X投稿やX ArticleのURLを読んで、要約・解説・HTML記事化を頼まれたとき |
 
 ## Install

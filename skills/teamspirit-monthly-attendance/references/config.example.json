@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "attendanceUrl": "https://example.lightning.force.com/lightning/n/teamspirit__AtkWorkTimeTab",
+  "workplaceHint": "Example workplace Chrome profile or account label",
+  "noteFormat": "MM/DD",
+  "defaultWeekRules": {
+    "1": [["09:00", "12:00"], ["13:00", "17:00"]],
+    "3": [["10:00", "12:00"]],
+    "5": [["09:30", "12:00"], ["13:00", "16:30"]]
+  },
+  "defaultHolidays": [],
+  "defaultExcludeDates": [],
+  "workRatio": {
+    "sliderScale": 10,
+    "jobs": [
+      {
+        "name": "Project A",
+        "matchText": "Project A",
+        "ratio": 1
+      },
+      {
+        "name": "Project B",
+        "matchText": "Project B",
+        "ratio": 4
+      }
+    ]
+  }
+}
