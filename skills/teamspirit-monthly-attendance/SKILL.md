@@ -14,6 +14,9 @@ Use the bundled console script as the canonical implementation. Execute it throu
 
 - `scripts/teamspirit-monthly-console.js`: attendance correction helper. Edit only `CONFIG`; default output is compact.
 - `scripts/teamspirit-work-ratio-console.js`: daily job work-ratio helper for the工数 dialog. Edit only `CONFIG`; default output is compact.
+- `scripts/teamspirit-config.mjs`: locate, validate, and write the local private config file without echoing its contents.
+- `references/configuration.md`: local config schema and first-run setup workflow. Read this whenever config is missing, invalid, or incomplete for the requested task.
+- `references/config.example.json`: sanitized example config. Never put real workplace URLs, job names, or internal IDs in the repository copy.
 - `references/observed-teamspirit-dom.md`: field IDs and selectors observed on the TeamSpirit attendance page. Read this only when the page/script behavior needs inspection or repair.
 
 ## Non-Negotiables
@@ -29,6 +32,22 @@ Use the bundled console script as the canonical implementation. Execute it throu
 - For bulk工数割合 registration, first run one sample target in dry-run or submit mode, reopen that sample date, and confirm the saved row times before running the full target list.
 - Do not use Computer Use for bulk TeamSpirit automation, Console polling, or repeated page inspection. It is allowed only for a one-time visual confirmation or emergency click after stating why.
 - Console scripts must keep compact output by default. Detailed payloads stay on `window.*_FINAL`; user-facing verification should read `window.*_SUMMARY` or compact marker logs first.
+- Do not run the bundled sample `CONFIG` against a real workplace page. Build the run `CONFIG` from the local private config plus the current user request.
+- Never commit, paste, or PR the local private config. Treat workplace URL/account hints, job names, client names, and job row matchers as private operational settings.
+
+## Local Configuration
+
+Before any real TeamSpirit browser or Console workflow, resolve the private local config:
+
+1. Use `node scripts/teamspirit-config.mjs path` to get the default config path. It is `${CODEX_HOME:-~/.codex}/teamspirit-monthly-attendance/config.json`.
+2. Run `node scripts/teamspirit-config.mjs validate`. If it succeeds and has the fields needed for the requested task, use it.
+3. If the config file is missing, invalid, or incomplete, read `references/configuration.md` and ask the user for only the missing values before doing Chrome or Console work.
+4. Write the answered config with `node scripts/teamspirit-config.mjs write` so the file is created with private permissions.
+5. Use the config to replace placeholders:
+   - `attendanceUrl` and `workplaceHint` drive Chrome tab selection.
+   - `defaultWeekRules`, `defaultHolidays`, `defaultExcludeDates`, and `noteFormat` seed attendance plans unless the user overrides them.
+   - `workRatio.jobs` provides real job labels and matchers for工数割合.
+6. If a task needs工数割合 and `workRatio.jobs` is absent, ask for job labels/matchers and ratios, update the local config, then continue.
 
 ## Browser Control Policy
 
@@ -45,7 +64,7 @@ Use the lowest-token route that can operate the intended logged-in TeamSpirit pa
 When controlling Chrome, load `chrome:control-chrome` first and follow this order:
 
 1. Initialize the Chrome extension browser runtime once, then call `browser.user.openTabs()`.
-2. Select the tab whose URL contains `<your-salesforce-domain>.lightning.force.com/lightning/n/teamspirit__AtkWorkTimeTab` and whose visible title/account context matches the intended workplace. Do not use a tab id that did not come from the current `openTabs()` result.
+2. Select the tab whose URL matches local config `attendanceUrl` and whose visible title/account context matches local config `workplaceHint`. Do not use a tab id that did not come from the current `openTabs()` result.
 3. Claim that exact tab with `browser.user.claimTab(tab)` and reuse the returned `tab`.
 4. Verify `await tab.url()` and a lightweight frame locator check for `iframe[id^="vfFrameId"]` or a frame containing `[id^="ttvApply"]` / `[id^="dailyWorkCell"]`.
 5. If the exposed Chrome API cannot evaluate the console script inside the Visualforce iframe, stop the Chrome path and use manual DevTools Console paste in `AtkWorkTimeView`. Do not try to compensate with Computer Use.
@@ -61,11 +80,12 @@ When controlling Chrome, load `chrome:control-chrome` first and follow this orde
 ## Workflow
 
 1. Gather inputs:
+   - local config from `scripts/teamspirit-config.mjs validate`
    - target year/month
-   - weekday work segments, e.g. Monday `09:00-12:00, 13:00-17:00`
-   - holidays/excluded dates
+   - weekday work segments from local config or user override
+   - holidays/excluded dates from local config and current source/user override
    - existing submitted dates, if any
-   - note format, default `MM/DD`
+   - note format from local config, default `MM/DD`
 
 2. Build the plan:
    - Convert multiple work segments into one TeamSpirit start/end plus休憩 gaps.
@@ -118,6 +138,7 @@ Use this for the工数 column after the attendance times already exist.
 
 2. Sample run:
    - Read `scripts/teamspirit-work-ratio-console.js`.
+   - Convert local config `workRatio.jobs[].matchText` to string matchers or `matchRegex` to JavaScript `RegExp` values in the script `CONFIG`.
    - Keep the default `targetDates: ["2026-01-05"]` or set exactly one requested sample date.
    - Keep `dryRun: true`, `submit: false`.
    - Run it once and inspect `window.TS_WORK_RATIO_SUMMARY`.
@@ -170,6 +191,17 @@ Use `entries` only for one-off overrides:
 ```js
 entries: {
   "2026-06-10": [["10:00", "12:00"]]
+}
+```
+
+For local config JSON, store the same data under string keys:
+
+```json
+{
+  "defaultWeekRules": {
+    "1": [["09:00", "12:00"], ["13:00", "17:00"]],
+    "3": [["10:00", "12:00"]]
+  }
 }
 ```
 

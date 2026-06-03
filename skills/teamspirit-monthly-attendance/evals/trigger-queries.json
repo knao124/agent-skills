@@ -20,6 +20,10 @@
     "should_trigger": true
   },
   {
+    "query": "TeamSpirit skillの設定ファイルがないので、初回設定を作ってから勤怠登録したい",
+    "should_trigger": true
+  },
+  {
     "query": "Salesforceの標準オブジェクトについて説明して",
     "should_trigger": false
   },

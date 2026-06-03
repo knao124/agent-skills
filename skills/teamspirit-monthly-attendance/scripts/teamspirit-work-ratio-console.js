@@ -1,6 +1,7 @@
 // TeamSpirit work ratio helper.
 // Paste this entire file into DevTools Console in the TeamSpirit Visualforce iframe.
-// Edit CONFIG first. Default mode is dry-run for the sample date only.
+// Edit CONFIG first from the local private config plus the current request.
+// Default sample mode is dry-run for the sample date only.
 (async () => {
   "use strict";
 

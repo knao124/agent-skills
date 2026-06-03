@@ -4,3 +4,7 @@ __pycache__/
 *.pyc
 *-workspace/
 .agent-skill-eval-workspace/
+
+# Local/private TeamSpirit config must stay outside committed skills.
+skills/teamspirit-monthly-attendance/config.json
+.teamspirit-monthly-attendance/
