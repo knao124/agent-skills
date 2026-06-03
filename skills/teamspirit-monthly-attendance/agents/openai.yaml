@@ -1,0 +1,4 @@
+interface:
+  display_name: "TeamSpirit Monthly Attendance"
+  short_description: "TeamSpirit月次勤怠を安全・厳密に登録する"
+  default_prompt: "Use $teamspirit-monthly-attendance to register next month TeamSpirit attendance from a weekly schedule."

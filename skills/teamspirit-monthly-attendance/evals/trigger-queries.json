@@ -1,0 +1,42 @@
+[
+  {
+    "query": "TeamSpiritの勤怠表で今月の勤怠時刻修正申請をまとめて登録したい",
+    "should_trigger": true
+  },
+  {
+    "query": "Teamspritの申請列のプラスから勤怠時刻修正を自動入力するconsole JSを作って",
+    "should_trigger": true
+  },
+  {
+    "query": "TeamSpiritで月曜日は9-17、水曜は10-12として祝日除外で合計時間を出して",
+    "should_trigger": true
+  },
+  {
+    "query": "TeamSpiritの工数列でジョブごとの割合を1:4にして全勤務日に登録して",
+    "should_trigger": true
+  },
+  {
+    "query": "Salesforce Lightning内のTeamSpirit Visualforce iframeで動く勤怠登録scriptを検証して",
+    "should_trigger": true
+  },
+  {
+    "query": "Salesforceの標準オブジェクトについて説明して",
+    "should_trigger": false
+  },
+  {
+    "query": "Chrome拡張のインストール方法を教えて",
+    "should_trigger": false
+  },
+  {
+    "query": "GitHubにPRを作ってmergeして",
+    "should_trigger": false
+  },
+  {
+    "query": "このJavaScriptの配列処理をリファクタして",
+    "should_trigger": false
+  },
+  {
+    "query": "来月の日本の祝日一覧を調べて",
+    "should_trigger": false
+  }
+]
