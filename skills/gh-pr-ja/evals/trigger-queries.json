@@ -20,6 +20,10 @@
     "should_trigger": true
   },
   {
+    "query": "PR本文にやることの全体像を追加して、実際にやったことは目的ごとにグループ化して",
+    "should_trigger": true
+  },
+  {
     "query": "UI変更のPRをスクリーンショット付きで作って",
     "should_trigger": true
   },
