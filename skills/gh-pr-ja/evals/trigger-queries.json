@@ -24,6 +24,10 @@
     "should_trigger": true
   },
   {
+    "query": "このPR本文に関連PRセクションを追加して、先行PRと後続PRを整理して",
+    "should_trigger": true
+  },
+  {
     "query": "UI変更のPRをスクリーンショット付きで作って",
     "should_trigger": true
   },
