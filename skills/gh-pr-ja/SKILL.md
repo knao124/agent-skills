@@ -24,12 +24,13 @@ Use these sections in this order unless the user explicitly asks for a different
 1. `背景`
 2. `問題`
 3. `対策の方針`
-4. `実際にやったこと`
-5. `スクリーンショット`
-6. `実行したコマンド`
-7. `結果`
+4. `やることの全体像`
+5. `実際にやったこと`
+6. `スクリーンショット`
+7. `実行したコマンド`
+8. `結果`
 
-If a section has no content, omit it. Keep the first four sections whenever they are relevant.
+If a section has no content, omit it. Keep the first five sections whenever they are relevant.
 
 ## Writing Rules
 
@@ -41,7 +42,9 @@ If a section has no content, omit it. Keep the first four sections whenever they
 - In `背景`, explain the trigger for the PR. If the change came from monitoring or incident investigation, include the latest confirmed timestamp with timezone and a direct link such as Cloud Logging or the alert URL when available.
 - In `問題`, describe the broken behavior, missing guardrail, or operational risk. Focus on what was wrong before the change.
 - In `対策の方針`, explain the design choice and the guardrails being introduced. Separate benign cases from real errors when that distinction matters.
-- In `実際にやったこと`, list concrete code, query, config, or test changes. Do not repeat rationale here.
+- In `やることの全体像`, summarize the end-to-end scope before implementation details. Use objective-level bullets such as "基盤を作る", "データを同期する", "権限を分ける", "検証する". Do not list individual files here.
+- In `実際にやったこと`, group concrete code, query, config, or test changes by purpose using short `###` subheadings. Use names such as `API`, `DB`, `権限`, `CI`, `docs`, or domain-specific groups. Do not repeat rationale here.
+- Under each `実際にやったこと` subgroup, keep bullets flat and concrete. Avoid one long ungrouped list when there are more than about six bullets or multiple objectives.
 - UI changes require screenshots in the PR description. Treat changes to user-visible screens, components, layout, styling, copy, icons, images, interaction states, or responsive behavior as UI changes; when unsure, treat the PR as a UI change.
 - For UI changes, the `スクリーンショット` section must contain an actual pasted or attached image rendered by GitHub Markdown, such as `![label](https://github.com/user-attachments/assets/...)`. A local file path, placeholder, `なし`, `不要`, or text-only explanation does not satisfy this requirement.
 - Do not open or update a UI-change PR until the screenshot is captured and can be pasted or attached. If screenshot capture is blocked by auth, environment, data, or tooling, stop and report the blocker instead of creating a PR without the image. Only skip this rule when the user explicitly says to omit screenshots for that PR.
@@ -90,7 +93,12 @@ If a section has no content, omit it. Keep the first four sections whenever they
 ## 対策の方針
 - ...
 
+## やることの全体像
+- ...
+
 ## 実際にやったこと
+
+### ...
 - ...
 
 ## スクリーンショット
