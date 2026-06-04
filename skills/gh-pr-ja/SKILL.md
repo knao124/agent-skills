@@ -25,12 +25,13 @@ Use these sections in this order unless the user explicitly asks for a different
 2. `問題`
 3. `対策の方針`
 4. `やることの全体像`
-5. `実際にやったこと`
-6. `スクリーンショット`
-7. `実行したコマンド`
-8. `結果`
+5. `関連PR`
+6. `実際にやったこと`
+7. `スクリーンショット`
+8. `実行したコマンド`
+9. `結果`
 
-If a section has no content, omit it. Keep the first five sections whenever they are relevant.
+If a section has no content, omit it. Keep the first five sections whenever they are relevant, and include `関連PR` whenever another PR affects review order, merge order, or context.
 
 ## Writing Rules
 
@@ -43,6 +44,7 @@ If a section has no content, omit it. Keep the first five sections whenever they
 - In `問題`, describe the broken behavior, missing guardrail, or operational risk. Focus on what was wrong before the change.
 - In `対策の方針`, explain the design choice and the guardrails being introduced. Separate benign cases from real errors when that distinction matters.
 - In `やることの全体像`, summarize the end-to-end scope before implementation details. Use objective-level bullets such as "基盤を作る", "データを同期する", "権限を分ける", "検証する". Do not list individual files here.
+- In `関連PR`, list only PRs that change review order, merge order, dependency context, rollout context, or follow-up scope. Include the PR number or URL, title if useful, and the relationship such as `先行`, `後続`, `依存`, `分割元`, or `補足`. Omit loosely related PRs that do not affect review.
 - In `実際にやったこと`, group concrete code, query, config, or test changes by purpose using short `###` subheadings. Use names such as `API`, `DB`, `権限`, `CI`, `docs`, or domain-specific groups. Do not repeat rationale here.
 - Under each `実際にやったこと` subgroup, keep bullets flat and concrete. Avoid one long ungrouped list when there are more than about six bullets or multiple objectives.
 - UI changes require screenshots in the PR description. Treat changes to user-visible screens, components, layout, styling, copy, icons, images, interaction states, or responsive behavior as UI changes; when unsure, treat the PR as a UI change.
@@ -95,6 +97,9 @@ If a section has no content, omit it. Keep the first five sections whenever they
 
 ## やることの全体像
 - ...
+
+## 関連PR
+- #123: ... - 先行
 
 ## 実際にやったこと
 
