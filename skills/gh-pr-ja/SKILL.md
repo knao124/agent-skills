@@ -25,13 +25,18 @@ Use these sections in this order unless the user explicitly asks for a different
 2. `問題`
 3. `対策の方針`
 4. `やることの全体像`
-5. `関連PR`
-6. `実際にやったこと`
-7. `スクリーンショット`
-8. `実行したコマンド`
-9. `結果`
+5. `影響範囲`
+6. `関連PR`
+7. `実際にやったこと`
+8. `今回の対象外`
+9. `レビュー観点`
+10. `スクリーンショット`
+11. `実行したコマンド`
+12. `結果`
+13. `残リスク`
+14. `ロールバック`
 
-If a section has no content, omit it. Keep the first five sections whenever they are relevant, and include `関連PR` whenever another PR affects review order, merge order, or context.
+Keep every section visible by default. If a section has no applicable content, write `なし` or a short explicit reason such as `なし（UI変更なし）`. This keeps reviewer checklist items closed instead of forcing reviewers to infer that an omitted section was intentionally skipped.
 
 ## Writing Rules
 
@@ -44,14 +49,21 @@ If a section has no content, omit it. Keep the first five sections whenever they
 - In `問題`, describe the broken behavior, missing guardrail, or operational risk. Focus on what was wrong before the change.
 - In `対策の方針`, explain the design choice and the guardrails being introduced. Separate benign cases from real errors when that distinction matters.
 - In `やることの全体像`, summarize the end-to-end scope before implementation details. Use objective-level bullets such as "基盤を作る", "データを同期する", "権限を分ける", "検証する". Do not list individual files here.
+- In `影響範囲`, describe affected screens, APIs, DB objects, jobs, Cloud Run services, deploy steps, permissions, or operations. Include important non-effects only when they prevent a likely misunderstanding.
 - In `関連PR`, list only PRs that change review order, merge order, dependency context, rollout context, or follow-up scope. Include the PR number or URL, title if useful, and the relationship such as `先行`, `後続`, `依存`, `分割元`, or `補足`. Omit loosely related PRs that do not affect review.
 - In `実際にやったこと`, group concrete code, query, config, or test changes by purpose using short `###` subheadings. Use names such as `API`, `DB`, `権限`, `CI`, `docs`, or domain-specific groups. Do not repeat rationale here.
 - Under each `実際にやったこと` subgroup, keep bullets flat and concrete. Avoid one long ungrouped list when there are more than about six bullets or multiple objectives.
+- In `今回の対象外`, list only nearby scope that a reviewer could reasonably mistake as included in this PR. Use it for intentional exclusions, follow-up PR scope, or rollout work handled elsewhere. Do not list arbitrary things that were not done.
+- In `レビュー観点`, name specific design decisions, risky hunks, behavior changes, or spec points that need focused review. Write `なし` for straightforward changes.
 - UI changes require screenshots in the PR description. Treat changes to user-visible screens, components, layout, styling, copy, icons, images, interaction states, or responsive behavior as UI changes; when unsure, treat the PR as a UI change.
 - For UI changes, the `スクリーンショット` section must contain an actual pasted or attached image rendered by GitHub Markdown, such as `![label](https://github.com/user-attachments/assets/...)`. A local file path, placeholder, `なし`, `不要`, or text-only explanation does not satisfy this requirement.
+- When local screenshot image files need to be attached, use the GitHub CLI `gh image` extension to upload them and paste the returned Markdown. Before using it, check `gh extension list`; if `gh image` is not installed, run `gh extension install drogers0/gh-image`. Upload with `gh image --repo <owner/repo> <image-path>...`.
 - Do not open or update a UI-change PR until the screenshot is captured and can be pasted or attached. If screenshot capture is blocked by auth, environment, data, or tooling, stop and report the blocker instead of creating a PR without the image. Only skip this rule when the user explicitly says to omit screenshots for that PR.
+- For non-UI changes, write `なし（UI変更なし）` in `スクリーンショット`.
 - In `実行したコマンド`, list the exact verification commands and whether each succeeded.
-- In `結果`, state the current state such as `成功`, remaining risk, or follow-up.
+- In `結果`, state the current state such as local checks passed, CI passed or pending, demo not deployed, prod unaffected, or rollout complete.
+- In `残リスク`, list only remaining uncertainty, unverified behavior, operational monitoring points, or risk accepted by the PR. Write `なし` when there is no meaningful residual risk.
+- In `ロールバック`, explain how to revert or stop the change for infra, DB, auth, billing, deploy, data migration, or other operationally risky changes. Mention whether a plain revert is enough or whether config, DB, or deploy steps are required. For low-risk changes, state the simple rollback path such as `通常のrevertで切り戻し可能`.
 
 ## Workflow
 
@@ -60,6 +72,7 @@ If a section has no content, omit it. Keep the first five sections whenever they
 2. Gather the evidence needed to justify the PR:
    `git diff`, tests, CI results, review comments, incident logs, monitoring links, and latest occurrence timestamps.
    Inspect the diff for UI changes. If there are UI changes, capture the relevant before/after or after-change screenshots for the PR description without committing those image files.
+   If screenshots are local files, install `gh image` if needed and use it to upload the files to GitHub user attachments.
    Confirm the screenshots are attached or pasted as GitHub-rendered images before proceeding.
 3. Decide the title:
    keep it short, in Japanese, and consistent with the repository's commit or PR prefix conventions such as `fix:` or `feat:` when those conventions exist.
@@ -98,22 +111,37 @@ If a section has no content, omit it. Keep the first five sections whenever they
 ## やることの全体像
 - ...
 
+## 影響範囲
+- ...
+
 ## 関連PR
-- #123: ... - 先行
+- なし
 
 ## 実際にやったこと
 
 ### ...
 - ...
 
+## 今回の対象外
+- なし
+
+## レビュー観点
+- なし
+
 ## スクリーンショット
-![...](...)
+- なし（UI変更なし）
 
 ## 実行したコマンド
 - `...` : 成功
 
 ## 結果
-- 成功
+- ...
+
+## 残リスク
+- なし
+
+## ロールバック
+- 通常のrevertで切り戻し可能
 ```
 
 ## Example Diff Comments

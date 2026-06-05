@@ -28,6 +28,14 @@
     "should_trigger": true
   },
   {
+    "query": "PR本文に今回の対象外を入れて、後続PRに回す範囲が伝わるようにして",
+    "should_trigger": true
+  },
+  {
+    "query": "DB migrationを含むPRなので、影響範囲とロールバックも書いて",
+    "should_trigger": true
+  },
+  {
     "query": "UI変更のPRをスクリーンショット付きで作って",
     "should_trigger": true
   },
