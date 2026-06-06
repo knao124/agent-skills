@@ -1,0 +1,42 @@
+[
+  {
+    "query": "この動画URLを見て、音声を文字起こししてから詳しく解説して",
+    "should_trigger": true
+  },
+  {
+    "query": "Xに添付された動画のトランスクリプトを抽出して記事化して",
+    "should_trigger": true
+  },
+  {
+    "query": "このmp4を読み込んで、タイムスタンプ付きで何を言っているかまとめて",
+    "should_trigger": true
+  },
+  {
+    "query": "動画の音声を取得して、公開用HTML記事にして",
+    "should_trigger": true
+  },
+  {
+    "query": "このYouTube動画の内容を、具体的な発言例つきで解説して",
+    "should_trigger": true
+  },
+  {
+    "query": "このポッドキャスト音声ファイルを文字起こしして要点を整理して",
+    "should_trigger": true
+  },
+  {
+    "query": "このツイート本文を要約して",
+    "should_trigger": false
+  },
+  {
+    "query": "このREADMEをHTMLで解説して",
+    "should_trigger": false
+  },
+  {
+    "query": "GitHub Actionsのログを読んで失敗原因を調べて",
+    "should_trigger": false
+  },
+  {
+    "query": "この画像の背景を差し替えて",
+    "should_trigger": false
+  }
+]

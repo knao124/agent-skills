@@ -1,0 +1,4 @@
+interface:
+  display_name: "Video Explainer"
+  short_description: "動画の音声取得、文字起こし、解説記事化まで支援する"
+  default_prompt: "Use $video-explainer to extract a transcript from this video URL and turn it into a detailed explanation article."

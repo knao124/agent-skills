@@ -34,6 +34,7 @@ skills/
 | `gcloud-repo-config` | repo ごとの `gcloud` named configuration を安全に初期設定、検証、利用する | repo 固有の `gcloud` named configuration、`.codex/gcloud.local.toml`、`CLOUDSDK_ACTIVE_CONFIG_NAME`、service account impersonation の設定や利用を頼まれたとき |
 | `teamspirit-monthly-attendance` | ローカル設定を使い、TeamSpirit/Salesforce の月次勤怠時刻修正と工数割合登録を console script で厳密に支援する | TeamSpirit 勤怠表、勤怠時刻修正申請、承認申請、工数割合、Chrome/Console 自動化を頼まれたとき |
 | `tweet-explainer` | X/Tweet URLをブラウザ優先、`~/.x-token` のApp-only token fallbackで読み、`explain-to-html` で解説HTMLを作る | X投稿やX ArticleのURLを読んで、要約・解説・HTML記事化を頼まれたとき |
+| `video-explainer` | 動画URLやローカル動画/音声を取得・文字起こしし、詳細な解説記事へ変換する | 動画を見て、音声を文字起こし、トランスクリプト抽出、動画を記事化して、と頼まれたとき |
 
 ## Install
 
@@ -48,6 +49,7 @@ gh skill preview knao124/agent-skills explain-to-html
 gh skill preview knao124/agent-skills gcloud-repo-config
 gh skill preview knao124/agent-skills teamspirit-monthly-attendance
 gh skill preview knao124/agent-skills tweet-explainer
+gh skill preview knao124/agent-skills video-explainer
 ```
 
 Codex の user scope に入れる例:
@@ -61,6 +63,7 @@ gh skill install knao124/agent-skills explain-to-html --agent codex --scope user
 gh skill install knao124/agent-skills gcloud-repo-config --agent codex --scope user
 gh skill install knao124/agent-skills teamspirit-monthly-attendance --agent codex --scope user
 gh skill install knao124/agent-skills tweet-explainer --agent codex --scope user
+gh skill install knao124/agent-skills video-explainer --agent codex --scope user
 ```
 
 チーム配布時は release tag に pin する。
