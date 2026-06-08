@@ -30,6 +30,7 @@ skills/
 | `codex-delegate` | 実装前にCodex同士で設計相談し、専用worktree上の実装役Codexへ作業委譲する | 実装役Codexに任せる、専用worktreeでCodexに実装させる、設計相談後に実装委譲するとき |
 | `gh-pr-ja` | 日本語のPRタイトル・本文・diffコメントを作成、整理する | PR作成、PR本文の書き換え、レビューやインシデント文脈の追記、Files changed への日本語コメント追加を頼まれたとき |
 | `git-worktree-start` | code change 前に clean な git worktree と `codex/` branch を用意する | 実装・修正・refactor・ドキュメント更新など、ファイル変更を伴う作業やそれをPR化する作業を始めるとき |
+| `gws-calendar-agenda` | `gws` で指定期間の自分のGoogleカレンダー予定を取得し、日付・参加状態つきの表にまとめる | MCPなしでGoogleカレンダー予定を一覧化、参加状態つきで表にする、指定期間の予定をまとめるよう頼まれたとき |
 | `explain-to-html` | 解説を `/tmp` 配下の standalone HTML として作成する | コード、diff、設定、コマンドの解説をブラウザで見られるHTMLとして保存・共有したいと頼まれたとき |
 | `gcloud-repo-config` | repo ごとの `gcloud` named configuration を安全に初期設定、検証、利用する | repo 固有の `gcloud` named configuration、`.codex/gcloud.local.toml`、`CLOUDSDK_ACTIVE_CONFIG_NAME`、service account impersonation の設定や利用を頼まれたとき |
 | `teamspirit-monthly-attendance` | ローカル設定を使い、TeamSpirit/Salesforce の月次勤怠時刻修正と工数割合登録を console script で厳密に支援する | TeamSpirit 勤怠表、勤怠時刻修正申請、承認申請、工数割合、Chrome/Console 自動化を頼まれたとき |
@@ -45,6 +46,7 @@ gh skill preview knao124/agent-skills codex-consult
 gh skill preview knao124/agent-skills codex-delegate
 gh skill preview knao124/agent-skills gh-pr-ja
 gh skill preview knao124/agent-skills git-worktree-start
+gh skill preview knao124/agent-skills gws-calendar-agenda
 gh skill preview knao124/agent-skills explain-to-html
 gh skill preview knao124/agent-skills gcloud-repo-config
 gh skill preview knao124/agent-skills teamspirit-monthly-attendance
@@ -59,6 +61,7 @@ gh skill install knao124/agent-skills codex-consult --agent codex --scope user
 gh skill install knao124/agent-skills codex-delegate --agent codex --scope user
 gh skill install knao124/agent-skills gh-pr-ja --agent codex --scope user
 gh skill install knao124/agent-skills git-worktree-start --agent codex --scope user
+gh skill install knao124/agent-skills gws-calendar-agenda --agent codex --scope user
 gh skill install knao124/agent-skills explain-to-html --agent codex --scope user
 gh skill install knao124/agent-skills gcloud-repo-config --agent codex --scope user
 gh skill install knao124/agent-skills teamspirit-monthly-attendance --agent codex --scope user

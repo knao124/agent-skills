@@ -1,0 +1,23 @@
+{
+  "skill_name": "gws-calendar-agenda",
+  "evals": [
+    {
+      "id": "account-confirmation",
+      "prompt": "6/1の自分のGoogleカレンダーを一覧化して",
+      "expected_output": "gwsを使う前に対象のGoogleアカウントを確認する。日付は絶対日付に解決し、未認証ならgws auth setup/loginを促す。",
+      "files": []
+    },
+    {
+      "id": "table-format",
+      "prompt": "2026/06/01の予定を参加状態も含めて表にして",
+      "expected_output": "日付、時間、予定、参加状態、場所の列を持つMarkdown表を返す。日付は06/01（月）、時間はHH:MM-HH:MM、参加状態は参加/不参加/仮参加/未回答/主催者/不明に変換する。",
+      "files": []
+    },
+    {
+      "id": "no-mcp",
+      "prompt": "MCPなしで来週のGoogleカレンダーをまとめて",
+      "expected_output": "MCPを使わずgws calendar events listを使う。singleEventsとorderByを指定し、nextPageTokenがあれば追加取得または部分結果であることを明示する。",
+      "files": []
+    }
+  ]
+}

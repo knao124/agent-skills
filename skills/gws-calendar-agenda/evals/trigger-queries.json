@@ -1,0 +1,22 @@
+[
+  {
+    "query": "gwsで6/1のGoogleカレンダー予定を参加状態つきで表にして",
+    "should_trigger": true
+  },
+  {
+    "query": "MCPは使わずに、来週の自分のカレンダーを一覧化して",
+    "should_trigger": true
+  },
+  {
+    "query": "Google Calendarの予定を06/01（月）形式の日付列つきで出して",
+    "should_trigger": true
+  },
+  {
+    "query": "gws auth setup のOAuth Client IDって何？",
+    "should_trigger": false
+  },
+  {
+    "query": "このREADMEをMarkdownテーブルに整形して",
+    "should_trigger": false
+  }
+]
