@@ -16,6 +16,18 @@
     "should_trigger": true
   },
   {
+    "query": "この本との差分を監査して、ノートだけで精読後の理解に到達できるようにして",
+    "should_trigger": true
+  },
+  {
+    "query": "重要主張台帳と自己テストの採点基準まで入れた読書ノートを作って",
+    "should_trigger": true
+  },
+  {
+    "query": "このPDFを短く3行で要約して",
+    "should_trigger": false
+  },
+  {
     "query": "PR本文を日本語で整えて",
     "should_trigger": false
   },
