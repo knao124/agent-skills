@@ -1,0 +1,4 @@
+interface:
+  display_name: "GWS Calendar Agenda"
+  short_description: "gwsで指定期間の自分の予定を表にまとめる"
+  default_prompt: "Use $gws-calendar-agenda to fetch my calendar for a specified date range with gws and summarize it as a Japanese table."
