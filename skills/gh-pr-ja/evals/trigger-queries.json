@@ -40,6 +40,10 @@
     "should_trigger": true
   },
   {
+    "query": "PRを作ったあと、Codex作業ログを折りたたみコメントとして別に載せて",
+    "should_trigger": true
+  },
+  {
     "query": "このコミットメッセージを英語で短く直して",
     "should_trigger": false
   },
