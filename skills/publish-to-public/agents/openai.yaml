@@ -1,0 +1,4 @@
+interface:
+  display_name: "Public公開"
+  short_description: "HTML を knao124/public に公開し導線更新と push まで行うスキル"
+  default_prompt: "Use $publish-to-public when the user wants to publish a local HTML artifact to the knao124/public GitHub Pages repository, update index and README links, push to main, and verify the public URL."
