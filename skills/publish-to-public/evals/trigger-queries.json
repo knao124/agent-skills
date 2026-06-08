@@ -1,0 +1,46 @@
+[
+  {
+    "query": "HTMLを公開して",
+    "should_trigger": true
+  },
+  {
+    "query": "これを公開して",
+    "should_trigger": true
+  },
+  {
+    "query": "このHTMLをpublicに公開して",
+    "should_trigger": true
+  },
+  {
+    "query": "さっき作った解説HTMLをGitHub Pagesに載せて",
+    "should_trigger": true
+  },
+  {
+    "query": "/tmp/codex-explain-foo.htmlをpublic repoに置いてindexから辿れるようにして",
+    "should_trigger": true
+  },
+  {
+    "query": "knao124/publicにこのHTMLファイルをpushして公開URLを確認して",
+    "should_trigger": true
+  },
+  {
+    "query": "このMarkdownを記事HTMLに変換して",
+    "should_trigger": false
+  },
+  {
+    "query": "READMEにGitHub Pagesの公開手順を追記して",
+    "should_trigger": false
+  },
+  {
+    "query": "このHTMLのCSSを修正して",
+    "should_trigger": false
+  },
+  {
+    "query": "public repoのREADMEだけ確認して",
+    "should_trigger": false
+  },
+  {
+    "query": "このPRを公開レビューできる状態にして",
+    "should_trigger": false
+  }
+]
