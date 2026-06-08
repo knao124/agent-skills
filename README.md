@@ -26,9 +26,10 @@ skills/
 
 | Skill | 内容 | Trigger |
 | --- | --- | --- |
+| `claude-worklog-summary` | Claude Code local transcript log から作業時間と会話圧縮メモを折りたたみMarkdownで出力する | Claude作業ログ、Agent作業ログ、会話圧縮メモ、PRコメント用の作業時間メモ、transcript log要約を頼まれたとき |
 | `codex-consult` | Codex CLIを相談役として呼び、Codex同士で明示回数の設計相談・レビュー・反論を行う | Codex同士で相談、別Codexに聞く、2往復/3往復レビューなど、実装せずセカンドオピニオンを求めるとき |
 | `codex-delegate` | 実装前にCodex同士で設計相談し、専用worktree上の実装役Codexへ作業委譲する | 実装役Codexに任せる、専用worktreeでCodexに実装させる、設計相談後に実装委譲するとき |
-| `codex-worklog-summary` | Codex local rollout log から作業時間と会話圧縮メモを折りたたみMarkdownで出力する | Codex作業ログ、会話圧縮メモ、PRコメント用の作業時間メモ、rollout log要約を頼まれたとき |
+| `codex-worklog-summary` | Codex local rollout log から作業時間と会話圧縮メモを折りたたみMarkdownで出力する | Codex作業ログ、Agent作業ログ、会話圧縮メモ、PRコメント用の作業時間メモ、rollout log要約を頼まれたとき |
 | `daily-report` | GitHub PR、Slack投稿、Googleカレンダー予定を統合してSlack投稿用の日報を作る | 日報作成、Slack/PR/Calendar統合、日付別コードブロック、Slack投稿用の箇条書き日報を頼まれたとき |
 | `gh-pr-period-list` | `gh` で指定期間の自分のPRをopen/merge日時ベースで一覧化する | GitHub PRを指定期間で一覧化、merge日時を含める、open日時またはmerge日時で検索するよう頼まれたとき |
 | `gh-pr-ja` | 日本語のPRタイトル・本文・diffコメントを作成、整理する | PR作成、PR本文の書き換え、レビューやインシデント文脈の追記、Files changed への日本語コメント追加を頼まれたとき |
@@ -47,6 +48,7 @@ skills/
 まず中身を確認する。
 
 ```sh
+gh skill preview knao124/agent-skills claude-worklog-summary
 gh skill preview knao124/agent-skills codex-consult
 gh skill preview knao124/agent-skills codex-delegate
 gh skill preview knao124/agent-skills codex-worklog-summary
@@ -82,6 +84,14 @@ gh skill install knao124/agent-skills slack-daily-report --agent codex --scope u
 gh skill install knao124/agent-skills teamspirit-monthly-attendance --agent codex --scope user
 gh skill install knao124/agent-skills tweet-explainer --agent codex --scope user
 gh skill install knao124/agent-skills video-explainer --agent codex --scope user
+```
+
+Claude Code で PR 作成 skill を使う例:
+
+```sh
+gh skill install knao124/agent-skills gh-pr-ja --agent claude-code --scope user
+gh skill install knao124/agent-skills claude-worklog-summary --agent claude-code --scope user
+gh skill install knao124/agent-skills git-worktree-start --agent claude-code --scope user
 ```
 
 チーム配布時は release tag に pin する。

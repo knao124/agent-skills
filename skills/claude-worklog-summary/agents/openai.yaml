@@ -1,0 +1,4 @@
+interface:
+  display_name: "Claude Worklog Summary"
+  short_description: "Claude Code会話ログをAgent作業ログ形式に圧縮する"
+  default_prompt: "Use $claude-worklog-summary to summarize this Claude Code session as a folded Agent worklog text for a PR comment."

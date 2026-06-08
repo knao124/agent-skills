@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
-"""Create a folded Markdown scaffold from a Codex rollout JSONL log."""
+"""Create a folded Markdown scaffold from a Claude Code transcript JSONL log."""
 
 from __future__ import annotations
 
 import argparse
 import json
 import os
-import sqlite3
 import sys
 from collections import Counter
 from dataclasses import dataclass
@@ -20,17 +19,16 @@ except ImportError:  # pragma: no cover
     ZoneInfo = None  # type: ignore[assignment]
 
 
-CODEX_HOME = Path(os.environ.get("CODEX_HOME", "~/.codex")).expanduser()
+CLAUDE_HOME = Path(os.environ.get("CLAUDE_CONFIG_DIR") or os.environ.get("CLAUDE_HOME", "~/.claude")).expanduser()
 DEFAULT_TZ = "Asia/Tokyo"
 
 
 @dataclass
-class ThreadInfo:
-    id: str
+class TranscriptInfo:
+    session_id: str
     title: str
-    rollout_path: Path
-    created_at: int | None = None
-    updated_at: int | None = None
+    transcript_path: Path
+    cwd: str | None = None
 
 
 @dataclass
@@ -94,6 +92,10 @@ def truncate(text: str, limit: int) -> str:
     return normalized[: limit - 1].rstrip() + "…"
 
 
+def encoded_project_path(path: str | Path) -> str:
+    return str(Path(path).expanduser().resolve()).replace("/", "-")
+
+
 def content_text(content: Any) -> str:
     if isinstance(content, str):
         return content
@@ -103,44 +105,97 @@ def content_text(content: Any) -> str:
     for item in content:
         if not isinstance(item, dict):
             continue
-        for key in ("text", "input_text", "output_text"):
-            value = item.get(key)
-            if isinstance(value, str):
-                parts.append(value)
-                break
+        if item.get("type") != "text":
+            continue
+        value = item.get("text")
+        if isinstance(value, str):
+            parts.append(value)
     return "\n".join(parts)
 
 
-def resolve_thread(args: argparse.Namespace) -> ThreadInfo:
-    if args.rollout_path:
-        path = Path(args.rollout_path).expanduser()
-        return ThreadInfo(id=args.thread_id or path.stem, title=args.title_contains or path.stem, rollout_path=path)
+def tool_calls_from_content(content: Any, ts: datetime) -> list[ToolCall]:
+    if not isinstance(content, list):
+        return []
+    calls: list[ToolCall] = []
+    for item in content:
+        if not isinstance(item, dict) or item.get("type") != "tool_use":
+            continue
+        name = item.get("name") or "tool_use"
+        calls.append(ToolCall(ts=ts, name=str(name)))
+    return calls
 
-    db_path = CODEX_HOME / "state_5.sqlite"
-    if not db_path.exists():
-        raise SystemExit(f"Codex state DB not found: {db_path}")
 
-    where = ""
-    params: tuple[Any, ...] = ()
-    if args.thread_id:
-        where = "where id = ?"
-        params = (args.thread_id,)
-    elif args.title_contains:
-        where = "where title like ?"
-        params = (f"%{args.title_contains}%",)
+def transcript_contains(path: Path, needle: str) -> bool:
+    if not needle:
+        return True
+    try:
+        with path.open(encoding="utf-8") as fh:
+            return any(needle in line for line in fh)
+    except OSError:
+        return False
 
-    query = f"""
-        select id, title, rollout_path, created_at, updated_at
-        from threads
-        {where}
-        order by updated_at desc
-        limit 1
-    """
-    with sqlite3.connect(db_path) as con:
-        row = con.execute(query, params).fetchone()
-    if row is None:
-        raise SystemExit("No matching Codex thread found")
-    return ThreadInfo(id=row[0], title=row[1], rollout_path=Path(row[2]), created_at=row[3], updated_at=row[4])
+
+def transcript_info(path: Path) -> TranscriptInfo:
+    session_id = path.stem
+    title = session_id
+    cwd: str | None = None
+    try:
+        with path.open(encoding="utf-8") as fh:
+            for line in fh:
+                try:
+                    item = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+                if isinstance(item.get("sessionId"), str):
+                    session_id = item["sessionId"]
+                if isinstance(item.get("slug"), str):
+                    title = item["slug"]
+                if isinstance(item.get("cwd"), str):
+                    cwd = item["cwd"]
+                if title != path.stem and cwd:
+                    break
+    except OSError as exc:
+        raise SystemExit(f"Could not read transcript: {path}: {exc}") from exc
+    return TranscriptInfo(session_id=session_id, title=title, transcript_path=path, cwd=cwd)
+
+
+def candidate_transcripts(args: argparse.Namespace) -> list[Path]:
+    if args.transcript_path:
+        return [Path(args.transcript_path).expanduser()]
+
+    projects_root = CLAUDE_HOME / "projects"
+    if not projects_root.exists():
+        raise SystemExit(f"Claude projects directory not found: {projects_root}")
+
+    project_dirs: list[Path]
+    project_path = args.project_path or os.getcwd()
+    encoded_dir = projects_root / encoded_project_path(project_path)
+    if encoded_dir.exists():
+        project_dirs = [encoded_dir]
+    elif args.project_path:
+        raise SystemExit(f"Claude project transcript directory not found: {encoded_dir}")
+    else:
+        project_dirs = [path for path in projects_root.iterdir() if path.is_dir()]
+
+    candidates: list[Path] = []
+    for project_dir in project_dirs:
+        candidates.extend(project_dir.glob("*.jsonl"))
+
+    if args.session_id:
+        candidates = [path for path in candidates if path.stem == args.session_id]
+    if args.text_contains:
+        candidates = [path for path in candidates if transcript_contains(path, args.text_contains)]
+    return sorted(candidates, key=lambda path: path.stat().st_mtime, reverse=True)
+
+
+def resolve_transcript(args: argparse.Namespace) -> TranscriptInfo:
+    candidates = candidate_transcripts(args)
+    if not candidates:
+        raise SystemExit("No matching Claude Code transcript found")
+    path = candidates[0]
+    if not path.exists():
+        raise SystemExit(f"Transcript log not found: {path}")
+    return transcript_info(path)
 
 
 def read_events(path: Path, tz_name: str) -> tuple[list[Message], list[ToolCall]]:
@@ -158,23 +213,24 @@ def read_events(path: Path, tz_name: str) -> tuple[list[Message], list[ToolCall]
             if not isinstance(ts_raw, str):
                 continue
             ts = parse_ts(ts_raw, tz_name).astimezone(tz)
-            if item.get("type") != "response_item":
+            item_type = item.get("type")
+            if item_type not in ("user", "assistant"):
                 continue
-            payload = item.get("payload")
-            if not isinstance(payload, dict):
+            message = item.get("message")
+            if not isinstance(message, dict):
                 continue
-            payload_type = payload.get("type")
-            if payload_type == "message":
-                role = payload.get("role")
-                if role not in ("user", "assistant"):
-                    continue
-                text = content_text(payload.get("content"))
-                if not text.strip() or text.lstrip().startswith("<environment_context>"):
-                    continue
+            role = message.get("role") or item_type
+            if role not in ("user", "assistant"):
+                continue
+            content = message.get("content")
+            text = content_text(content)
+            if text.strip():
                 messages.append(Message(ts=ts, role=role, text=text.strip()))
-            elif payload_type in ("function_call", "custom_tool_call", "tool_search_call", "web_search_call"):
-                name = payload.get("name") or payload_type
-                calls.append(ToolCall(ts=ts, name=str(name)))
+            if item_type == "assistant":
+                calls.extend(tool_calls_from_content(content, ts))
+
+    messages.sort(key=lambda value: value.ts)
+    calls.sort(key=lambda value: value.ts)
     return messages, calls
 
 
@@ -182,9 +238,9 @@ def filter_between(values: list[Any], start: datetime, end: datetime) -> list[An
     return [value for value in values if start <= value.ts <= end]
 
 
-def build_markdown(args: argparse.Namespace, thread: ThreadInfo, messages: list[Message], calls: list[ToolCall]) -> str:
+def build_markdown(args: argparse.Namespace, transcript: TranscriptInfo, messages: list[Message], calls: list[ToolCall]) -> str:
     if not messages:
-        raise SystemExit("No user/assistant messages found in rollout log")
+        raise SystemExit("No user/assistant messages found in Claude Code transcript")
 
     full_start = messages[0].ts
     latest_message_end = messages[-1].ts
@@ -192,7 +248,7 @@ def build_markdown(args: argparse.Namespace, thread: ThreadInfo, messages: list[
     work_end = parse_ts(args.work_end, args.timezone) if args.work_end else latest_message_end
     if work_end < work_start:
         raise SystemExit("--work-end must be after --work-start")
-    full_end = work_end if args.work_end else messages[-1].ts
+    full_end = work_end if args.work_end else latest_message_end
 
     context_messages = [m for m in messages if m.ts < work_start]
     if args.context_limit >= 0:
@@ -202,16 +258,17 @@ def build_markdown(args: argparse.Namespace, thread: ThreadInfo, messages: list[
     tool_counts = Counter(call.name for call in work_calls)
     tool_text = "、".join(f"`{name}` {count}回" for name, count in sorted(tool_counts.items())) or "なし"
     timeline_header = "PR Work Timeline" if args.pr_mode else "Work Timeline"
-    scope = args.scope or thread.title
+    scope = args.scope or transcript.title
+    source_label = transcript.title if transcript.title != transcript.session_id else transcript.session_id
 
     lines = [
         "<details>",
         "<summary>Agent作業ログ / 会話圧縮メモ</summary>",
         "",
         "## Source",
-        "- Source: Codex local rollout log",
-        f"- Thread: `{thread.title}`",
-        f"- Thread ID: `{thread.id}`",
+        "- Source: Claude Code local transcript log",
+        f"- Session: `{source_label}`",
+        f"- Session ID: `{transcript.session_id}`",
         "- Times: JST",
         f"- Scope: {scope}",
         "",
@@ -225,7 +282,7 @@ def build_markdown(args: argparse.Namespace, thread: ThreadInfo, messages: list[
 
     if context_messages:
         for message in context_messages:
-            label = "ユーザー" if message.role == "user" else "Codex"
+            label = "ユーザー" if message.role == "user" else "Claude"
             lines.append(f"- {fmt_dt(message.ts, include_date=False)} {label}: {truncate(message.text, args.text_limit)}")
     else:
         lines.append("- なし")
@@ -233,7 +290,7 @@ def build_markdown(args: argparse.Namespace, thread: ThreadInfo, messages: list[
     lines.extend(["", f"## {timeline_header}"])
     if work_messages:
         for message in work_messages:
-            label = "ユーザー" if message.role == "user" else "Codex"
+            label = "ユーザー" if message.role == "user" else "Claude"
             lines.append(f"- {fmt_dt(message.ts, include_date=False)} {label}: {truncate(message.text, args.text_limit)}")
     else:
         lines.append("- なし")
@@ -244,9 +301,10 @@ def build_markdown(args: argparse.Namespace, thread: ThreadInfo, messages: list[
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--thread-id", help="Exact Codex thread id")
-    parser.add_argument("--title-contains", help="Use the latest thread whose title contains this text")
-    parser.add_argument("--rollout-path", help="Read a specific rollout JSONL file")
+    parser.add_argument("--session-id", help="Exact Claude Code session id")
+    parser.add_argument("--project-path", help="Project path whose Claude transcript directory should be searched")
+    parser.add_argument("--transcript-path", help="Read a specific transcript JSONL file")
+    parser.add_argument("--text-contains", help="Use the latest transcript containing this text")
     parser.add_argument("--scope", help="Scope label shown in the Source section")
     parser.add_argument("--work-start", help="Start of the scoped work window, JST or ISO")
     parser.add_argument("--work-end", help="End of the scoped work window, JST or ISO")
@@ -256,11 +314,9 @@ def main() -> int:
     parser.add_argument("--pr-mode", action="store_true", help="Use PR Work Timeline heading")
     args = parser.parse_args()
 
-    thread = resolve_thread(args)
-    if not thread.rollout_path.exists():
-        raise SystemExit(f"Rollout log not found: {thread.rollout_path}")
-    messages, calls = read_events(thread.rollout_path, args.timezone)
-    sys.stdout.write(build_markdown(args, thread, messages, calls))
+    transcript = resolve_transcript(args)
+    messages, calls = read_events(transcript.transcript_path, args.timezone)
+    sys.stdout.write(build_markdown(args, transcript, messages, calls))
     return 0
 
 
