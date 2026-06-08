@@ -1,0 +1,4 @@
+interface:
+  display_name: "GH PR Period List"
+  short_description: "ghで自分のPRをopen/merge日時ベースで期間一覧化する"
+  default_prompt: "Use $gh-pr-period-list to list my GitHub PRs for a repository and date range, matching either open time or merge time."
