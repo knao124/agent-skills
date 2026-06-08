@@ -1,99 +1,95 @@
 ---
 name: reading-note
-description: Use this skill when the user wants to deeply understand a book, PDF, article, or document through a 精読代替ノート, 読書ノート, 論理復元ノート, concept ledger, question-chain summary, chapter logic map, or understanding-goal breakdown. Use it for Japanese requests such as 本を理解したい, 精読ノートを作って, 論理の流れを整理して, 登場単語を網羅して, or XXをYYできる理解ゴールを作って.
+description: "本、PDF、記事、文書を深く理解するために、精読代替ノート、読書ノート、論理復元ノート、問いの連鎖、章ごとの役割、重要概念台帳、理解ゴール一覧を作るときに使う。日本語の依頼例: 本を理解したい、精読ノートを作って、論理の流れを整理して、登場単語を網羅して、XXをYYできる理解ゴールを作って。"
 license: MIT
 ---
 
 # Reading Note
 
-Create a "精読代替ノート": a note that is less than full close reading, but good enough to help a serious first-time reader enter the book's logic, concepts, and practical understanding goals under time pressure.
+この skill は、本やPDFを「精読未満だが、精読の代替として使える水準」で理解するためのノートを作る。
 
-The note must not be a compressed summary only. A first-time reader cannot absorb a dense "logic flow" before they know what problem the book solves, what object the book is constructing, and why each concept has to appear. Build the reader's entry route first, then provide the compressed logic as a review layer.
+目的は、短い要約を作ることではない。初見の読者が、何を理解すればよいのか、著者がどの順番で論理を組み立てているのか、登場概念がなぜ必要なのかを追えるようにする。
 
-## Core Standard
+## 成功基準
 
-The output succeeds when a reader can:
+読み手が次のことをできる状態にする。
 
-- State what the book is trying to make, decide, prove, or explain.
-- Follow the author's argument as a chain of questions and answers.
-- Explain why each important term appears, not only define it.
-- Use the terms to perform concrete understanding goals such as "XXをYYできる".
-- Separate "what the author is saying" from "whether the claim is valid, complete, or applicable".
-- Reconstruct the book's main logic without pretending they have completed full close reading.
+- この本が何を作れる、判断できる、説明できるようにする本かを言える。
+- 著者の議論を「問い -> 答え -> 次の問い」の流れで追える。
+- 重要語を定義だけでなく、論理上の役割として説明できる。
+- 登場語を使って「XXをYYできる」という具体的な理解ゴールを実行できる。
+- 著者の主張の復元と、その主張の妥当性評価を分けられる。
+- 精読済みのふりをせず、本文の主構造を再構成できる。
 
-## Non-Negotiable Rules
+## 必須ルール
 
-- Do not begin with the compressed logic flow. Begin with an entry layer for first-time comprehension.
-- Do not list terms as a glossary only. For each important term, explain its role in the argument or workflow.
-- Do not fabricate source content. If the source text is missing, unavailable, or unreadable, ask for the source or state the limitation.
-- Do not overquote. Paraphrase and summarize, using only short quotes when necessary.
-- Preserve uncertainty. Mark inferred structure, missing source evidence, and weak confidence explicitly.
-- Treat high-stakes domains such as finance, law, medicine, and tax as educational analysis, not professional advice.
+- 圧縮された論理の流れから始めない。最初に初見者向けの導入層を置く。
+- 用語を単なる一覧や辞書にしない。各語について、なぜ必要か、どこで効くか、誤解すると何が壊れるかを書く。
+- ソース内容を捏造しない。本文、PDF、URL、書名などの根拠が読めない場合は、その制約を明示する。
+- 長い引用を避ける。必要な短い引用以外は、要約とパラフレーズで書く。
+- 推測は推測として扱う。目次や本文からの推定、根拠不足、信頼度の低い箇所を明示する。
+- 金融、法律、医療、税務などの高リスク領域では、学習用の理解整理として書き、専門助言として扱わない。
 
-## Workflow
+## 作業手順
 
-1. Confirm and read the source.
-   - If a local path, PDF, book title, or URL is provided, inspect the source before writing.
-   - For a PDF, extract text and identify the table of contents, chapter headings, recurring terms, examples, formulas, and summary sections.
-   - If only a title is provided and source access is uncertain, do not invent details. Ask for the file or use available source access if the user explicitly permits.
+1. ソースを確認して読む。
+   - ローカルパス、PDF、書名、URL、本文が与えられている場合は、まず中身を確認する。
+   - PDFでは、テキスト抽出、目次、章見出し、頻出語、図表、公式、まとめ部分を確認する。
+   - 書名だけで本文にアクセスできない場合は、内容を作らず、ファイル、URL、本文提示を求める。
 
-2. Identify the book's object.
-   - Ask: "この本は読者に何を作れる・判断できる・説明できるようにする本か?"
-   - Express this as an object, not only a topic.
-   - Examples: a valuation model, a decision procedure, a causal explanation, a historical interpretation, an operating framework.
+2. この本が作る対象を特定する。
+   - 「この本は読者に何を作れる、判断できる、説明できるようにする本か」を問う。
+   - テーマ名だけでなく、成果物や判断手順として表現する。
+   - 例: 企業価値評価モデル、意思決定手順、因果説明、歴史解釈、運用フレーム。
 
-3. Build the entry map.
-   - Explain the minimum whole structure before the detailed logic.
-   - Use a domain-specific frame when available. For example, a valuation book may be organized around "cash flow / discount rate / terminal value / validation"; a statistics book around "data / model / estimation / uncertainty / decision".
-   - Keep this section concrete and short enough for an initial reader to hold in working memory.
+3. 全体構造を作る。
+   - 詳細な論理に入る前に、最小限の全体像を置く。
+   - 技術書や実務書では、分子、分母、入力値、出力値、検証方法のような構造を使う。
+   - 初見者の作業記憶に収まる短さにする。
 
-4. Create one simple running example.
-   - Introduce a toy example that makes the abstract structure visible.
-   - Use the example repeatedly to explain the logic, terms, and goals.
-   - The example should be intentionally simple; it is for orientation, not precision.
+4. 単純な例を1つ作る。
+   - 抽象構造が見えるように、意図的に単純化した例を置く。
+   - 同じ例を使って、論理、用語、理解ゴールを説明する。
+   - 精密さより、入口としての分かりやすさを優先する。
 
-5. Convert the argument into a question chain.
-   - Write the book's flow as "問い -> 答え -> 次の問い".
-   - This is the main bridge between first-time comprehension and compressed logic.
-   - Prefer causal and procedural connections over chapter-title paraphrase.
+5. 議論を問いの連鎖に変換する。
+   - 「問い -> 著者の答え -> その答えが生む次の問い」で書く。
+   - 章タイトルの言い換えではなく、因果関係や手続き上の必然性を表す。
+   - ここが、初見者向け導入と圧縮ロジックの橋渡しになる。
 
-6. Only then write the compressed logic flow.
-   - Now summarize the argument densely.
-   - The compressed flow should be readable as a review because the entry map and question chain already prepared the reader.
+6. その後に圧縮版の論理の流れを書く。
+   - 導入、単純例、問いの連鎖で準備したあとに、密度の高い論理フローを書く。
+   - 圧縮版は入口ではなく、復習用の層として扱う。
 
-7. Map chapters by function.
-   - For each chapter or major section, record:
-     - The question it answers.
-     - The answer or move it contributes.
-     - The concepts introduced.
-     - The next question it creates.
-   - Do not merely summarize chapter contents.
+7. 章ごとの役割を整理する。
+   - 各章または主要セクションについて、答える問い、本章の答え、登場概念、次の問いを書く。
+   - 内容要約ではなく、全体ロジックの中での機能を書く。
 
-8. Build the concept ledger.
-   - Split terms into categories such as 骨格語, 実務補助語, 手続き語, 評価語, and 反例語 when useful.
-   - Use the same explanatory format for all categories.
-   - For each term, include: plain meaning, why it is needed, where it appears in the logic, what misunderstanding it prevents, and what the reader should be able to do with it.
+8. 重要概念台帳を作る。
+   - 必要に応じて、骨格語、実務補助語、手続き語、評価語、反例語に分ける。
+   - すべて同じ説明フォーマットで扱う。
+   - 各語について、平たく言うと、なぜ必要か、論理上の位置、誤解すると何が壊れるか、できるようになることを書く。
 
-9. Extract formulas, procedures, or rules only when they are structurally important.
-   - Include the minimum formulas or steps needed to reconstruct the book's reasoning.
-   - Explain each formula as a role in the argument, not as a standalone equation.
+9. 公式、手順、ルールを最小限に抽出する。
+   - 本の論理を再構成するために必要なものだけを入れる。
+   - 公式は単独で置かず、論理上の役割を説明する。
 
-10. Write understanding goals.
-   - Use the format "XXをYYできる".
-   - Cover concept recognition, explanation, calculation or application, comparison, diagnosis, and critique when relevant.
-   - Goals should be testable by a reader, not vague aspirations.
+10. 理解ゴールを書く。
+   - 「XXをYYできる」の形にする。
+   - 概念認識、説明、計算、適用、比較、診断、批判を必要に応じて含める。
+   - 抽象的な目標ではなく、読み手が合否判定できる形にする。
 
-11. Add validity checks.
-   - Separate author-internal reconstruction from external evaluation.
-   - Record assumptions, weak points, counterexamples, scope limits, and practical caveats.
+11. 検証メモを加える。
+   - 著者の内部論理の復元と、外部から見た妥当性評価を分ける。
+   - 前提、弱点、反例、適用限界、実務上の注意点を整理する。
 
-12. Add self-tests.
-   - Include questions that verify whether the reader can reconstruct the argument.
-   - Include at least one "explain to a beginner" test and one "apply to a new case" test.
+12. 自己テストを加える。
+   - 論理を再構成できるかを確認する問いを入れる。
+   - 初学者に説明するテストと、新しいケースに適用するテストを少なくとも1つずつ入れる。
 
-## Output Template
+## 出力テンプレート
 
-Use Japanese by default unless the user requests another language.
+指定がなければ日本語で書く。
 
 ```markdown
 # <書名> 精読代替ノート
@@ -146,22 +142,22 @@ Use Japanese by default unless the user requests another language.
 ## 13. 1分説明
 ```
 
-## Style
+## 文体
 
-- Write as a study tool, not as a book review.
-- Prefer concrete verbs: 見積もる, 比較する, 切り分ける, 説明する, 検証する.
-- Use tables for repeated structured information.
-- Use prose for "why this matters" sections; do not reduce the whole note to lists.
-- If the user asks for only an outline, provide the same structure in abbreviated form and say that it is a draft rule, not a source-grounded final note.
+- 書評ではなく、学習と理解のための道具として書く。
+- 見積もる、比較する、切り分ける、説明する、検証する、のような具体的な動詞を使う。
+- 繰り返し構造は表にする。
+- 「なぜ重要か」は文章で説明し、全体を箇条書きだけにしない。
+- ユーザーが案だけを求めている場合は、同じ構造を短縮版で示し、ソースに基づく最終ノートではないことを明示する。
 
-## Completion Checklist
+## 完了チェック
 
-Before finishing, verify that the note includes:
+終了前に、次が含まれているか確認する。
 
-- An entry layer before the compressed logic.
-- A running example or equivalent concrete anchor.
-- A question chain.
-- Chapter roles as question-answer-next question, if chapters are available.
-- Concept ledger with "why needed" and "what the reader can do with it".
-- Understanding goals in "XXをYYできる" form.
-- Assumptions, limits, and self-tests.
+- 圧縮ロジックより前に、初見者向けの導入層がある。
+- 単純な例、またはそれに相当する具体的な足場がある。
+- 問いの連鎖がある。
+- 章が読める場合、章ごとの役割が「問い、答え、次の問い」で整理されている。
+- 重要概念台帳に「なぜ必要か」と「できるようになること」がある。
+- 理解ゴールが「XXをYYできる」に近い検証可能な形になっている。
+- 前提、限界、自己テストがある。
