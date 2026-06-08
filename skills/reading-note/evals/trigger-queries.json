@@ -1,0 +1,34 @@
+[
+  {
+    "query": "このPDFの精読代替ノートを作って",
+    "should_trigger": true
+  },
+  {
+    "query": "この本を理解したい。論理の流れと概念台帳と理解ゴールで整理して",
+    "should_trigger": true
+  },
+  {
+    "query": "精読ノートを作って。問いの連鎖で章ごとに整理して",
+    "should_trigger": true
+  },
+  {
+    "query": "時間がないので、精読未満だけど深く理解できる読書メモにして",
+    "should_trigger": true
+  },
+  {
+    "query": "PR本文を日本語で整えて",
+    "should_trigger": false
+  },
+  {
+    "query": "今日の日報を作って",
+    "should_trigger": false
+  },
+  {
+    "query": "このコードをHTMLで解説して",
+    "should_trigger": false
+  },
+  {
+    "query": "PDFをWordに変換して",
+    "should_trigger": false
+  }
+]

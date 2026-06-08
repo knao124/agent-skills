@@ -38,6 +38,7 @@ skills/
 | `explain-to-html` | 解説を `/tmp` 配下の standalone HTML として作成する | コード、diff、設定、コマンドの解説をブラウザで見られるHTMLとして保存・共有したいと頼まれたとき |
 | `gcloud-repo-config` | repo ごとの `gcloud` named configuration を安全に初期設定、検証、利用する | repo 固有の `gcloud` named configuration、`.codex/gcloud.local.toml`、`CLOUDSDK_ACTIVE_CONFIG_NAME`、service account impersonation の設定や利用を頼まれたとき |
 | `publish-to-public` | ローカルHTMLを `knao124/public` に配置し、index/README導線更新、push、公開URL検証まで行う | HTMLを公開して、これを公開して、publicに公開、GitHub Pagesに載せて、と頼まれたとき |
+| `reading-note` | 本やPDFを理解導入、問いの連鎖、概念台帳、理解ゴール、検証メモで精読代替ノート化する | 精読ノート、読書ノート、論理復元、本/PDFを深く理解したい、登場概念や理解ゴール整理を頼まれたとき |
 | `slack-daily-report` | `agent-slack` で指定 workspace の自分の投稿を取得し、日報用の raw table と日時サマリを作る | Slack投稿から日報、作業時間つきの表、Slack/git/calendar統合前のrawデータ作成を頼まれたとき |
 | `teamspirit-monthly-attendance` | ローカル設定を使い、TeamSpirit/Salesforce の月次勤怠時刻修正と工数割合登録を console script で厳密に支援する | TeamSpirit 勤怠表、勤怠時刻修正申請、承認申請、工数割合、Chrome/Console 自動化を頼まれたとき |
 | `tweet-explainer` | X/Tweet URLをブラウザ優先、`~/.x-token` のApp-only token fallbackで読み、`explain-to-html` で解説HTMLを作る | X投稿やX ArticleのURLを読んで、要約・解説・HTML記事化を頼まれたとき |
@@ -60,6 +61,7 @@ gh skill preview knao124/agent-skills gws-calendar-agenda
 gh skill preview knao124/agent-skills explain-to-html
 gh skill preview knao124/agent-skills gcloud-repo-config
 gh skill preview knao124/agent-skills publish-to-public
+gh skill preview knao124/agent-skills reading-note
 gh skill preview knao124/agent-skills slack-daily-report
 gh skill preview knao124/agent-skills teamspirit-monthly-attendance
 gh skill preview knao124/agent-skills tweet-explainer
@@ -80,6 +82,7 @@ gh skill install knao124/agent-skills gws-calendar-agenda --agent codex --scope 
 gh skill install knao124/agent-skills explain-to-html --agent codex --scope user
 gh skill install knao124/agent-skills gcloud-repo-config --agent codex --scope user
 gh skill install knao124/agent-skills publish-to-public --agent codex --scope user
+gh skill install knao124/agent-skills reading-note --agent codex --scope user
 gh skill install knao124/agent-skills slack-daily-report --agent codex --scope user
 gh skill install knao124/agent-skills teamspirit-monthly-attendance --agent codex --scope user
 gh skill install knao124/agent-skills tweet-explainer --agent codex --scope user
