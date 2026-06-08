@@ -1,0 +1,22 @@
+[
+  {
+    "query": "このCodex作業ログをPRコメント用の折りたたみメモとして出して",
+    "should_trigger": true
+  },
+  {
+    "query": "Codex内でどれくらい時間がかかったか、会話圧縮メモを作って",
+    "should_trigger": true
+  },
+  {
+    "query": "rollout logからPR作業タイムラインをMarkdownでまとめて",
+    "should_trigger": true
+  },
+  {
+    "query": "PR本文を日本語で作って",
+    "should_trigger": false
+  },
+  {
+    "query": "GitHubのCI開始時刻とmerge時刻だけ教えて",
+    "should_trigger": false
+  }
+]
