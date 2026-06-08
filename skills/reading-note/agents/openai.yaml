@@ -1,4 +1,4 @@
 interface:
   display_name: "Reading Note"
-  short_description: "本やPDFを精読代替ノートとして構造化する"
-  default_prompt: "Use $reading-note to turn this book, PDF, article, or document into a first-time-reader friendly 精読代替ノート with an entry map, simple example, question chain, concept ledger, understanding goals, and self-tests."
+  short_description: "本やPDFを精読代替ノートへ変換する"
+  default_prompt: "Use $reading-note to turn this book, PDF, article, or document into a 精読代替ノート with source coverage, close-reading outcomes, question chain, claim and concept ledgers, understanding goals, scored self-tests, and a gap audit against the source."
