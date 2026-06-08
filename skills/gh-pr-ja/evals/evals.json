@@ -42,6 +42,12 @@
       "prompt": "UIコンポーネントのスタイルを変更した差分でPRを作る。スクショはまだ撮れていない。",
       "expected_output": "UI変更として扱い、PR本文のスクリーンショット欄には実際に貼り付けられた画像が必須であることを示す。ローカル画像を添付する場合は gh extension list で gh image を確認し、未インストールなら gh extension install drogers0/gh-image を実行し、gh image でGitHub Markdownを生成する。スクリーンショット未取得のままPRを作らず、取得または貼り付けがブロッカーであると明示する。",
       "files": []
+    },
+    {
+      "id": "codex-worklog-comment",
+      "prompt": "差分でPRを作成し、PR作成後にCodex内の作業時間と会話圧縮メモを別コメントとして折りたたみ形式で載せて。",
+      "expected_output": "PR本文には作業ログを混ぜず、PR作成後に codex-worklog-summary を使って `<details>` 形式のCodex作業ログテキストを生成し、gh pr comment で別コメントとして投稿する。codex-worklog-summary が未導入なら gh skill install knao124/agent-skills codex-worklog-summary --agent codex --scope user --force で導入してから使う。",
+      "files": []
     }
   ]
 }
