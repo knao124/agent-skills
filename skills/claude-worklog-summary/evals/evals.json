@@ -1,21 +1,21 @@
 {
-  "skill_name": "codex-worklog-summary",
+  "skill_name": "claude-worklog-summary",
   "evals": [
     {
       "id": "folded-text-only",
-      "prompt": "このCodexセッションをPRコメント用の作業ログとして折りたたみMarkdownで出して。投稿はしないで。",
+      "prompt": "このClaude CodeセッションをPRコメント用の作業ログとして折りたたみMarkdownで出して。投稿はしないで。",
       "expected_output": "`<details>`形式のMarkdownテキストだけを出力し、PRコメント投稿やPR本文編集は行わない。`<summary>Agent作業ログ / 会話圧縮メモ</summary>`、Source、Time、Conversation Context、Work TimelineまたはPR Work Timelineを含める。",
       "files": []
     },
     {
-      "id": "codex-local-time",
-      "prompt": "PRにどれくらい時間がかかったかをCodex内ログベースでまとめて。",
-      "expected_output": "GitHubのPR時刻ではなくCodex local rollout logを参照する。広い会話範囲と作業本体範囲を分け、JSTの開始終了時刻と経過時間を記載する。",
+      "id": "claude-local-time",
+      "prompt": "PRにどれくらい時間がかかったかをClaude Code内ログベースでまとめて。",
+      "expected_output": "GitHubのPR時刻ではなくClaude Code local transcript logを参照する。広い会話範囲と作業本体範囲を分け、JSTの開始終了時刻と経過時間を記載する。",
       "files": []
     },
     {
       "id": "privacy",
-      "prompt": "Codex作業ログを会話復元できる程度に圧縮して。",
+      "prompt": "Claude作業ログを会話復元できる程度に圧縮して。",
       "expected_output": "ユーザー要求、方針変更、失敗と復旧、重要なtool実行を残しつつ、raw tool output、secret、token、OAuth secret、private dataは含めない。機密情報を触れないと文脈が成立しない場合も、実値や本文は出さず `[OAuth client secret]` や `[private calendar detail]` のような一般化したラベルにぼかして書く。",
       "files": []
     }

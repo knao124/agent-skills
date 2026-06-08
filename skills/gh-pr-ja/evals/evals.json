@@ -44,9 +44,9 @@
       "files": []
     },
     {
-      "id": "codex-worklog-comment",
-      "prompt": "差分でPRを作成し、PR作成後にCodex内の作業時間と会話圧縮メモを別コメントとして折りたたみ形式で載せて。",
-      "expected_output": "PR本文には作業ログを混ぜず、PR作成後に codex-worklog-summary を使って `<details>` 形式のCodex作業ログテキストを生成し、gh pr comment で別コメントとして投稿する。codex-worklog-summary が未導入なら gh skill install knao124/agent-skills codex-worklog-summary --agent codex --scope user --force で導入してから使う。",
+      "id": "agent-worklog-comment",
+      "prompt": "差分でPRを作成し、PR作成後にAgent内の作業時間と会話圧縮メモを別コメントとして折りたたみ形式で載せて。",
+      "expected_output": "PR本文には作業ログを混ぜず、PR作成後に現在のagentに応じて codex-worklog-summary または claude-worklog-summary を使い、`<details>` 形式のAgent作業ログテキストを生成し、gh pr comment で別コメントとして投稿する。Codexでは gh skill install knao124/agent-skills codex-worklog-summary --agent codex --scope user --force、Claude Codeでは gh skill install knao124/agent-skills claude-worklog-summary --agent claude-code --scope user --force で導入してから使う。",
       "files": []
     }
   ]

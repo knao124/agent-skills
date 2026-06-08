@@ -79,12 +79,13 @@ Keep every section visible by default. If a section has no applicable content, w
 4. Draft the body using the default section order.
    For UI changes, include the `スクリーンショット` section with the actual image Markdown; never leave a placeholder to fill in later.
 5. Open or update the PR only after the body satisfies the screenshot requirement for UI changes.
-6. After creating a PR, add a separate Codex worklog comment:
-   generate folded Markdown text with `$codex-worklog-summary` and post it as a PR comment, not in the PR body.
-   If `$codex-worklog-summary` is not installed, install it first:
-   `gh skill install knao124/agent-skills codex-worklog-summary --agent codex --scope user --force`.
-   Then read `~/.codex/skills/codex-worklog-summary/SKILL.md`, follow that skill, save the generated Markdown to a temporary file, and run `gh pr comment <number> --body-file <file>`.
-   The comment should keep the folded `Codex作業ログ / 会話圧縮メモ` format and omit implementation summary / verification sections unless the user explicitly asks for them.
+6. After creating a PR, add a separate agent worklog comment:
+   generate folded Markdown text with the current agent's worklog skill and post it as a PR comment, not in the PR body.
+   Use this branch:
+   - When running in Codex, use `$codex-worklog-summary`. If it is not installed, install it with `gh skill install knao124/agent-skills codex-worklog-summary --agent codex --scope user --force`, then read `~/.codex/skills/codex-worklog-summary/SKILL.md` and follow that skill.
+   - When running in Claude Code, use `$claude-worklog-summary`. If it is not installed, install it with `gh skill install knao124/agent-skills claude-worklog-summary --agent claude-code --scope user --force`, then read `~/.claude/skills/claude-worklog-summary/SKILL.md` and follow that skill.
+   Save the generated Markdown to a temporary file and run `gh pr comment <number> --body-file <file>`.
+   The comment should keep the folded `Agent作業ログ / 会話圧縮メモ` format and omit implementation summary / verification sections unless the user explicitly asks for them.
 7. After the PR exists, inspect the `Files changed` tab and add Japanese comments to the important diff hunks:
    cover changes whose intent is not immediately obvious from the code, especially guard conditions, error handling, operational workarounds, schema changes, and behavior changes.
 8. Remove fluff:
@@ -92,11 +93,11 @@ Keep every section visible by default. If a section has no applicable content, w
 9. If the user asks to revise an existing PR:
    preserve the facts, but rewrite the structure and tone to match this skill.
 
-## Codex Worklog Comment Rules
+## Agent Worklog Comment Rules
 
 - Add this comment only after the PR exists. Do not put it in the PR body.
-- The source of timing should be Codex local session / rollout logs, not GitHub PR timestamps, when available.
-- The comment is an audit trail of the Codex conversation and work sequence. It may include user scope changes, approach decisions, blockers, recovery steps, PR creation, CI, merge, install, and cleanup events.
+- The source of timing should be the current agent's local session logs, not GitHub PR timestamps, when available.
+- The comment is an audit trail of the agent conversation and work sequence. It may include user scope changes, approach decisions, blockers, recovery steps, PR creation, CI, merge, install, and cleanup events.
 - Keep private data out of the comment. Do not include raw tool outputs, tokens, OAuth secrets, or private calendar/email/Slack content.
 - If the user asks not to post a worklog comment, skip it and mention that it was intentionally omitted.
 
