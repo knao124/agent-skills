@@ -1,0 +1,4 @@
+interface:
+  display_name: "Slack Daily Report"
+  short_description: "Slack投稿から日報用の表と日時サマリを安全に作る"
+  default_prompt: "Use $slack-daily-report to summarize my Slack posts for the specified date range into a daily report table and date summary."

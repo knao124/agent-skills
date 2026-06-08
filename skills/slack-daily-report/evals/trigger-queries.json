@@ -1,0 +1,42 @@
+[
+  {
+    "query": "Growth Verseの6/1から6/7までの自分のSlack投稿を日報用にまとめて",
+    "should_trigger": true
+  },
+  {
+    "query": "agent-slackを使って、先週のSlackのやりとりから日付・テーマ・具体的な内容・作業時間の表を作って",
+    "should_trigger": true
+  },
+  {
+    "query": "Slackの自分の投稿を取得して、テーブル形式と日時サマリ形式で日報のrawデータにして",
+    "should_trigger": true
+  },
+  {
+    "query": "6月前半のSlack作業時間を文字数ベースで0.25h単位に切り上げて見積もって",
+    "should_trigger": true
+  },
+  {
+    "query": "Slack、git、calendarを混ぜて日報を作りたいので、まずSlack由来のraw表を作って",
+    "should_trigger": true
+  },
+  {
+    "query": "agent-slack auth import-chrome が失敗する理由を調べて",
+    "should_trigger": false
+  },
+  {
+    "query": "Slackに投稿する日報文面を作って送信して",
+    "should_trigger": false
+  },
+  {
+    "query": "Gitのコミット履歴だけから週報を作って",
+    "should_trigger": false
+  },
+  {
+    "query": "Google Calendarの予定を確認して今日の予定を教えて",
+    "should_trigger": false
+  },
+  {
+    "query": "このSlackスレッドに返信する文章を考えて",
+    "should_trigger": false
+  }
+]

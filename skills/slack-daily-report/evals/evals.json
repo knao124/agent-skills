@@ -1,0 +1,23 @@
+{
+  "skill_name": "slack-daily-report",
+  "evals": [
+    {
+      "id": "workspace-confirmation",
+      "prompt": "Use Slack to summarize my posts from Growth Verse for 2026-06-01 through 2026-06-07 into a daily-report raw table.",
+      "expected_output": "The agent verifies the configured Slack workspaces and explicitly tests/selects the Growth Verse workspace before reading messages.",
+      "files": []
+    },
+    {
+      "id": "own-posts-and-format",
+      "prompt": "Create a table and date summary from my Slack posts for last week. Use work time estimates based on message text, not elapsed clock time.",
+      "expected_output": "The output includes both a table with 日付, 曜日, テーマ, 具体的な内容, 作業時間 columns and a date-summary section with bullets ending in values like （0.25h）.",
+      "files": []
+    },
+    {
+      "id": "rounding-rule",
+      "prompt": "Estimate Slack writing time from my own messages and round to 0.25 hour units.",
+      "expected_output": "The agent uses a character-count plus per-message-overhead model and rounds nonzero rows up to the nearest 0.25h.",
+      "files": []
+    }
+  ]
+}
