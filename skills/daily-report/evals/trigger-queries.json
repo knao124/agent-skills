@@ -1,0 +1,34 @@
+[
+  {
+    "query": "Slack、GitHub PR、Googleカレンダーから6/1〜6/5の日報を作って",
+    "should_trigger": true
+  },
+  {
+    "query": "GROWTH VERSEとdhk-devs/canvas-aiを見て、今日の日報をSlack投稿用の箇条書きで作って",
+    "should_trigger": true
+  },
+  {
+    "query": "PRとSlackとカレンダーをまとめて日報化して。日付ごとにコードブロックを分けて",
+    "should_trigger": true
+  },
+  {
+    "query": "6/5の日報を作りたい。開発はPRだけ、会議はカレンダー、連絡はSlackでまとめて",
+    "should_trigger": true
+  },
+  {
+    "query": "Slack投稿から作業時間つきのraw tableを作って",
+    "should_trigger": false
+  },
+  {
+    "query": "指定期間の自分のPR一覧だけ出して",
+    "should_trigger": false
+  },
+  {
+    "query": "Google Calendarの今日の予定を表にして",
+    "should_trigger": false
+  },
+  {
+    "query": "PR本文を日本語で整えて",
+    "should_trigger": false
+  }
+]
