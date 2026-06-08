@@ -1,0 +1,4 @@
+interface:
+  display_name: "Daily Report"
+  short_description: "PR・Slack・カレンダーを統合して日報を整形する"
+  default_prompt: "Use $daily-report to create my daily report from GitHub PRs, Slack posts, and calendar events for the specified date range."

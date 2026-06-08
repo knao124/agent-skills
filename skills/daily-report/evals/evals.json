@@ -1,0 +1,35 @@
+{
+  "skill_name": "daily-report",
+  "evals": [
+    {
+      "id": "confirm-source-scope-first",
+      "prompt": "6/1〜6/5の日報を作って",
+      "expected_output": "データ取得前にSlack workspace、参照するGitHub repository一覧、Googleカレンダーアカウント/カレンダーを確認する。日付範囲は2026-06-01〜2026-06-05のように絶対化する。未確認のままSlack、GitHub、Calendarを取得しない。",
+      "files": []
+    },
+    {
+      "id": "uses-dependent-skills",
+      "prompt": "GROWTH VERSE、dhk-devs/canvas-ai と knao124/agent-skills、na-kobayashi@growth-verse.ai のprimaryカレンダーで6/5の日報を作って",
+      "expected_output": "slack-daily-report、gh-pr-period-list、gws-calendar-agendaを使う。必要なskillが見つからない場合は gh skill install knao124/agent-skills <skill> --agent codex --scope user --force の形式で3つのinstallコマンドを案内し、独自の直接取得で代替しない。",
+      "files": []
+    },
+    {
+      "id": "final-format-slack-postable",
+      "prompt": "6/5の日報をSlackに投稿しやすい形で作って。見出しは使わず箇条書き、インデントは半角スペース4つで。",
+      "expected_output": "日付ごとに個別のMarkdownコードブロックを返す。コードブロック内は最初に YYYY/MM/DD（曜） を置き、#や##見出しを使わない。トップレベルは * 開発、* 会議、* slack で、ネストは半角スペース4つずつにする。",
+      "files": []
+    },
+    {
+      "id": "development-from-pr-only",
+      "prompt": "PR、Slack、カレンダーを統合して日報化して。開発欄はPRで得られる情報だけにして。",
+      "expected_output": "開発セクションはGitHub PRタイトル、repo、番号、URL、状態だけから構成する。Slack由来のコード品質提案や調整内容は開発セクションに入れず、slackセクションへ入れる。PRは [OWNER/REPO #NUMBER TITLE](URL) 形式でリンクする。",
+      "files": []
+    },
+    {
+      "id": "calendar-filtering",
+      "prompt": "カレンダーは予定あり、NG枠、未回答、仮参加を除外して日報に入れて",
+      "expected_output": "gws-calendar-agendaで取得した予定から、予定あり、NG枠、空タイトル、(no title)を除外する。参加状態は参加または主催者のみを残し、未回答、仮参加、不参加、不明は最終日報の会議欄に入れない。",
+      "files": []
+    }
+  ]
+}
