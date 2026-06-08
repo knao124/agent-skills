@@ -1,0 +1,42 @@
+[
+  {
+    "query": "ghコマンドを使って、6/1〜6/7に出した自分のPRを一覧化して。merge日時も入れて",
+    "should_trigger": true
+  },
+  {
+    "query": "dhk-devs/canvas-ai の指定期間の自分のPRを、open日時かmerge日時が入っていれば拾って表にして",
+    "should_trigger": true
+  },
+  {
+    "query": "先週マージした、または先週作った自分のGitHub PRをrepo別に見たい",
+    "should_trigger": true
+  },
+  {
+    "query": "createdAtだけじゃなくmergedAtでも検索してPR一覧を作って",
+    "should_trigger": true
+  },
+  {
+    "query": "GitHubのPR一覧にmerge時刻とopen時刻をJSTで出して",
+    "should_trigger": true
+  },
+  {
+    "query": "このPR本文を日本語フォーマットに直して",
+    "should_trigger": false
+  },
+  {
+    "query": "GitHub Actionsの失敗ログを調べて修正して",
+    "should_trigger": false
+  },
+  {
+    "query": "指定期間のSlack投稿から日報を作って",
+    "should_trigger": false
+  },
+  {
+    "query": "Google Calendarの6/1の予定を一覧化して",
+    "should_trigger": false
+  },
+  {
+    "query": "このrepoのopen PRにレビューコメントを追加して",
+    "should_trigger": false
+  }
+]

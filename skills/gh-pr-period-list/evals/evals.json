@@ -1,0 +1,29 @@
+{
+  "skill_name": "gh-pr-period-list",
+  "evals": [
+    {
+      "id": "open-or-merge-period",
+      "prompt": "dhk-devs/canvas-ai について 2026-06-01〜2026-06-07 に出した自分のPRを一覧化して。merge日時も追加し、open日時またはmerge日時が期間内なら含めて。",
+      "expected_output": "ghのactive userをauthorとして使い、created検索とmerged検索を両方実行してPR番号で重複排除する。JSTの2026-06-01 00:00:00から2026-06-07 23:59:59まででopen日時またはmerge日時を厳密にフィルタし、Open日時、Merge日時、PR、状態、タイトルのMarkdown表を返す。未mergeのPRはMerge日時を未mergeと表示する。",
+      "files": []
+    },
+    {
+      "id": "timezone-boundary",
+      "prompt": "6/1〜6/7 JST の自分のPRをghで検索したい。UTC日付にまたがるPRも落とさないで。",
+      "expected_output": "ローカル日付範囲をJSTで絶対化し、候補取得ではUTC日付範囲を使う。最終判定はcreatedAtまたはmergedAtをJSTへ変換して期間内か確認するため、6/1早朝JSTのPRを落とさない。",
+      "files": []
+    },
+    {
+      "id": "repo-not-visible",
+      "prompt": "ghで owner/missing-repo の指定期間の自分のPRを一覧化して",
+      "expected_output": "ghがCould not resolve to a RepositoryまたはHTTP 404を返した場合、PRが0件と断定せず、active accountからrepoが見えていないかrepo名が誤っている可能性を明示する。",
+      "files": []
+    },
+    {
+      "id": "script-first",
+      "prompt": "毎週使うので、手作業のjqではなく安定した方法で自分のPR一覧を出して",
+      "expected_output": "bundled scriptのscripts/list_prs.pyを優先して使い、GraphQL pagination、created/merged検索、重複排除、ローカルtimezone filteringをスクリプトに任せる。",
+      "files": []
+    }
+  ]
+}
