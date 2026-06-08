@@ -17,6 +17,7 @@ Use it to preserve enough context to reconstruct the Codex conversation and work
 - Answer in Japanese unless the user asks otherwise.
 - Produce text only. Do not post a GitHub PR comment, edit a PR body, or open a PR from this skill.
 - Treat Codex logs as local/private. Do not include secrets, OAuth client secrets, raw tokens, full tool outputs, browser URLs with sensitive query strings, or raw calendar/email/Slack/private data.
+- If the worklog cannot be understood without mentioning sensitive material, blur it absolutely: replace values and private content with generic labels such as `[OAuth client secret]`, `[private calendar detail]`, `[customer name]`, or `[internal URL]`, and describe only the operational role it played.
 - Prefer Codex local rollout logs over GitHub timestamps when the user asks about Codex-side time.
 - Keep the output folded with `<details>` unless the user asks for another container.
 - Do not include `Implementation Summary` or `Verification` sections by default. This skill is for conversation/worklog reconstruction, not PR review evidence.
@@ -68,6 +69,7 @@ Rename `PR Work Timeline` to `Work Timeline` when the target is not a PR.
    - Keep tool failures that affected the path.
    - Keep commits, PR creation, CI, merge, install, and cleanup events when relevant.
    - Omit raw command output unless it is the key evidence for a decision.
+   - Redact sensitive facts before writing the final text. Keep the event shape, decision, and timing; remove or generalize the secret, personal data, private content, account identifiers, and exact private URLs.
 5. Return only the Markdown text unless the user asks for explanation.
 
 ## Script
