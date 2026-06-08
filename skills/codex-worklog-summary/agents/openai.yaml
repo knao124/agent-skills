@@ -1,0 +1,4 @@
+interface:
+  display_name: "Codex Worklog Summary"
+  short_description: "Codex会話ログをPR用の折りたたみメモに圧縮する"
+  default_prompt: "Use $codex-worklog-summary to summarize this Codex session as a folded worklog text for a PR comment."
