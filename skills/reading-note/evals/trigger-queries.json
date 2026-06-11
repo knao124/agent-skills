@@ -24,6 +24,10 @@
     "should_trigger": true
   },
   {
+    "query": "冒頭に作業報告を書かず、この本は何を作る本かから始める精読ノートにして",
+    "should_trigger": true
+  },
+  {
     "query": "重要主張台帳と自己テストの採点基準まで入れた読書ノートを作って",
     "should_trigger": true
   },
