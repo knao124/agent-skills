@@ -1,0 +1,58 @@
+[
+  {
+    "query": "一倉定の経営計画書をうちの会社向けに作りたい。まずIR資料を読んで方針を理解して",
+    "should_trigger": true
+  },
+  {
+    "query": "一倉式で方針書を書きたいんだけど、何から決めればいい?",
+    "should_trigger": true
+  },
+  {
+    "query": ".tmp/keikaku.md にある経営計画書のドラフト、一倉定の経営計画書として項目がただしいか監査して",
+    "should_trigger": true
+  },
+  {
+    "query": "公開中の中期経営計画を、社員向けの経営計画書(方針書+利益計画+目標B/S)に翻訳してほしい",
+    "should_trigger": true
+  },
+  {
+    "query": "来期の短期経営計画書を作りたい。長期計画は去年作ったやつがある",
+    "should_trigger": true
+  },
+  {
+    "query": "うちはファンドビジネスなんだけど、商品方針がぼやける。一倉の枠組みでどう書けばいい?",
+    "should_trigger": true
+  },
+  {
+    "query": "社長の決意がこもった方針書のたたき台を作って。目標は売上100億、経常5億",
+    "should_trigger": true
+  },
+  {
+    "query": "投資家向けの中期経営計画の説明スライド(pptx)を作って",
+    "should_trigger": false
+  },
+  {
+    "query": "銀行融資用の事業計画書のテンプレートをWordで作ってほしい",
+    "should_trigger": false
+  },
+  {
+    "query": "一倉定の社長学シリーズ2のPDFを読んで、内容の読書ノートを作って",
+    "should_trigger": false
+  },
+  {
+    "query": "来期のOKRを設定したい。チームごとのObjectiveとKey Resultsを考えて",
+    "should_trigger": false
+  },
+  {
+    "query": "今期の予算実績差異分析のレポートを作って。経理データはxlsxにある",
+    "should_trigger": false
+  },
+  {
+    "query": "経営会議の議事録をまとめて、決定事項を一覧化して",
+    "should_trigger": false
+  },
+  {
+    "query": "5カ年のDCFモデルをスプレッドシートで組んで企業価値を算定して",
+    "should_trigger": false
+  }
+]
