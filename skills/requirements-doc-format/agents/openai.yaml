@@ -1,0 +1,4 @@
+interface:
+  display_name: "Requirements Doc Format"
+  short_description: "要件定義書の標準フォーマット作成と監査を支援する技能"
+  default_prompt: "Use $requirements-doc-format to create or review functional requirements definition documents in the standard v5 format."
