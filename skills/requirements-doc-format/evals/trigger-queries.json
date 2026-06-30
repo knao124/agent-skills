@@ -1,0 +1,82 @@
+[
+  {
+    "query": "新しい検索画面の要件定義書を、標準章立てと条件→入力→処理→出力で作って",
+    "should_trigger": true
+  },
+  {
+    "query": "ログイン画面の要件定義書を作って。ロックと初回パスワード変更も含めて",
+    "should_trigger": true
+  },
+  {
+    "query": "ユーザー一覧画面の要件定義を、検索・ページング・詳細遷移まで含めて書いて",
+    "should_trigger": true
+  },
+  {
+    "query": "マスタデータの作成・編集・削除を含む要件定義書を作って",
+    "should_trigger": true
+  },
+  {
+    "query": "CSV一括取込の要件定義を、プレビュー検証と取込実行まで含めて書いて",
+    "should_trigger": true
+  },
+  {
+    "query": "申請、承認、差戻し、取消のワークフロー要件定義書を作って",
+    "should_trigger": true
+  },
+  {
+    "query": "詳細画面で編集保存するときの排他制御も含めて要件定義して",
+    "should_trigger": true
+  },
+  {
+    "query": "この要件定義書がv5フォーマットに沿っているか監査して",
+    "should_trigger": true
+  },
+  {
+    "query": "機能要件を条件・入力・処理・出力の4観点に分解し直して",
+    "should_trigger": true
+  },
+  {
+    "query": "この要件定義書で異常系と境界値が抜けていないかチェックして",
+    "should_trigger": true
+  },
+  {
+    "query": "OpenAPI schemaを書いて。pathsとcomponentsを定義して",
+    "should_trigger": false
+  },
+  {
+    "query": "DB物理設計書としてテーブル定義とDDLを作って",
+    "should_trigger": false
+  },
+  {
+    "query": "Figmaの画面をReactコンポーネントとして実装して",
+    "should_trigger": false
+  },
+  {
+    "query": "docs/001_プロトタイピング配下のCSSを調整して見た目を直して",
+    "should_trigger": false
+  },
+  {
+    "query": "PR本文を背景、問題、対策の方針で日本語に整えて",
+    "should_trigger": false
+  },
+  {
+    "query": "非機能要件だけを性能・可用性・セキュリティで整理して",
+    "should_trigger": false
+  },
+  {
+    "query": "画面項目一覧とピクセル単位のレイアウト仕様を作って",
+    "should_trigger": false
+  },
+  {
+    "query": "このREADMEの見出し構成を読みやすく直して",
+    "should_trigger": false
+  },
+  {
+    "query": "ユーザーストーリーと受け入れ条件をProduct Requirements Documentとして書いて",
+    "should_trigger": false
+  },
+  {
+    "query": "GitHub Actionsのvalidate失敗を調査して直して",
+    "should_trigger": false
+  }
+]
