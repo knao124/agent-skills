@@ -29,6 +29,7 @@ Use the bundled console script as the canonical implementation. Execute it throu
 - Verify Japanese holidays/current company exclusions for the target month using a current source or user-provided exclusion dates. State absolute dates.
 - Fail closed: if a target date has no plus button and it was not listed in `expectedExistingDates`, stop and inspect instead of silently skipping.
 - For工数割合 registration, never modify `empWorkSeq*`; those hidden fields are TeamSpirit job row IDs. Use percent mode plus `empWorkSlider*` values only.
+- For工数割合 registration, the script must run in the Visualforce page main world where `window.dijit` is available. Direct browser automation evaluation can run in an isolated context that sees `dailyWorkCell*` but cannot operate Dojo sliders.
 - For bulk工数割合 registration, first run one sample target in dry-run or submit mode, reopen that sample date, and confirm the saved row times before running the full target list.
 - Do not use Computer Use for bulk TeamSpirit automation, Console polling, or repeated page inspection. It is allowed only for a one-time visual confirmation or emergency click after stating why.
 - Console scripts must keep compact output by default. Detailed payloads stay on `window.*_FINAL`; user-facing verification should read `window.*_SUMMARY` or compact marker logs first.
@@ -56,8 +57,9 @@ Use the lowest-token route that can operate the intended logged-in TeamSpirit pa
 1. If the user only asks for calculation, script generation, or skill updates, do not open/control Chrome.
 2. Prefer the Chrome plugin for authenticated TeamSpirit pages. Claim the visible intended workplace Chrome tab/profile, verify the URL, and evaluate JavaScript directly in the TeamSpirit Visualforce iframe when the tool supports it.
 3. If Chrome plugin control cannot claim the intended tab/profile or cannot evaluate in the Visualforce iframe, use the manual DevTools Console fallback: provide the edited script, have it pasted into the `AtkWorkTimeView` context, then verify via compact summary variables.
-4. Do not switch to Computer Use as a bulk fallback. If Chrome control is blocked and manual Console execution is not available, stop and report the blocker.
-5. Never infer success from a different Chrome profile, a different Salesforce org, or the Lightning shell document outside the Visualforce iframe.
+4. For工数割合 only, if an automation route can evaluate JavaScript in the Visualforce document but `window.dijit` is unavailable, it is isolated from the page main world. Do not set hidden slider inputs manually. Either use DevTools Console in `AtkWorkTimeView`, or inject the edited script as a `<script>` element into the Visualforce document and bridge compact `window.TS_WORK_RATIO_SUMMARY` back through a DOM attribute.
+5. Do not switch to Computer Use as a bulk fallback. If Chrome control is blocked and manual Console execution is not available, stop and report the blocker.
+6. Never infer success from a different Chrome profile, a different Salesforce org, or the Lightning shell document outside the Visualforce iframe.
 
 ## Chrome Plugin Procedure
 
@@ -209,6 +211,7 @@ For local config JSON, store the same data under string keys:
 
 - Chrome target/profile not claimable: stop and use manual DevTools Console fallback. Do not continue in a different profile and do not use Computer Use for bulk automation.
 - `Console context is not TeamSpirit...`: switch DevTools Console JavaScript context to the Visualforce iframe.
+- `window.dijit is unavailable` or `Missing Dojo slider empWorkSlider*` while `dailyWorkCell*` exists: the script is running outside the page main world. Use DevTools Console in `AtkWorkTimeView` or inject the edited script as a page `<script>` element; do not write `empWorkSlider*` hidden inputs directly because the displayed row times will not recalculate.
 - Month mismatch: navigate/select the correct month before running again.
 - Unexpected no-plus date: inspect the row; if it is already `承認待ち`, add that date to `expectedExistingDates` and rerun. Otherwise stop.
 - Rest input not found: read `references/observed-teamspirit-dom.md`, inspect the modal DOM, and update the script only after confirming the current field IDs.
