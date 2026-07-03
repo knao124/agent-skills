@@ -1,0 +1,34 @@
+[
+  {
+    "query": "このNottaの共有URLから議事録を作って。決定内容とTODOも分けて",
+    "should_trigger": true
+  },
+  {
+    "query": "Teams会議の文字起こしを、共有用の日本語議事録に整えて",
+    "should_trigger": true
+  },
+  {
+    "query": "この会議録画mp4を見て、議題ごとの議事・決定内容・TODOをまとめて",
+    "should_trigger": true
+  },
+  {
+    "query": "議事録をこの形式で作って。mtgタイトル、日時、議事一覧、議事、決定内容、TODOがほしい",
+    "should_trigger": true
+  },
+  {
+    "query": "この動画を詳しく解説するHTML記事にして",
+    "should_trigger": false
+  },
+  {
+    "query": "来週の定例会議のアジェンダ案を作って",
+    "should_trigger": false
+  },
+  {
+    "query": "このPRの本文を日本語で書いて",
+    "should_trigger": false
+  },
+  {
+    "query": "Slackの投稿から日報を作って",
+    "should_trigger": false
+  }
+]

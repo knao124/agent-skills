@@ -37,6 +37,7 @@ skills/
 | `gws-calendar-agenda` | `gws` で指定期間の自分のGoogleカレンダー予定を取得し、日付・参加状態つきの表にまとめる | MCPなしでGoogleカレンダー予定を一覧化、参加状態つきで表にする、指定期間の予定をまとめるよう頼まれたとき |
 | `explain-to-html` | 解説を `/tmp` 配下の standalone HTML として作成する | コード、diff、設定、コマンドの解説をブラウザで見られるHTMLとして保存・共有したいと頼まれたとき |
 | `gcloud-repo-config` | repo ごとの `gcloud` named configuration を安全に初期設定、検証、利用する | repo 固有の `gcloud` named configuration、`.codex/gcloud.local.toml`、`CLOUDSDK_ACTIVE_CONFIG_NAME`、service account impersonation の設定や利用を頼まれたとき |
+| `meeting-minutes` | 会議録画・文字起こし・会議ツールURLから共有用の日本語議事録を作る | Notta/Zoom/Teams/Google Meet等の録画や文字起こしから、議事・決定内容・TODOつき議事録を頼まれたとき |
 | `publish-to-public` | ローカルHTMLを `knao124/public` に配置し、index/README導線更新、push、公開URL検証まで行う | HTMLを公開して、これを公開して、publicに公開、GitHub Pagesに載せて、と頼まれたとき |
 | `reading-note` | 本やPDFを初見者の入口質問、ロジックツリー詳細、重要主張台帳、重要概念台帳、自己テスト、差分監査で精読代替ノート化する | 精読ノート、読書ノート、論理復元、本/PDFを深く理解したい、そもそも用語、ロジックツリー、登場概念・理解ゴール・本との差分監査を頼まれたとき |
 | `requirements-doc-format` | 要件定義書の標準章立て、4観点、プロトタイプ/要件定義のフォルダ規約で作成・監査する | 要件定義書の作成・修正・監査、docs convention、v5フォーマット、001はprototyping/002は要件定義の明記を頼まれたとき |
@@ -61,6 +62,7 @@ gh skill preview knao124/agent-skills git-worktree-start
 gh skill preview knao124/agent-skills gws-calendar-agenda
 gh skill preview knao124/agent-skills explain-to-html
 gh skill preview knao124/agent-skills gcloud-repo-config
+gh skill preview knao124/agent-skills meeting-minutes
 gh skill preview knao124/agent-skills publish-to-public
 gh skill preview knao124/agent-skills reading-note
 gh skill preview knao124/agent-skills requirements-doc-format
@@ -83,6 +85,7 @@ gh skill install knao124/agent-skills git-worktree-start --agent codex --scope u
 gh skill install knao124/agent-skills gws-calendar-agenda --agent codex --scope user
 gh skill install knao124/agent-skills explain-to-html --agent codex --scope user
 gh skill install knao124/agent-skills gcloud-repo-config --agent codex --scope user
+gh skill install knao124/agent-skills meeting-minutes --agent codex --scope user
 gh skill install knao124/agent-skills publish-to-public --agent codex --scope user
 gh skill install knao124/agent-skills reading-note --agent codex --scope user
 gh skill install knao124/agent-skills requirements-doc-format --agent codex --scope user

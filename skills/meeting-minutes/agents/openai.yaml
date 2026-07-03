@@ -1,0 +1,4 @@
+interface:
+  display_name: "Meeting Minutes"
+  short_description: "動画や会議ツールURLから共有用の日本語議事録を作成"
+  default_prompt: "Use $meeting-minutes to create concise Japanese meeting minutes from this meeting recording or transcript."
