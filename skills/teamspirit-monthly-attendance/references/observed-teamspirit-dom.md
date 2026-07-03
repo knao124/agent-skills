@@ -8,6 +8,7 @@ Use this reference only when the script needs inspection or repair.
 - DevTools Console context must be the TeamSpirit Visualforce iframe, observed as `vfFrameId_... (AtkWorkTimeView)`.
 - In the wrong context, `document.getElementById("ttvApplyYYYY-MM-DD")` is missing.
 - For Codex-driven runs, prefer Chrome plugin evaluation in the intended workplace Chrome tab/profile. If direct iframe evaluation is unavailable, use manual DevTools Console paste in `AtkWorkTimeView`.
+- For工数割合, the executable script must run in the Visualforce page main world. Some automation surfaces can read `dailyWorkCell*` and dialog DOM but expose `window.dijit` as `undefined`; that context cannot operate the Dojo sliders.
 - Do not use Computer Use accessibility-tree polling for this page. Salesforce/TeamSpirit exposes a very large tree; compact `window.TS_*_SUMMARY` variables are the verification source.
 
 ## Monthly Table
@@ -49,6 +50,7 @@ Clicking the date's工数 plus/cell opens工数実績入力.
 - Percent labels/buttons per row: `btnPercentLabel0`, `btnPercent0`, ...
 - Clock labels per row: `btnClock2Label0`, ...
 - Dojo sliders per row: `dijit.byId("empWorkSlider0")`, ...
+- The slider DOM also contains hidden inputs named `empWorkSlider0`, `empWorkSlider1`, ... . Do not write those hidden inputs directly; observed behavior was that the hidden values changed but row time labels and totals stayed unchanged. Use the Dojo widget in page main world.
 - Time labels/inputs per row: `empTimeLabel0`, `empInputTime0`, ...
 - Total label/footer: `empWorkTotalTime`, visible footer total
 

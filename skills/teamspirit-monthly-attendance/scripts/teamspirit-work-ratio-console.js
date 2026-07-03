@@ -1,5 +1,7 @@
 // TeamSpirit work ratio helper.
 // Paste this entire file into DevTools Console in the TeamSpirit Visualforce iframe.
+// The work-ratio dialog uses Dojo widgets, so this must run in the page main world.
+// Isolated automation contexts may see the DOM but not window.dijit.
 // Edit CONFIG first from the local private config plus the current request.
 // Default sample mode is dry-run for the sample date only.
 (async () => {
@@ -312,8 +314,14 @@
   }
 
   function sliderFor(index) {
-    const slider = window.dijit && window.dijit.byId ? window.dijit.byId(`empWorkSlider${index}`) : null;
-    if (!slider) throw new Error(`Missing Dojo slider empWorkSlider${index}`);
+    if (!window.dijit || !window.dijit.byId) {
+      throw new Error("window.dijit is unavailable. Run this script in the TeamSpirit page main world, such as DevTools Console for AtkWorkTimeView, or inject it as a script element into the Visualforce document.");
+    }
+    const slider = window.dijit.byId(`empWorkSlider${index}`);
+    if (!slider) {
+      const sliderNode = document.getElementById(`empWorkSlider${index}`);
+      throw new Error(`Missing Dojo slider empWorkSlider${index}${sliderNode ? ": DOM node exists, but the Dojo widget is not registered in this execution context." : ""}`);
+    }
     return slider;
   }
 
