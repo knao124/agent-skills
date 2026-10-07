@@ -55,10 +55,11 @@ Keep every section visible by default. If a section has no applicable content, w
 - Under each `実際にやったこと` subgroup, keep bullets flat and concrete. Avoid one long ungrouped list when there are more than about six bullets or multiple objectives.
 - In `今回の対象外`, list only nearby scope that a reviewer could reasonably mistake as included in this PR. Use it for intentional exclusions, follow-up PR scope, or rollout work handled elsewhere. Do not list arbitrary things that were not done.
 - In `レビュー観点`, name specific design decisions, risky hunks, behavior changes, or spec points that need focused review. Write `なし` for straightforward changes.
-- UI changes require screenshots in the PR description. Treat changes to user-visible screens, components, layout, styling, copy, icons, images, interaction states, or responsive behavior as UI changes; when unsure, treat the PR as a UI change.
-- For UI changes, the `スクリーンショット` section must contain an actual pasted or attached image rendered by GitHub Markdown, such as `![label](https://github.com/user-attachments/assets/...)`. A local file path, placeholder, `なし`, `不要`, or text-only explanation does not satisfy this requirement.
-- When local screenshot image files need to be attached, use the GitHub CLI `gh image` extension to upload them and paste the returned Markdown. Before using it, check `gh extension list`; if `gh image` is not installed, run `gh extension install drogers0/gh-image`. Upload with `gh image --repo <owner/repo> <image-path>...`.
-- Do not open or update a UI-change PR until the screenshot is captured and can be pasted or attached. If screenshot capture is blocked by auth, environment, data, or tooling, stop and report the blocker instead of creating a PR without the image. Only skip this rule when the user explicitly says to omit screenshots for that PR.
+- For UI changes, capture and attach screenshots to the PR description when the environment permits. Treat changes to user-visible screens, components, layout, styling, copy, icons, images, interaction states, or responsive behavior as UI changes; when unsure, treat the PR as a UI change.
+- When a screenshot is attached, the `スクリーンショット` section must contain an actual image rendered by GitHub Markdown, such as `![label](https://github.com/user-attachments/assets/...)`. Do not present a local file path or placeholder as an attached image.
+- Prefer the GitHub CLI `gh image` extension for local screenshots. Check `gh extension list`; if needed, install it with `gh extension install drogers0/gh-image`. Upload with `gh image --repo <owner/repo> <image-path>...` and paste the returned Markdown.
+- If screenshot capture or upload is unavailable because of auth, environment, data, or tooling, continue the otherwise authorized PR creation, update, or merge without asking for separate screenshot-omission approval. State the concrete omission reason and which visual checks were completed in `スクリーンショット`; do not claim unperformed checks or promise a later attachment. Do not create a release or commit image files solely to work around an upload failure. This fallback does not authorize a merge or other external action that the user has not requested.
+- If the user explicitly requires attached screenshots as a condition for creating or merging the PR, honor that condition and report the blocker instead of applying the automatic omission fallback.
 - For non-UI changes, write `なし（UI変更なし）` in `スクリーンショット`.
 - In `実行したコマンド`, list the exact verification commands and whether each succeeded.
 - In `結果`, state the current state such as local checks passed, CI passed or pending, demo not deployed, prod unaffected, or rollout complete.
@@ -71,14 +72,13 @@ Keep every section visible by default. If a section has no applicable content, w
    identify the base branch, run `git fetch origin`, and rebase or merge the working branch onto the latest `origin/<base>` using the repository's standard flow. If conflicts appear, resolve them before drafting the PR body or running `gh pr create`. If the base branch advances again while the PR is open, repeat this step before finalizing the PR.
 2. Gather the evidence needed to justify the PR:
    `git diff`, tests, CI results, review comments, incident logs, monitoring links, and latest occurrence timestamps.
-   Inspect the diff for UI changes. If there are UI changes, capture the relevant before/after or after-change screenshots for the PR description without committing those image files.
-   If screenshots are local files, install `gh image` if needed and use it to upload the files to GitHub user attachments.
-   Confirm the screenshots are attached or pasted as GitHub-rendered images before proceeding.
+   Inspect the diff for UI changes. When capture and upload are available, attach relevant before/after or after-change screenshots without committing image files; prefer `gh image` for local files.
+   If capture or upload is blocked, apply the screenshot omission fallback above and keep progressing within the user's authorized scope.
 3. Decide the title:
    keep it short, in Japanese, and consistent with the repository's commit or PR prefix conventions such as `fix:` or `feat:` when those conventions exist.
 4. Draft the body using the default section order.
-   For UI changes, include the `スクリーンショット` section with the actual image Markdown; never leave a placeholder to fill in later.
-5. Open or update the PR only after the body satisfies the screenshot requirement for UI changes.
+   For UI changes, include the actual image Markdown or the concrete omission reason and completed visual checks in `スクリーンショット`; never leave a placeholder to fill in later.
+5. Open or update the PR after the body accurately records the evidence, including any screenshot omission. Preserve an explicit user requirement for attached images.
 6. After creating a PR, add a separate agent worklog comment:
    generate folded Markdown text with the current agent's worklog skill and post it as a PR comment, not in the PR body.
    Use this branch:

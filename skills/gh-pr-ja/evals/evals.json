@@ -38,15 +38,33 @@
       "files": []
     },
     {
-      "id": "ui-change-requires-screenshot",
+      "id": "ui-change-screenshot-preferred",
       "prompt": "UIコンポーネントのスタイルを変更した差分でPRを作る。スクショはまだ撮れていない。",
-      "expected_output": "UI変更として扱い、PR本文のスクリーンショット欄には実際に貼り付けられた画像が必須であることを示す。ローカル画像を添付する場合は gh extension list で gh image を確認し、未インストールなら gh extension install drogers0/gh-image を実行し、gh image でGitHub Markdownを生成する。スクリーンショット未取得のままPRを作らず、取得または貼り付けがブロッカーであると明示する。",
+      "expected_output": "UI変更として扱い、環境で可能なら画面を撮影してPR本文に実際の画像を添付する。ローカル画像は gh extension list で gh image を確認してアップロードする。撮影や添付が認証・環境・データ・ツールの制約でできない場合は、スクリーンショット欄に省略理由と確認済みの範囲を記載し、画像省略の追加確認でPR作成を止めない。未実施の画面確認を実施済みと書かない。",
       "files": []
     },
     {
       "id": "agent-worklog-comment",
       "prompt": "差分でPRを作成し、PR作成後にAgent内の作業時間と会話圧縮メモを別コメントとして折りたたみ形式で載せて。",
       "expected_output": "PR本文には作業ログを混ぜず、PR作成後に現在のagentに応じて codex-worklog-summary または claude-worklog-summary を使い、`<details>` 形式のAgent作業ログテキストを生成し、gh pr comment で別コメントとして投稿する。Codexでは gh skill install knao124/agent-skills codex-worklog-summary --agent codex --scope user --force、Claude Codeでは gh skill install knao124/agent-skills claude-worklog-summary --agent claude-code --scope user --force で導入してから使う。",
+      "files": []
+    },
+    {
+      "id": "screenshot-upload-auth-unavailable",
+      "prompt": "表の列幅修正をPRにしてマージして。ローカルの画面確認とビルド・テストは成功し、画面画像も保存済みだが、gh image はブラウザーの認証情報を取得できず失敗した。画像必須という指定はない。",
+      "expected_output": "画像添付用の認証が使えない理由と実施済みの画面確認をスクリーンショット欄に記載し、画像省略の追加確認をせずにPR作成と依頼済みのマージを進める。画像ファイルをコミットしたり、画像保存用のリリースを作ったりしない。",
+      "files": []
+    },
+    {
+      "id": "screenshot-capture-environment-unavailable",
+      "prompt": "UIの文言修正をPRにして。ビルドとテストは通ったが、利用できるブラウザーがなく画面画像を撮影できない。マージは依頼していない。",
+      "expected_output": "撮影できない理由と画面の目視確認が未実施であることをPR本文に記載し、画像省略の追加確認をせずにPRを作成する。画像や画面確認を捏造せず、依頼されていないマージは行わない。",
+      "files": []
+    },
+    {
+      "id": "explicit-screenshot-condition",
+      "prompt": "修正後の画像をPR本文に添付できた場合だけPRを作成して。ローカルの画面確認は完了したが、画像のアップロード用認証は利用できない。",
+      "expected_output": "画像添付を必須とする明示的な条件を優先し、PRを作成せずに添付用認証の問題を報告する。一般の画像省略フォールバックでユーザーの条件を上書きしない。",
       "files": []
     }
   ]
