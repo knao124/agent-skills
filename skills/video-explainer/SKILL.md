@@ -1,6 +1,6 @@
 ---
 name: video-explainer
-description: Use this skill when Codex needs to inspect, download, transcribe, summarize, explain, or turn a video or video URL into a detailed explanation/article. Trigger on requests such as "この動画を見て", "音声を文字起こしして", "トランスクリプト抽出して", "動画を記事化して", X/Twitter videos, local .mp4/.mov/.m4a/.mp3 files, HLS/DASH media, or workflows that need source extraction, transcript creation, copyright-safe quoting, and optional explain-to-html output.
+description: Use this skill when Codex needs to inspect, download, transcribe, summarize, explain, or turn a video or video URL into a detailed explanation/article. Trigger on requests such as "この動画を見て", "音声を文字起こしして", "トランスクリプト抽出して", "動画を記事化して", X/Twitter videos, local .mp4/.mov/.m4a/.mp3 files, HLS/DASH media, or workflows that need source extraction, transcript creation, copyright-safe quoting, and optional HTML output when explicitly requested.
 license: MIT
 ---
 
@@ -8,7 +8,7 @@ license: MIT
 
 ## Overview
 
-Use this skill to turn a video into a reliable explanation artifact. The workflow is: identify the source, acquire the media or audio, transcribe with timestamps, correct obvious recognition errors, then produce a copyright-safe detailed summary or `explain-to-html` article.
+Use this skill to turn a video into a reliable explanation artifact. The workflow is: identify the source, acquire the media or audio, transcribe with timestamps, correct obvious recognition errors, then produce a copyright-safe detailed summary or article in the requested format.
 
 ## Required Workflow
 
@@ -64,11 +64,11 @@ For a video article, include:
 
 Write enough detail that a reader can reconstruct the argument, examples, and sequence of the video without watching it. Do not publish the full transcript unless the user explicitly asks and copyright policy allows it.
 
-### 5. Use `explain-to-html` when article output is requested
+### 5. Match the Requested Output Format
 
-If the user asks to article-ize, publish, share, or make the explanation browser-viewable, use `explain-to-html` for the final artifact.
+Write the explanation in chat by default. If the user explicitly requests HTML or a browser-viewable page, create a standalone HTML file. Follow any other requested output format directly.
 
-Pass structured context:
+Use the collected context for the explanation:
 
 - source URL and acquisition method
 - video duration

@@ -1,6 +1,6 @@
 ---
 name: tweet-explainer
-description: Use this skill when the user asks Codex to read, summarize, explain, or turn into an HTML article a Tweet/X post URL. Try browser-based public extraction first to avoid X API usage, then fall back to the App-only token stored at ~/.x-token when browser extraction cannot reliably obtain the post, X Article, media, or linked content needed for the explanation. Use the existing explain-to-html skill for the final browser-viewable explanation.
+description: Use this skill when the user asks Codex to read, summarize, explain, or turn into an HTML article a Tweet/X post URL. Try browser-based public extraction first to avoid X API usage, then fall back to the App-only token stored at ~/.x-token when browser extraction cannot reliably obtain the post, X Article, media, or linked content needed for the explanation.
 license: MIT
 ---
 
@@ -15,7 +15,7 @@ Use this skill for requests like:
 - `tweet URLを渡すので要約記事を書いて`
 - `X Article付きの投稿を読んでまとめて`
 
-The goal is to produce a standalone HTML explanation using the existing `explain-to-html` skill. Data acquisition happens first, with this priority:
+Summarize and explain the post in chat by default. Create a standalone HTML explanation only when the user explicitly requests HTML or a browser-viewable page. Data acquisition happens first, with this priority:
 
 1. Browser extraction without using any token.
 2. X API fallback with the App-only token stored at `~/.x-token`.
@@ -83,11 +83,11 @@ If the script returns:
 - `404`: tell the user the post was not found, deleted, private, or the ID was wrong.
 - `429`: tell the user rate limits were hit and stop.
 
-### 4. Use `explain-to-html` for the Final Article
+### 4. Write the Explanation in the Requested Format
 
-After acquiring the post data, use the existing `explain-to-html` skill to create the final HTML. Do not provide only a chat summary unless the user explicitly forbids file creation.
+After acquiring the post data, write the summary or explanation in the format requested by the user. Use chat by default; create an HTML file only when the user explicitly requests HTML or a browser-viewable page.
 
-Pass the explanation target as structured context:
+Use the collected context for the explanation:
 
 - original URL
 - acquisition method: `browser` or `x-api-app-only`
@@ -105,7 +105,6 @@ The final explanation should:
 - avoid over-quoting long source text
 - include source URL and acquisition method
 - mention when API fallback was used
-- include the normal `explain-to-html` review/comment UI
 
 ## Secret Handling
 
@@ -131,7 +130,7 @@ python3 skills/tweet-explainer/scripts/fetch_x_post.py \
   --pretty
 ```
 
-Save normalized JSON for handoff into `explain-to-html`:
+Save normalized JSON for use in the explanation:
 
 ```sh
 python3 skills/tweet-explainer/scripts/fetch_x_post.py "<url>" \

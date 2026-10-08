@@ -12,7 +12,7 @@
     "should_trigger": true
   },
   {
-    "query": "X Article付きのツイートを取得して、explain-to-htmlで説明ページを作って",
+    "query": "X Article付きのツイートを取得して、HTMLの説明ページを作って",
     "should_trigger": true
   },
   {
