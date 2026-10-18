@@ -10,13 +10,13 @@
     {
       "id": "uses-dependent-skills",
       "prompt": "GROWTH VERSE、dhk-devs/canvas-ai と knao124/agent-skills、na-kobayashi@growth-verse.ai のprimaryカレンダーで6/5の日報を作って",
-      "expected_output": "slack-daily-report、gh-pr-period-list、gws-calendar-agendaを使う。必要なskillが見つからない場合は gh skill install knao124/agent-skills <skill> --agent codex --scope user --force の形式で3つのinstallコマンドを案内し、独自の直接取得で代替しない。",
+      "expected_output": "slack-daily-report、gh-pr-period-list、gws-calendar-agendaを使う。不足する依存skillだけのinstall方法を案内し、その取得を独自の直接取得で代替しない。提供済みの記録だけを整形する依頼には外部取得や依存skillを要求しない。",
       "files": []
     },
     {
       "id": "final-format-slack-postable",
       "prompt": "6/5の日報をSlackに投稿しやすい形で作って。見出しは使わず箇条書き、インデントは半角スペース4つで。",
-      "expected_output": "日付ごとに個別のMarkdownコードブロックを返す。コードブロック内は最初に YYYY/MM/DD（曜） を置き、#や##見出しを使わない。トップレベルは * 開発、* 会議、* slack で、ネストは半角スペース4つずつにする。",
+      "expected_output": "日付・合計時間と各業務の時間、カテゴリ小計を記載し、ひとことと■本日を付けない。ユーザー指定の見出しなし・箇条書き・半角スペース4つのインデントを優先する。raw Markdownの指定がない限りコードフェンスには入れない。",
       "files": []
     },
     {
@@ -29,6 +29,24 @@
       "id": "calendar-filtering",
       "prompt": "カレンダーは予定あり、NG枠、未回答、仮参加を除外して日報に入れて",
       "expected_output": "gws-calendar-agendaで取得した予定から、予定あり、NG枠、空タイトル、(no title)を除外する。参加状態は参加または主催者のみを残し、未回答、仮参加、不参加、不明は最終日報の会議欄に入れない。",
+      "files": []
+    },
+    {
+      "id": "supplied-log-hours-format",
+      "prompt": "この作業記録で日報を書いて。合計4hで、定例・資料作成・顧客MTG・1on1。全項目に時間を書いて、不明な内訳は概算で配分。ひとことと■本日は不要。",
+      "expected_output": "外部データの取得やworkspace確認を求めず提供記録から作成する。日付と合計、カテゴリ小計、各項目のhを記載し、概算の配分合計を4hにそろえる。推定である旨は本文外で一度示し、■本日やひとことを含めない。",
+      "files": []
+    },
+    {
+      "id": "preserve-hours-on-heading-revision",
+      "prompt": "前の日報の■本日を消して。他の内容と時間はそのままで。",
+      "expected_output": "同じwriting-block IDで日付・合計の見出しに直し、既存の業務と配分時間・リンクは変えない。",
+      "files": []
+    },
+    {
+      "id": "fixed-and-estimated-hours",
+      "prompt": "合計6hの日報を作って。顧客MTGは2h、資料作成と承認事務は時間不明。",
+      "expected_output": "既知の顧客MTG2hを保ち、残り4hを資料作成と承認事務へ概算配分する。全項目とカテゴリにhを付け、カテゴリ小計と合計6hを照合する。推定の稼働時間を勤怠へ登録しない。",
       "files": []
     }
   ]

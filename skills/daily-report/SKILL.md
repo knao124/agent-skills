@@ -1,6 +1,6 @@
 ---
 name: daily-report
-description: "Use this skill when Codex needs to create a Japanese daily report from GitHub PRs, Slack posts, and Google Calendar events for a specified date or date range. Trigger on requests such as 日報を作って, 6/1-6/5の日報, Slack/PR/カレンダーを統合して日報化, or when the user wants the final Slack-postable bullet format. This skill orchestrates existing skills: slack-daily-report, gh-pr-period-list, and gws-calendar-agenda."
+description: "Create or revise Japanese daily reports from supplied work logs or requested GitHub PR, Slack, and Google Calendar sources. Use for 日報を作って, 日報の形式を更新して, or reports for a date range. Include hours on every work item, estimate unknown breakdowns within known daily totals, and omit ■ 本日 and ひとこと."
 license: MIT
 ---
 
@@ -8,23 +8,23 @@ license: MIT
 
 ## Overview
 
-Create a Japanese daily report by combining three raw activity layers:
+Create a Japanese daily report from work records already supplied in the conversation, or collect the requested external activity layers:
 
 - GitHub PRs for development work.
 - Google Calendar events for meetings.
 - Slack posts for communication and coordination work.
 
-This skill only orchestrates, filters, groups, and formats. Always use the existing source-specific skills for data collection.
+When the user supplies the work records, format those records directly without fetching unrelated sources or asking for Slack/GitHub/Calendar scope. When external collection is needed, use the existing source-specific skills below for only the sources requested by the user.
 
 ## Required Skills
 
-Use all three skills below. Do not bypass them with ad hoc direct collection unless the user explicitly asks for a fallback after a blocking failure.
+These dependencies apply only when collecting the corresponding external source. Supplied-log formatting does not require any of them. Do not bypass a required source-specific skill with ad hoc collection unless the user explicitly asks for a fallback after a blocking failure.
 
 - `$slack-daily-report` for Slack workspace confirmation, own-post retrieval, thread context, and Slack activity grouping.
 - `$gh-pr-period-list` for GitHub PR retrieval by open or merge date.
 - `$gws-calendar-agenda` for Google Calendar retrieval and participation status handling.
 
-If any required skill is not installed or not available, stop before collecting data and tell the user to install it from `knao124/agent-skills` with `gh skill`:
+If a skill needed for a requested external source is not installed or not available, stop collection of that source and tell the user to install it from `knao124/agent-skills` with `gh skill`:
 
 ```sh
 gh skill install knao124/agent-skills slack-daily-report --agent codex --scope user --force
@@ -36,9 +36,9 @@ Then ask the user to retry the daily report request after installation.
 
 ## Start By Confirming Scope
 
-Before fetching private data, ask for the source scope unless the current user message already names it explicitly.
+For supplied records, resolve dates and daily totals from the conversation and proceed. Before fetching additional private data, ask only for the missing scope of the requested sources; reuse scope already confirmed in the conversation.
 
-Ask for:
+For external collection, ask only for applicable missing values:
 
 - Slack workspace: workspace name, URL, or selector for `$slack-daily-report`.
 - GitHub repositories: one or more `OWNER/REPO` values for `$gh-pr-period-list`.
@@ -55,7 +55,7 @@ If the user provided all values in the current turn, state the resolved scope an
 
 ## Collection Workflow
 
-1. Resolve all dates to absolute local dates. Default timezone is `Asia/Tokyo` unless the user specifies otherwise.
+1. Resolve all dates to absolute local dates. Default timezone is `Asia/Tokyo` unless the user specifies otherwise. For supplied records, skip external collection steps 2–4 and group the provided activities by date.
 2. Invoke `$gh-pr-period-list` once per repository for the full requested date range.
    - Include PRs whose open date or merge date falls inside the range.
    - Prefer JSON output when available so PRs can be grouped by local date.
@@ -76,7 +76,7 @@ If the user provided all values in the current turn, state the resolved scope an
 
 Use a small number of practical themes. Prefer concrete product/project names over generic categories.
 
-For `開発`:
+For the raw `開発` layer (map it to the final practical themes below):
 
 - Group PRs by repository area or feature based only on PR titles and repository names.
 - Link every PR in Markdown.
@@ -99,38 +99,51 @@ For `slack`:
 - Do not copy long message text.
 - Avoid including purely casual messages unless they explain work coordination. If only casual/short messages exist, group them as `その他`.
 
+## Hours and Allocation
+
+- Put a duration in hours on every work item, including nested items: `（0.5h）`. Put each category's subtotal next to its name, and the daily total on the date line.
+- Preserve supplied durations and daily totals. Derive known durations from explicit start/end times; exclude gaps and avoid double-counting overlapping work.
+- When a daily total is known but some item durations are missing, distribute the remaining time reasonably across those items. Prefer simple increments such as 0.25h, 0.5h, and 1h; use finer increments when necessary to preserve exact totals. Do not block on an unknown breakdown or ask the user to allocate every item.
+- Keep previously agreed estimated allocations unless the user asks to revise them. Estimates apply only to time allocation: do not invent activities, achievements, participants, or links.
+- If a daily total is missing and cannot be derived from provided times, ask only for that total. If supplied fixed item times exceed the daily total or otherwise conflict, surface the conflict rather than silently changing fixed durations.
+- Mention once outside the report that uncertain breakdowns are approximate. Do not mark every item with repetitive caveats.
+- For nested items, the parent duration includes its children. Count the parent once toward the category subtotal; do not add parent and child durations together. Merge short explanations into the timed parent bullet when nesting adds no value.
+- Check that work items sum to each category subtotal and that category subtotals sum to each daily total. Include travel only when it is already part of the user's reported work total, and make its duration explicit.
+- Estimates in a report are not authorization to modify attendance records or external timesheets. Use actual approved start/end and break times for those actions.
+
 ## Final Output Format
 
-Return one fenced Markdown code block per date. Do not put all dates in a single code block.
+Use rendered Markdown in an editable writing block when the host supports it, otherwise ordinary Markdown. Do not wrap reports in code fences unless the user requests raw Markdown.
 
-Inside each code block:
-
-- Start with a plain date line: `YYYY/MM/DD（曜）`.
-- Do not use Markdown headings such as `#` or `##`.
-- Use only bullet lists for sections.
-- Use `* 開発`, `* 会議`, and `* slack` as top-level bullets.
-- Express nesting with exactly four half-width spaces per level.
-- Keep section names lowercase for `slack`.
-- If a layer has no data, include one bullet such as `該当PRなし`, `該当予定なし`, or `Slack上の該当投稿なし`.
+- Start each day with `YYYY/MM/DD（曜）（合計 Xh）`.
+- Do not add `■ 本日`, `本日`, `ひとこと`, impressions, or a closing comment.
+- Group work under inline-code category labels and write the subtotal outside the inline code: `` `共通業務`（3h） ``.
+- Reuse the user's categories, such as `共通機能開発`, `個別案件`, and `その他`. For infrastructure and security work, `共通業務` is suitable. Do not force non-development work into `共通機能開発`.
+- Use `-` bullets with concrete work descriptions and a duration on every item. Retain supplied useful links and link retrieved PRs according to the rules above.
+- Omit empty categories. Separate multiple days with `---`. A single multi-day report can occupy one writing block.
+- Keep the actual work date even if the attendance system uses a different paired date for a holiday exchange.
 
 Template:
 
 ```markdown
-2026/06/01（月）
+2026/06/01（月）（合計 4h）
 
-* 開発
-    * ドキュメント・作業環境整備
-        * [dhk-devs/canvas-ai #2569 docs: root AGENTS.mdを軽量化](https://github.com/dhk-devs/canvas-ai/pull/2569)
-* 会議
-    * 08:00-08:15 [int/web] DHK-PMIチーム定例
-    * 11:50-12:00 月初朝礼
-* slack
-    * SLI/SLO・エラートリアージ運用
-        * DHKでも利用するため、aimstar側のskill共有を依頼
-        * 共有されたskillを一旦利用する方針を確認
+`共通業務`（2h）
+
+- インフラ定例（0.5h）
+- ロードマップ資料作成（1.5h）
+
+`個別案件`（1h）
+
+- PBX連携の打ち合わせ（1h）
+
+`その他`（1h）
+
+- 1on1（0.5h）
+- 承認事務（0.5h）
 ```
 
-For multiple days, repeat the same fenced-block shape once per date.
+For revisions, preserve the same writing-block ID and existing report content unless the user requests further changes. A request to remove a heading does not authorize reallocating previously agreed hours.
 
 ## Reporting Notes
 
