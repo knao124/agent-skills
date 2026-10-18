@@ -125,7 +125,7 @@ Use rendered Markdown in an editable writing block when the host supports it, ot
 Template:
 
 ```markdown
-2026/06/01（月）  
+2026/06/01（月）
 ■ 本日（合計 4.0h）
 
 `共通業務`（2h）
