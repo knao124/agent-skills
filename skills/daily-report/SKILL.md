@@ -1,6 +1,6 @@
 ---
 name: daily-report
-description: "Create or revise Japanese daily reports from supplied work logs or requested GitHub PR, Slack, and Google Calendar sources. Use for 日報を作って, 日報の形式を更新して, or reports for a date range. Include hours on every work item, estimate unknown breakdowns within known daily totals, and omit ■ 本日 and ひとこと."
+description: "Create or revise Japanese daily reports from supplied work logs or requested GitHub PR, Slack, and Google Calendar sources. Use for 日報を作って, 日報の形式を更新して, or reports for a date range. Include hours on every work item, estimate unknown breakdowns within known daily totals, use separate date and ■ 本日（合計 X.Xh） lines, and omit links and ひとこと by default."
 license: MIT
 ---
 
@@ -79,9 +79,7 @@ Use a small number of practical themes. Prefer concrete product/project names ov
 For the raw `開発` layer (map it to the final practical themes below):
 
 - Group PRs by repository area or feature based only on PR titles and repository names.
-- Link every PR in Markdown.
-- Use this link format exactly:
-  `[OWNER/REPO #NUMBER TITLE](URL)`
+- Keep PR repository, number, title, URL, and status in the source notes. Omit hyperlinks and bare URLs from the final report by default. If the user explicitly requests links, use `[OWNER/REPO #NUMBER TITLE](URL)`.
 - If a PR is not merged, append status after the link, for example `（OPEN / DRAFT）` or `（CLOSED）`.
 - If the same PR is opened and merged on the same report date, list it once.
 - If a PR is opened on one report date and merged on another, it may appear on both dates because both dates contain PR activity.
@@ -101,7 +99,7 @@ For `slack`:
 
 ## Hours and Allocation
 
-- Put a duration in hours on every work item, including nested items: `（0.5h）`. Put each category's subtotal next to its name, and the daily total on the date line.
+- Put a duration in hours on every work item, including nested items: `（0.5h）`. Put each category's subtotal next to its name, and the daily total on the separate `■ 本日` line.
 - Preserve supplied durations and daily totals. Derive known durations from explicit start/end times; exclude gaps and avoid double-counting overlapping work.
 - When a daily total is known but some item durations are missing, distribute the remaining time reasonably across those items. Prefer simple increments such as 0.25h, 0.5h, and 1h; use finer increments when necessary to preserve exact totals. Do not block on an unknown breakdown or ask the user to allocate every item.
 - Keep previously agreed estimated allocations unless the user asks to revise them. Estimates apply only to time allocation: do not invent activities, achievements, participants, or links.
@@ -115,18 +113,20 @@ For `slack`:
 
 Use rendered Markdown in an editable writing block when the host supports it, otherwise ordinary Markdown. Do not wrap reports in code fences unless the user requests raw Markdown.
 
-- Start each day with `YYYY/MM/DD（曜）（合計 Xh）`.
-- Do not add `■ 本日`, `本日`, `ひとこと`, impressions, or a closing comment.
+- Start each day with exactly two lines: `YYYY/MM/DD（曜）`, then `■ 本日（合計 X.Xh）`. Keep a real line break between them; use a Markdown hard break when needed so rendered text also stays on two lines.
+- Show daily totals with at least one decimal place, such as `4.0h` or `1.5h`; preserve finer precision when rounding would change the total. Item and category durations may use `2h`, `0.5h`, or `0.25h`.
+- Do not add `ひとこと`, impressions, or a closing comment. Follow explicit user overrides when a different heading is requested.
 - Group work under inline-code category labels and write the subtotal outside the inline code: `` `共通業務`（3h） ``.
 - Reuse the user's categories, such as `共通機能開発`, `個別案件`, and `その他`. For infrastructure and security work, `共通業務` is suitable. Do not force non-development work into `共通機能開発`.
-- Use `-` bullets with concrete work descriptions and a duration on every item. Retain supplied useful links and link retrieved PRs according to the rules above.
+- Use `-` bullets with concrete work descriptions and a duration on every item. Remove Markdown link destinations and bare URLs by default, retaining the descriptive text and useful PR identifiers. Include links only when explicitly requested.
 - Omit empty categories. Separate multiple days with `---`. A single multi-day report can occupy one writing block.
 - Keep the actual work date even if the attendance system uses a different paired date for a holiday exchange.
 
 Template:
 
 ```markdown
-2026/06/01（月）（合計 4h）
+2026/06/01（月）  
+■ 本日（合計 4.0h）
 
 `共通業務`（2h）
 
@@ -143,7 +143,7 @@ Template:
 - 承認事務（0.5h）
 ```
 
-For revisions, preserve the same writing-block ID and existing report content unless the user requests further changes. A request to remove a heading does not authorize reallocating previously agreed hours.
+For revisions, preserve the same writing-block ID and existing report content unless the user requests further changes. If the user asks to receive copyable text before skill/configuration work, deliver the revised report first, then perform the update and report completion briefly. A request to remove a heading does not authorize reallocating previously agreed hours.
 
 ## Reporting Notes
 
