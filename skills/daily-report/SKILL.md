@@ -1,6 +1,6 @@
 ---
 name: daily-report
-description: "Create or revise Japanese daily reports from supplied work logs or requested GitHub PR, Slack, and Google Calendar sources. Use for 日報を作って, 日報の形式を更新して, or reports for a date range. Include hours on every work item, estimate unknown breakdowns within known daily totals, use separate date and ■ 本日（合計 X.Xh） lines, and omit links and ひとこと by default."
+description: "Create or revise Japanese daily reports from supplied work logs or requested GitHub PR, Slack, and Google Calendar sources. Use for 日報を作って, 日報の形式を更新して, or reports for a date range. Include hours on every work item, estimate unknown breakdowns within known daily totals, use separate date and ■ 本日（合計 X.Xh） lines, group work into インフラ業務・部門間業務・その他, and omit links and ひとこと by default."
 license: MIT
 ---
 
@@ -74,7 +74,14 @@ If the user provided all values in the current turn, state the resolved scope an
 
 ## Grouping Rules
 
-Use a small number of practical themes. Prefer concrete product/project names over generic categories.
+Use these three final categories in this order: `インフラ業務`, `部門間業務`, `その他`. Do not create additional top-level categories such as 共通業務, 共通機能開発, or 個別案件 unless the user explicitly overrides the categories.
+
+- `インフラ業務`: infrastructure operation/development, security, ISMAP/PCI-DSS, SIP/PBX integration, infrastructure roadmaps, and infrastructure-specific technical meetings/1on1s. Classify customer work here when its purpose is infrastructure or telephony integration.
+- `部門間業務`: strategy and business-management meetings, PMI, cross-department coordination, AGENT Weekly observation, management-meeting materials, and related KPI preparation.
+- `その他`: personnel evaluations, goal-setting interviews, onboarding, general 1on1s, approval administration, and travel. An explicitly infrastructure-focused 1on1 belongs to インフラ業務.
+- Classify by the work's purpose and supplied context, not simply whether the title contains 会議 or 1on1. For an unclear item, use the established classification from the conversation; otherwise provisionally use その他 without inventing a purpose.
+- Keep item descriptions and agreed durations when recategorizing. Recalculate category subtotals, preserve each daily total, and count each activity once.
+- A request to add a category means revise the daily-report prose; do not substitute a summary table unless the user asks for a table.
 
 For the raw `開発` layer (map it to the final practical themes below):
 
@@ -116,8 +123,8 @@ Use rendered Markdown in an editable writing block when the host supports it, ot
 - Start each day with exactly two lines: `YYYY/MM/DD（曜）`, then `■ 本日（合計 X.Xh）`. Keep a real line break between them; use a Markdown hard break when needed so rendered text also stays on two lines.
 - Show daily totals with at least one decimal place, such as `4.0h` or `1.5h`; preserve finer precision when rounding would change the total. Item and category durations may use `2h`, `0.5h`, or `0.25h`.
 - Do not add `ひとこと`, impressions, or a closing comment. Follow explicit user overrides when a different heading is requested.
-- Group work under inline-code category labels and write the subtotal outside the inline code: `` `共通業務`（3h） ``.
-- Reuse the user's categories, such as `共通機能開発`, `個別案件`, and `その他`. For infrastructure and security work, `共通業務` is suitable. Do not force non-development work into `共通機能開発`.
+- Group work under inline-code category labels and write the subtotal outside the inline code: `` `インフラ業務`（3h） ``.
+- Use the three categories defined in Grouping Rules: `インフラ業務`, `部門間業務`, `その他`. Preserve that order and omit a category on a day when it has no activities.
 - Use `-` bullets with concrete work descriptions and a duration on every item. Remove Markdown link destinations and bare URLs by default, retaining the descriptive text and useful PR identifiers. Include links only when explicitly requested.
 - Omit empty categories. Separate multiple days with `---`. A single multi-day report can occupy one writing block.
 - Keep the actual work date even if the attendance system uses a different paired date for a holiday exchange.
@@ -128,14 +135,14 @@ Template:
 2026/06/01（月）
 ■ 本日（合計 4.0h）
 
-`共通業務`（2h）
+`インフラ業務`（2h）
 
 - インフラ定例（0.5h）
 - ロードマップ資料作成（1.5h）
 
-`個別案件`（1h）
+`部門間業務`（1h）
 
-- PBX連携の打ち合わせ（1h）
+- 部門連携会議（1h）
 
 `その他`（1h）
 
