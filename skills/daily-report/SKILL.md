@@ -76,9 +76,9 @@ If the user provided all values in the current turn, state the resolved scope an
 
 Use these three final categories in this order: `インフラ業務`, `部門間業務`, `その他`. Do not create additional top-level categories such as 共通業務, 共通機能開発, or 個別案件 unless the user explicitly overrides the categories.
 
-- `インフラ業務`: infrastructure operation/development, security, ISMAP/PCI-DSS, SIP/PBX integration, infrastructure roadmaps, and infrastructure-specific technical meetings/1on1s. Classify customer work here when its purpose is infrastructure or telephony integration.
+- `インフラ業務`: infrastructure operation/development, security, ISMAP/PCI-DSS, SIP/PBX integration, infrastructure roadmaps, and infrastructure-specific technical meetings/1on1s. Always classify `プラットフォーム1on1` (including variants such as `プラットフォーム 1on1`, `Platform 1on1`) and `インフラ1on1` here, regardless of duration. Classify customer work here when its purpose is infrastructure or telephony integration.
 - `部門間業務`: strategy and business-management meetings, PMI, cross-department coordination, AGENT Weekly observation, management-meeting materials, and related KPI preparation.
-- `その他`: personnel evaluations, goal-setting interviews, onboarding, general 1on1s, approval administration, and travel. An explicitly infrastructure-focused 1on1 belongs to インフラ業務.
+- `その他`: personnel evaluations, goal-setting interviews, onboarding, general 1on1s, approval administration, and travel. Always classify `承認系事務` and `承認事務` here, including approval processing. Do not classify them as 部門間業務 merely because approvals involve another department. General 1on1s belong here only when no platform/infrastructure context is given; `プラットフォーム1on1` and `インフラ1on1` belong to インフラ業務.
 - Classify by the work's purpose and supplied context, not simply whether the title contains 会議 or 1on1. For an unclear item, use the established classification from the conversation; otherwise provisionally use その他 without inventing a purpose.
 - Keep item descriptions and agreed durations when recategorizing. Recalculate category subtotals, preserve each daily total, and count each activity once.
 - A request to add a category means revise the daily-report prose; do not substitute a summary table unless the user asks for a table.
