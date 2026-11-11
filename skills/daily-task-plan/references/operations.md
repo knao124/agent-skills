@@ -95,7 +95,7 @@ gws docs documents get --params "$(jq -nc --arg id "$DAILY_DOC_ID" \
   "requests": [
     {"insertText": {
       "location": {"index": 1, "tabId": "TARGET_TAB_ID"},
-      "text": "YYYY-MM-DD（曜）\n今日やること\n\t<会社フィールドの値>\n\t\t作業名\n"
+      "text": "YYYY-MM-DD（曜）\n今日やること\n\t<会社フィールドの値>\n\t\t[社名] 作業名\n"
     }}
   ]
 }
