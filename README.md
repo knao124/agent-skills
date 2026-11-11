@@ -31,6 +31,7 @@ skills/
 | `codex-delegate` | 実装前にCodex同士で設計相談し、専用worktree上の実装役Codexへ作業委譲する | 実装役Codexに任せる、専用worktreeでCodexに実装させる、設計相談後に実装委譲するとき |
 | `codex-worklog-summary` | Codex local rollout log から作業時間と会話圧縮メモを折りたたみMarkdownで出力する | Codex作業ログ、Agent作業ログ、会話圧縮メモ、PRコメント用の作業時間メモ、rollout log要約を頼まれたとき |
 | `daily-report` | GitHub PR、Slack投稿、Googleカレンダー予定を統合してSlack投稿用の日報を作る | 日報作成、Slack/PR/Calendar統合、日付別コードブロック、Slack投稿用の箇条書き日報を頼まれたとき |
+| `daily-task-plan` | カレンダーとGitHubタスクからDocsの日報に一日の下書きを作り、記入した実績・メモをIssueとProjectへ反映する | 今日やること、日報への計画追記、日報からGitHubへの実績反映を頼まれたとき |
 | `gh-pr-period-list` | `gh` で指定期間の自分のPRをopen/merge日時ベースで一覧化する | GitHub PRを指定期間で一覧化、merge日時を含める、open日時またはmerge日時で検索するよう頼まれたとき |
 | `gh-pr-ja` | 日本語のPRタイトル・本文・diffコメントを作成、整理する | PR作成、PR本文の書き換え、レビューやインシデント文脈の追記、Files changed への日本語コメント追加を頼まれたとき |
 | `git-worktree-start` | code change 前に clean な git worktree と `codex/` branch を用意する | 実装・修正・refactor・ドキュメント更新など、ファイル変更を伴う作業やそれをPR化する作業を始めるとき |
@@ -55,6 +56,7 @@ gh skill preview knao124/agent-skills codex-consult
 gh skill preview knao124/agent-skills codex-delegate
 gh skill preview knao124/agent-skills codex-worklog-summary
 gh skill preview knao124/agent-skills daily-report
+gh skill preview knao124/agent-skills daily-task-plan
 gh skill preview knao124/agent-skills gh-pr-period-list
 gh skill preview knao124/agent-skills gh-pr-ja
 gh skill preview knao124/agent-skills git-worktree-start
@@ -77,6 +79,7 @@ gh skill install knao124/agent-skills codex-consult --agent codex --scope user
 gh skill install knao124/agent-skills codex-delegate --agent codex --scope user
 gh skill install knao124/agent-skills codex-worklog-summary --agent codex --scope user
 gh skill install knao124/agent-skills daily-report --agent codex --scope user
+gh skill install knao124/agent-skills daily-task-plan --agent codex --scope user
 gh skill install knao124/agent-skills gh-pr-period-list --agent codex --scope user
 gh skill install knao124/agent-skills gh-pr-ja --agent codex --scope user
 gh skill install knao124/agent-skills git-worktree-start --agent codex --scope user
@@ -96,6 +99,7 @@ Claude Code で PR 作成 skill を使う例:
 
 ```sh
 gh skill install knao124/agent-skills gh-pr-ja --agent claude-code --scope user
+gh skill install knao124/agent-skills daily-task-plan --agent claude-code --scope user
 gh skill install knao124/agent-skills claude-worklog-summary --agent claude-code --scope user
 gh skill install knao124/agent-skills git-worktree-start --agent claude-code --scope user
 ```

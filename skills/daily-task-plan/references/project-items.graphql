@@ -1,0 +1,49 @@
+query($owner: String!, $projectNumber: Int!, $endCursor: String) {
+  user(login: $owner) {
+    projectV2(number: $projectNumber) {
+      id
+      title
+      items(first: 100, after: $endCursor) {
+        pageInfo { hasNextPage endCursor }
+        nodes {
+          id
+          isArchived
+          content {
+            ... on Issue {
+              id
+              number
+              title
+              url
+              body
+              state
+              repository { nameWithOwner }
+              parent { number url }
+              subIssues(first: 100) {
+                pageInfo { hasNextPage endCursor }
+                nodes { number title url state }
+              }
+            }
+          }
+          fieldValues(first: 100) {
+            pageInfo { hasNextPage endCursor }
+            nodes {
+              ... on ProjectV2ItemFieldDateValue {
+                date
+                field { ... on ProjectV2Field { id name } }
+              }
+              ... on ProjectV2ItemFieldNumberValue {
+                number
+                field { ... on ProjectV2Field { id name } }
+              }
+              ... on ProjectV2ItemFieldSingleSelectValue {
+                name
+                optionId
+                field { ... on ProjectV2SingleSelectField { id name } }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

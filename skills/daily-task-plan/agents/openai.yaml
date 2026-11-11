@@ -1,0 +1,4 @@
+interface:
+  display_name: "今日の計画と日報の実績反映"
+  short_description: "カレンダーとGitHubから日報の下書きを作り、記入済みの実績をタスクへ反映する"
+  default_prompt: "$daily-task-planで、カレンダーとGitHubのタスクを見て今日の計画を日報タブの先頭に書いて。"

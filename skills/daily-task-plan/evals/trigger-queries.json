@@ -1,0 +1,22 @@
+[
+  {"query":"カレンダーとタスク一覧を見て、今日やることを日報に書いて。","should_trigger":true},
+  {"query":"今日の作業計画の下書きをDocsの日報タブの先頭へ入れて。","should_trigger":true},
+  {"query":"対象カレンダーの予定とGitHubの期限から、今日のスケジュールを組んで。","should_trigger":true},
+  {"query":"明日の予定とタスクから、日報用の計画を作って。","should_trigger":true},
+  {"query":"今日の日報に実績を書いたので、GitHubのIssueとProjectに反映して。","should_trigger":true},
+  {"query":"日報の会議ログと作業の下のメモも、タスク一覧へ登録して。","should_trigger":true},
+  {"query":"$daily-task-planで今日の残り時間を組み直して。","should_trigger":true},
+  {"query":"予定に収まらないGitHubタスクも示して、今日やることを作って。","should_trigger":true},
+  {"query":"GitHub PRとSlackの自分の投稿から、先週の実績日報を作って。","should_trigger":false},
+  {"query":"Googleカレンダーの予定を参加状態つきの表にして。","should_trigger":false},
+  {"query":"この会議をカレンダーの15時に移動して。","should_trigger":false},
+  {"query":"このチャットの回答をGoogle Docsへ保存して。","should_trigger":false},
+  {"query":"GitHubのIssueをひとつ追加して。期限は金曜日。","should_trigger":false},
+  {"query":"日報作成skillそのものを新しく作りたい。","should_trigger":false},
+  {"query":"11月の自分のPRをマージ日時つきで一覧化して。","should_trigger":false},
+  {"query":"この日報の日本語を読みやすく直して。","should_trigger":false},
+  {"query":"毎朝9時に実行するリマインダーを設定して。","should_trigger":false},
+  {"query":"1か月分のTeamSpirit勤怠を登録して。","should_trigger":false},
+  {"query":"日報の完了チェックと補足メモをtasksへ同期して。","should_trigger":true},
+  {"query":"今日の予定を、カレンダーと期限の近いIssueから下書きして。細かい質問はいらない。","should_trigger":true}
+]
