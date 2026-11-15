@@ -1,4 +1,4 @@
 interface:
   display_name: "Requirements Doc Format"
-  short_description: "要件定義書の標準フォーマット作成と監査を支援する技能"
-  default_prompt: "Use $requirements-doc-format to create or review functional requirements definition documents in the standard v5 format."
+  short_description: "会話の説明を保ち、Issueと詳細要件書を目的に応じて書き分ける"
+  default_prompt: "Use $requirements-doc-format to organize the agreed requirements clearly, choose the appropriate Issue or detailed-document format, and apply writing to Japanese prose."

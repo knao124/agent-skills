@@ -1,5 +1,13 @@
 [
   {
+    "query": "ここまで会話で決めた要件を、同じ説明順と具体例でGitHub Issueに登録して。",
+    "should_trigger": true
+  },
+  {
+    "query": "このIssueの要件を、誰が何をするか分かる箇条書きへ書き直して。合意した条件は残して。",
+    "should_trigger": true
+  },
+  {
     "query": "新しい検索画面の要件定義書を、標準章立てと条件→入力→処理→出力で作って",
     "should_trigger": true
   },
