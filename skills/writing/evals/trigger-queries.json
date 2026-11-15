@@ -1,0 +1,12 @@
+[
+  {"query": "この日本語の説明を、解釈がぶれない文章に直して", "should_trigger": true},
+  {"query": "PR本文の太字とカッコ書きを整理して読みやすくして", "should_trigger": true},
+  {"query": "このコードコメントの目的と理由が伝わるかレビューして", "should_trigger": true},
+  {"query": "このIssueをshokaiさんのwritingで書き換えて", "should_trigger": true},
+  {"query": "wikiへ転記する説明が、元の文脈なしでも通じるように直して", "should_trigger": true},
+  {"query": "この不具合説明が、長所のように読めないか確認して", "should_trigger": true},
+  {"query": "入力文字列の丸括弧を取り除くPython関数を実装して", "should_trigger": false},
+  {"query": "Markdownパーサーが太字を認識しないバグを直して", "should_trigger": false},
+  {"query": "このURLにHTTPリクエストを送ってステータスコードを調べて", "should_trigger": false},
+  {"query": "ソースコードの英字識別子を一括リネームして", "should_trigger": false}
+]
