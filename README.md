@@ -45,6 +45,7 @@ skills/
 | `teamspirit-monthly-attendance` | ローカル設定を使い、TeamSpirit/Salesforce の月次勤怠時刻修正と工数割合登録を console script で厳密に支援する | TeamSpirit 勤怠表、勤怠時刻修正申請、承認申請、工数割合、Chrome/Console 自動化を頼まれたとき |
 | `tweet-explainer` | X/Tweet URLをブラウザ優先、`~/.x-token` のApp-only token fallbackで読み、要約・解説する | X投稿やX ArticleのURLを読んで、要約・解説・HTML記事化を頼まれたとき |
 | `video-explainer` | 動画URLやローカル動画/音声を取得・文字起こしし、詳細な解説記事へ変換する | 動画を見て、音声を文字起こし、トランスクリプト抽出、動画を記事化して、と頼まれたとき |
+| `writing` | shokaiさんの文章の心得に沿って、解釈がぶれない日本語を書き、強調記号やカッコ書きを整理する | 日本語の説明、コードコメント、PR本文、ドキュメント、wikiを執筆・推敲・レビューするとき |
 
 ## Install
 
@@ -70,6 +71,7 @@ gh skill preview knao124/agent-skills slack-daily-report
 gh skill preview knao124/agent-skills teamspirit-monthly-attendance
 gh skill preview knao124/agent-skills tweet-explainer
 gh skill preview knao124/agent-skills video-explainer
+gh skill preview knao124/agent-skills writing
 ```
 
 Codex の user scope に入れる例:
@@ -93,6 +95,7 @@ gh skill install knao124/agent-skills slack-daily-report --agent codex --scope u
 gh skill install knao124/agent-skills teamspirit-monthly-attendance --agent codex --scope user
 gh skill install knao124/agent-skills tweet-explainer --agent codex --scope user
 gh skill install knao124/agent-skills video-explainer --agent codex --scope user
+gh skill install knao124/agent-skills writing --agent codex --scope user
 ```
 
 Claude Code で PR 作成 skill を使う例:
@@ -109,6 +112,24 @@ gh skill install knao124/agent-skills git-worktree-start --agent claude-code --s
 ```sh
 gh skill install knao124/agent-skills gh-pr-ja --pin v0.1.0 --agent codex --scope user
 ```
+
+### 日本語の文章ルール
+
+`writing`は、shokaiさんの[文章を書く時の心得](https://github.com/shokai/agent-skills/blob/3a0ffd84d22faef73e42e96fedd3b54bbcfb4a66/plugins/kuden/skills/writing/SKILL.md)をMITライセンスで取り込んだもの。本文は原文を保ち、配布用のfrontmatterと評価例を添えている。著作権表示とライセンスは[skills/writing/LICENSE](skills/writing/LICENSE)に置く。
+
+Codexで毎回適用する場合は、インストール後に`~/.codex/AGENTS.md`へ次を記載する。yomiyasuから切り替える場合は、毎回適用する指定と読み込み先を置き換える。両方を同時に適用しない。
+
+```markdown
+## 日本語の文章
+
+- 日本語の回答、進捗報告、説明、作成する文章には、明示的な呼び出しがなくてもshokaiさんの`writing`を毎回適用すること。
+- 会話開始時に `~/.codex/skills/writing/SKILL.md` を読むこと。読み込んだ後は、その会話の日本語出力を返す前に同じ基準で見直すこと。
+- 文章の書き直しでは、主張、情報の比重、断定の強さ、文の働きを保ち、根拠のない情報を足さないこと。
+- 通常の回答では推敲した本文だけを返すこと。「変えたところ」などの推敲報告は、ユーザーが文章の書き直しを依頼した場合に限ること。
+- コード、コマンド、URL、識別子、原文どおりの引用、ユーザー指定の出力形式は、文章の推敲で変更しないこと。
+```
+
+`gh skill install`は既存のyomiyasuや`AGENTS.md`を自動で変更しない。元に戻す場合は、退避しておいたスキルと適用設定を復元する。
 
 ## Validate
 

@@ -1,0 +1,40 @@
+---
+name: writing
+description: Use this skill when writing, revising, or reviewing Japanese explanations, code comments, PR descriptions, documents, or wiki pages to avoid ambiguous wording and excessive emphasis or parenthetical explanations.
+license: MIT
+metadata:
+  upstream: https://github.com/shokai/agent-skills/blob/3a0ffd84d22faef73e42e96fedd3b54bbcfb4a66/plugins/kuden/skills/writing/SKILL.md
+---
+
+# 文章を書く時の心得
+
+ソースコードのコメント、pull requestの概要欄、ドキュメント、wikiのどこに書く時も、以下の基準に従う。
+
+## 心得1. 解釈のブレが発生しない文を書く
+
+- 良くない事は、良くない事だと分かる述語で書く。「patternが遅くなっても落ちない」は、まるで良い事かのようにも読める。失われる働きを述語にして「patternが遅くなった事を検知できない」と書く
+- 目的は完全な節で言い切る。「〜できるよう」「〜で使うため」と書く。「〜用に、」のような体言止めの断片にしない
+- 目的の述語を曖昧な語にしない。「highlightが当たるよう、Xを保持する」ではなく「highlightを判定できるよう、Xを保持する」と書く。「当たる」では、何が成立する事なのかを言い切れていない
+- 理由の後に2つの事柄を「〜し、〜する」でつなぐと、理由がどちらにかかるか曖昧になる
+- 文を他所から写す時は、貼り付け先の前後の文脈に合うか確かめ、書いた後に読み直して意味が通るか確かめる。元の文脈を前提にした省略は、貼り付け先では意味が通らない
+
+## 心得2. 強調記号で重要性を示さず、文を推敲する
+
+`**bold**` 等の強調記号で重要性を表現しない。重要なら、語彙、断言の強さ、文の位置で伝わるように文そのものを推敲する。
+
+## 心得3. カッコ書きで補足説明しない
+
+丸括弧で補足説明を挿入すると、文の構造が曖昧になり読みにくくなる。
+
+- 補足が親の項目の詳細や判断基準なら、子リストで展開する
+- 補足が背景や理由なら、文を分けて続ける
+- 括弧の中身を先に述べてから本題に入るなど、文の順序を変える
+- 文意を裏返しただけの括弧注記は削る。「実際に書かれた表記を保持する(正規化後ではない)」の括弧の中は、前半が言えた時点で自明である
+
+## 心得4. 和文と英字の間に空白を入れない
+
+和文と、英字やコードの識別子との間に空白を入れない。`Modal を <dialog> に` ではなく `Modalを<dialog>に` と書く。`react-bootstrap Modal` のような英単語同士の空白は残す。Markdownのinline codeの前後の空白は、この規則の対象外である。
+
+## 心得5. URLで終わる行の末尾に句点を付けない
+
+`起点は <URL>` のようにURLで終わる行の末尾に `。` を付けない。
