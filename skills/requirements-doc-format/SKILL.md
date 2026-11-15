@@ -1,6 +1,6 @@
 ---
 name: requirements-doc-format
-description: Use this skill when creating, revising, or auditing functional requirements in GitHub Issues, conversations, or detailed requirements documents. Preserve agreed explanations, apply writing to Japanese prose, and use the v5 standard format only for detailed documents. Check conditions, inputs, actions, outputs, permissions, failures, and boundary cases without forcing those headings into an Issue.
+description: Use this skill when creating, revising, or auditing functional requirements in GitHub Issues, conversations, or detailed requirements documents. Preserve agreed explanations, apply writing to Japanese prose, and use the v5 standard format only for detailed documents. For Issues, separate mandatory requirements, implementation constraints, examples, and exclusions using nested bullets without Markdown headings or bold. Check conditions, inputs, actions, outputs, permissions, failures, and boundary cases without forcing those headings into an Issue.
 license: MIT
 ---
 
@@ -26,12 +26,32 @@ license: MIT
 
 ユーザーがIssueへの登録や会話の整理を求めた場合は、この形式を使う。「要件」という語だけで正式な詳細要件書として扱わない。
 
-- 冒頭で実現したいことを短く説明し、合意した話題に対応する見出しと箇条書きで整理する。見出しの個数は固定しない。
+- 本文は箇条書きで書き、親子関係と並び順で区分を示す。Markdownの見出し・太字・見出し代わりの独立した平文は使わない。コマンド等の原文は子項目のコードブロックとして保持する。
+- 必須要件・実装条件・操作例・対象外を分ける。実現したいことは必要に応じて先頭の「目的」に短く書く。該当しない区分は無理に作らない。
+  - 必須要件：実装後に何ができれば要件を満たすかを書く。機能のまとまりごとに「要件1：〜できること」のように識別できる形で示し、必要な動作条件だけを子項目に置く。個数は合意内容に合わせ、固定しない。
+  - 実装条件：共通APIの利用、権限、データの保管方法など、実現時に守る制約を書く。必須要件の説明と区別するが、任意の参考情報にはしない。未決の設計案は、決定済みの条件と区別する。
+  - 操作例：要件の使い方が分かる例を書く。仮のコマンド名・値は仮の例と明示し、例だけで新しい必須機能や設定値を確定しない。
+  - 対象外：今回実装しない機能・範囲を書く。実装する機能の権限制約や失敗時の動作を、対象外として省略しない。
+- 全文を同じ深さの箇条書きに変えるだけでは整理したと扱わない。読み手が必須要件を先に把握し、各条件がどの要件に関係するか分かるように分類する。
 - 同じ条件を概要・用語・機能一覧・処理・出力へ繰り返し書かない。
 - 条件・入力・処理・出力、権限、失敗、境界値は、記載漏れを確認する観点として使う。これらを必須の表示見出しにはしない。
 - 読み手が動作を理解するために必要な制約、対象外、例を残す。短くするために権限や更新競合などの重要な条件を落とさない。
 - 詳細な型一覧・図・改定履歴は一律には追加しない。技術上の補足が必要なら、主な説明を読み終えられる位置へ置く。
 - 既存の共通要件は必要な箇所を参照し、Issueごとに全文を複製しない。共通要件の変更が必要なら、変更点を明示する。
+
+例えば、次のように親項目を通常の箇条書きで示す。具体的な機能・個数は対象に合わせる。
+
+```md
+- 必須要件
+  - 要件1：社員が自分の権限でデータを参照できること。
+    - サーバは、本人に許可されたデータだけを返す。
+- 実装条件
+  - WebとCLIは同じ業務APIを使う。
+- 操作例
+  - 社員がCLIで案件を検索すると、参照可能な案件が返る。
+- 対象外
+  - 外部サービスへの自動送信は今回実装しない。
+```
 
 ### 正式な詳細要件書
 
@@ -50,6 +70,8 @@ license: MIT
 ## 最終確認
 
 - ユーザーが求めた文書種別と形式になっているか。
+- Issueでは必須要件が識別でき、実装条件・操作例・対象外と混ざっていないか。箇条書きに変えただけで、分類を省略していないか。
+- Issue本文にMarkdownの見出しや太字が残っていないか。例の仮の値やコマンドを必須条件として追加していないか。
 - 会話で合意した内容、説明順、具体例を保ち、合意済みの説明より読みにくくしていないか。
 - 誰が何をするか、実行条件と結果、必要な権限、失敗時と境界値の扱いが分かるか。
 - 同じ説明を複数箇所で繰り返していないか。説明していない専門語や不要な見出しを増やしていないか。

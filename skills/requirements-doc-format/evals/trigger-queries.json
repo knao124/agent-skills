@@ -1,5 +1,9 @@
 [
   {
+    "query": "このIssueを必須要件と実装条件・操作例・対象外に分けて。見出しや太字は使わず、箇条書きだけで何を実装するか分かるようにして。",
+    "should_trigger": true
+  },
+  {
     "query": "ここまで会話で決めた要件を、同じ説明順と具体例でGitHub Issueに登録して。",
     "should_trigger": true
   },
