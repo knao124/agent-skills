@@ -37,6 +37,7 @@ skills/
 | `git-worktree-start` | code change 前に clean な git worktree と `codex/` branch を用意する | 実装・修正・refactor・ドキュメント更新など、ファイル変更を伴う作業やそれをPR化する作業を始めるとき |
 | `gws-calendar-agenda` | `gws` で指定期間の自分のGoogleカレンダー予定を取得し、日付・参加状態つきの表にまとめる | MCPなしでGoogleカレンダー予定を一覧化、参加状態つきで表にする、指定期間の予定をまとめるよう頼まれたとき |
 | `gcloud-repo-config` | repo ごとの `gcloud` named configuration を安全に初期設定、検証、利用する | repo 固有の `gcloud` named configuration、`.codex/gcloud.local.toml`、`CLOUDSDK_ACTIVE_CONFIG_NAME`、service account impersonation の設定や利用を頼まれたとき |
+| `issue-commander` | T3 Codeで親イシューの依存関係を整理し、役割ごとにモデルを割り当てて作業スレッドを調整する | 親イシューの司令塔、サブイシューの並行進行、担当スレッド間の引き継ぎや進捗確認を頼まれたとき |
 | `meeting-minutes` | 会議録画・文字起こし・会議ツールURLから共有用の日本語議事録を作る | Notta/Zoom/Teams/Google Meet等の録画や文字起こしから、議事・決定内容・TODOつき議事録を頼まれたとき |
 | `publish-to-public` | ローカルHTMLを `knao124/public` に配置し、index/README導線更新、push、公開URL検証まで行う | HTMLを公開して、これを公開して、publicに公開、GitHub Pagesに載せて、と頼まれたとき |
 | `reading-note` | 本やPDFを初見者の入口質問、ロジックツリー詳細、重要主張台帳、重要概念台帳、自己テスト、差分監査で精読代替ノート化する | 精読ノート、読書ノート、論理復元、本/PDFを深く理解したい、そもそも用語、ロジックツリー、登場概念・理解ゴール・本との差分監査を頼まれたとき |
@@ -63,6 +64,7 @@ gh skill preview knao124/agent-skills gh-pr-ja
 gh skill preview knao124/agent-skills git-worktree-start
 gh skill preview knao124/agent-skills gws-calendar-agenda
 gh skill preview knao124/agent-skills gcloud-repo-config
+gh skill preview knao124/agent-skills issue-commander
 gh skill preview knao124/agent-skills meeting-minutes
 gh skill preview knao124/agent-skills publish-to-public
 gh skill preview knao124/agent-skills reading-note
@@ -87,6 +89,7 @@ gh skill install knao124/agent-skills gh-pr-ja --agent codex --scope user
 gh skill install knao124/agent-skills git-worktree-start --agent codex --scope user
 gh skill install knao124/agent-skills gws-calendar-agenda --agent codex --scope user
 gh skill install knao124/agent-skills gcloud-repo-config --agent codex --scope user
+gh skill install knao124/agent-skills issue-commander --agent codex --scope user
 gh skill install knao124/agent-skills meeting-minutes --agent codex --scope user
 gh skill install knao124/agent-skills publish-to-public --agent codex --scope user
 gh skill install knao124/agent-skills reading-note --agent codex --scope user
@@ -98,13 +101,14 @@ gh skill install knao124/agent-skills video-explainer --agent codex --scope user
 gh skill install knao124/agent-skills writing --agent codex --scope user
 ```
 
-Claude Code で PR 作成 skill を使う例:
+Claude Codeのuser scopeに入れる例
 
 ```sh
 gh skill install knao124/agent-skills gh-pr-ja --agent claude-code --scope user
 gh skill install knao124/agent-skills daily-task-plan --agent claude-code --scope user
 gh skill install knao124/agent-skills claude-worklog-summary --agent claude-code --scope user
 gh skill install knao124/agent-skills git-worktree-start --agent claude-code --scope user
+gh skill install knao124/agent-skills issue-commander --agent claude-code --scope user
 ```
 
 チーム配布時は release tag に pin する。

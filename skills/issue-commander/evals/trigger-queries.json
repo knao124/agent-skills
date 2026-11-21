@@ -1,0 +1,82 @@
+[
+  {
+    "query": "親イシュー https://github.com/example/repo/issues/32 の司令塔をやって。サブイシューを全部読んで依存関係を整理して",
+    "should_trigger": true
+  },
+  {
+    "query": "このスレッドを司令塔にして、サブイシューごとにworktreeのスレッドを立てて並行で進めて",
+    "should_trigger": true
+  },
+  {
+    "query": "司令塔をお願いした親イシューの進捗を、ステータス・前回からの差分・課題・相談事項で整理して",
+    "should_trigger": true
+  },
+  {
+    "query": "GitHubの親イシューに依存関係を書いた。T3 Codeで先に進められるサブイシューを整理して",
+    "should_trigger": true
+  },
+  {
+    "query": "この親イシューのU5は、別スレッドでレビューが終わったのに止まってる。結果を担当に渡して進めて",
+    "should_trigger": true
+  },
+  {
+    "query": "$issue-commanderで親イシュー#42を見て、設計を誰に頼むかまで決めて。起動は後で頼む",
+    "should_trigger": true
+  },
+  {
+    "query": "Take point on GitHub issue #42 in T3 Code. Read its child issues and plan who can start without waiting.",
+    "should_trigger": true
+  },
+  {
+    "query": "親イシューの実装スレッド2本が同じmigrationを作りそう。担当を整理して両方に伝えて",
+    "should_trigger": true
+  },
+  {
+    "query": "親イシューの担当スレッドを順に見て、質問で止まっているものを教えて。報告だけでいい",
+    "should_trigger": true
+  },
+  {
+    "query": "サブイシューを並行で進めたい。T3 Codeのスレッドを立てる前に、触るファイルの重複を見て",
+    "should_trigger": true
+  },
+  {
+    "query": "このイシューを実装してPRを作って",
+    "should_trigger": false
+  },
+  {
+    "query": "このPRのコードをレビューして",
+    "should_trigger": false
+  },
+  {
+    "query": "Codex同士で2往復相談だけして。ファイルは触らない",
+    "should_trigger": false
+  },
+  {
+    "query": "自分の今週のPRを一覧にして",
+    "should_trigger": false
+  },
+  {
+    "query": "新しいgit worktreeを作って作業を始めて",
+    "should_trigger": false
+  },
+  {
+    "query": "T3 Codeでこの単独のバグ修正用スレッドを1本立てて",
+    "should_trigger": false
+  },
+  {
+    "query": "親イシュー#42とサブイシューの本文を和訳して",
+    "should_trigger": false
+  },
+  {
+    "query": "この設計書をGPT-6.2 Solのhighでレビューして。親イシュー全体の進行は私が担当する",
+    "should_trigger": false
+  },
+  {
+    "query": "T3 Codeにある今週の全スレッドの稼働時間を集計して",
+    "should_trigger": false
+  },
+  {
+    "query": "この関数で並行実行すると競合する箇所を調べて",
+    "should_trigger": false
+  }
+]
