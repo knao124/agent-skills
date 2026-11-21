@@ -1,0 +1,4 @@
+interface:
+  display_name: "Issue Commander"
+  short_description: "親イシューの司令塔として、サブイシューを並行スレッドで進める"
+  default_prompt: "$issue-commanderでこの親イシューの司令塔を担当し、サブイシューの依存関係とスレッドを立てる順番を整理して。"
