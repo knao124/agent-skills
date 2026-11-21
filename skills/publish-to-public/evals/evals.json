@@ -4,7 +4,7 @@
     {
       "id": "publish-explicit-html-path",
       "prompt": "/tmp/codex-explain-static-html.html を public に公開して。",
-      "expected_output": "指定されたHTMLファイルを検証し、~/dev/knao124/public にコピーし、index.html と README.md に公開ページへのリンクを追加または更新し、main にcommit/pushし、https://knao124.github.io/public/<filename> をcurlで確認して最終URLを返す。",
+      "expected_output": "指定されたHTMLファイルを検証し、解決した knao124/public のローカルcloneにコピーし、index.html と README.md に公開ページへのリンクを追加または更新し、main にcommit/pushし、https://knao124.github.io/public/<filename> をcurlで確認して最終URLを返す。",
       "files": []
     },
     {
@@ -16,7 +16,7 @@
     {
       "id": "preserve-existing-public-repo-changes",
       "prompt": "さっき作った解説HTMLをGitHub Pagesに載せて。public repoには未commitの変更がある。",
-      "expected_output": "~/dev/knao124/public の既存変更を確認し、無関係な変更を上書きせず、公開対象HTMLと必要なナビゲーション差分だけを追加する。既存変更と競合する場合は安全に止めて確認する。",
+      "expected_output": "解決した knao124/public のローカルcloneの既存変更を確認し、無関係な変更を上書きせず、公開対象HTMLと必要なナビゲーション差分だけを追加する。既存変更と競合する場合は安全に止めて確認する。",
       "files": []
     }
   ]
