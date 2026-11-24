@@ -1,6 +1,6 @@
 ---
 name: gcloud-repo-config
-description: Use this skill when Codex needs to set up, discover, validate, or use a repository-local Google Cloud CLI named configuration for gcloud commands. Trigger on repo-specific gcloud auth/login/config switching, `.codex/gcloud.local.toml`, `CLOUDSDK_ACTIVE_CONFIG_NAME`, service account impersonation, or AI agent access to Google Cloud from a repo.
+description: Use this skill when Codex needs to set up, discover, validate, or use a repository-local Google Cloud CLI named configuration for gcloud commands. Trigger on repo-specific gcloud login, reauthentication, config switching, `.codex/gcloud.local.toml`, `CLOUDSDK_ACTIVE_CONFIG_NAME`, service account impersonation, or AI agent access to Google Cloud from a repo.
 license: MIT
 ---
 
@@ -81,6 +81,18 @@ gcloud --configuration=<configuration> <command>
 
 Prefer the environment variable form when a multi-command workflow uses the same configuration.
 
+## Reauthentication
+
+When running a `gcloud` command unattended, set `CLOUDSDK_CORE_DISABLE_PROMPTS=1` for that command so it reports when interactive reauthentication is required. If Google Cloud CLI user credentials need reauthentication, always use the authorization-code paste flow with the selected named configuration and its login account. Obtain the user's approval before starting login if they have not already authorized it.
+
+```sh
+CLOUDSDK_ACTIVE_CONFIG_NAME=<configuration> gcloud auth login <account> --no-launch-browser --force
+```
+
+Have the user open the authorization URL printed by `gcloud`, sign in, and paste the one-time authorization code into the running `gcloud` prompt. Keep the code out of chat, logs, and repository files. If the user cannot access the prompt directly, provide the command for them to run in an interactive terminal on the machine that needs authentication. Wait for login to succeed before retrying the original command with the same named configuration.
+
+See the [Google Cloud CLI login reference](https://docs.cloud.google.com/sdk/gcloud/reference/auth/login) for the authorization-code flow.
+
 ## Initial Setup
 
 When `.codex/gcloud.local.toml` is missing or points to a nonexistent configuration, ask the user concise questions before changing anything:
@@ -98,7 +110,7 @@ After the user answers, run the setup with the chosen values:
 # Skip this create command if the user chose an existing configuration.
 gcloud config configurations create <configuration> --no-activate
 
-CLOUDSDK_ACTIVE_CONFIG_NAME=<configuration> gcloud auth login <account>
+CLOUDSDK_ACTIVE_CONFIG_NAME=<configuration> gcloud auth login <account> --no-launch-browser
 CLOUDSDK_ACTIVE_CONFIG_NAME=<configuration> gcloud config set account <account>
 CLOUDSDK_ACTIVE_CONFIG_NAME=<configuration> gcloud config set project <project-id>
 
@@ -126,6 +138,8 @@ python3 <skill-dir>/scripts/gcloud_repo_config.py write --repo . \
 
 Omit optional flags when the user did not provide those values.
 
+If initial login prompts for an authorization code, use the same terminal input procedure as in Reauthentication.
+
 ## ADC Handling
 
 Explain this distinction when relevant:
@@ -147,7 +161,7 @@ Do not overwrite ADC with `--update-adc` unless the user explicitly confirms tha
 ## Failure Handling
 
 - If `gcloud` is missing, tell the user to install Google Cloud SDK before setup.
-- If `gcloud auth login` requires browser interaction, pause and let the user complete it.
+- If `gcloud` reports that user credentials need reauthentication, follow Reauthentication before retrying.
 - If impersonation fails, check that the login account has `roles/iam.serviceAccountTokenCreator` on the target service account.
 - If the selected configuration has a different project/account than the repo-local file, stop and ask before changing config properties.
 - If `.codex/gcloud.local.toml` is tracked by git, stop and ask whether to remove it from tracking before proceeding.
