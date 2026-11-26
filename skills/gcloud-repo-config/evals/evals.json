@@ -18,6 +18,12 @@
       "prompt": "repoのアプリコードもGoogle client libraryを使うので、このgcloud local設定で認証を切り替えて。",
       "expected_output": "gcloud named configurationとADCは別物だと説明し、CLI用設定だけで足りるかADC設定も必要かを確認してから進める。",
       "files": []
+    },
+    {
+      "id": "reauth-clickable-link",
+      "prompt": "gcloudコマンドがReauthentication requiredになった。iPhoneからすぐ再認証できるようにして。",
+      "expected_output": "CLOUDSDK_ACTIVE_CONFIG_NAME付きでgcloud auth login --no-launch-browserをバックグラウンド起動し、出力されたaccounts.google.comのURLを通常のクリック可能なMarkdownリンクで提示し、返信された認証コードを起動中プロセスの標準入力へ渡して完了させる（localhostコールバックや端末での手動コマンド実行を案内しない）。",
+      "files": []
     }
   ]
 }
