@@ -83,13 +83,29 @@ Prefer the environment variable form when a multi-command workflow uses the same
 
 ## Reauthentication
 
-When running a `gcloud` command unattended, set `CLOUDSDK_CORE_DISABLE_PROMPTS=1` for that command so it reports when interactive reauthentication is required. If Google Cloud CLI user credentials need reauthentication, always use the authorization-code paste flow with the selected named configuration and its login account. Obtain the user's approval before starting login if they have not already authorized it.
+When running a `gcloud` command unattended, set `CLOUDSDK_CORE_DISABLE_PROMPTS=1` for that command so it reports when interactive reauthentication is required instead of hanging on a password prompt.
+
+If Google Cloud CLI user credentials need reauthentication (e.g., `Reauthentication required`), **do not** ask the user to open a terminal, **do not** use `localhost` browser-callback login (it fails on iPhone/mobile and remote clients), and **do not** put the login URL only inside a secret-request card/button (mobile clients cannot click it cleanly and it can time out).
+
+Always use this exact 1-roundtrip clickable-link flow on the first try:
+
+1. Start the named-configuration authorization-code login as a **background task** waiting on stdin (keeping the process alive):
 
 ```sh
-CLOUDSDK_ACTIVE_CONFIG_NAME=<configuration> gcloud auth login <account> --no-launch-browser --force
+CLOUDSDK_ACTIVE_CONFIG_NAME=<configuration> gcloud auth login <account> --no-launch-browser
 ```
 
-Have the user open the authorization URL printed by `gcloud`, sign in, and paste the one-time authorization code into the running `gcloud` prompt. Keep the code out of chat, logs, and repository files. If the user cannot access the prompt directly, provide the command for them to run in an interactive terminal on the machine that needs authentication. Wait for login to succeed before retrying the original command with the same named configuration.
+(Pass `--force` only if `gcloud` skips login while reusing a stale session. `--no-launch-browser` redirects to Google's public `https://sdk.cloud.google.com/authcode.html`, so it works from iPhone, iPad, and desktop browsers.)
+
+2. Extract the exact `https://accounts.google.com/o/oauth2/auth?...` URL from the background task output.
+3. Reply directly in the chat message with a **clickable Markdown link** (not a code block, not a secret card), e.g.:
+
+```markdown
+[Google Cloud にログインする](https://accounts.google.com/o/oauth2/auth?...)
+```
+
+Ask the user to tap the link, sign in as `<account>`, and reply with the displayed verification code.
+4. As soon as the user replies with the code, immediately send `<code + newline>` to the running background `gcloud` task's stdin, wait for it to exit `0`, and resume the original `gcloud` command. Never commit or save the verification code into files or repository logs.
 
 See the [Google Cloud CLI login reference](https://docs.cloud.google.com/sdk/gcloud/reference/auth/login) for the authorization-code flow.
 

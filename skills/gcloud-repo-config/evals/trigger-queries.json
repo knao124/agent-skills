@@ -20,6 +20,10 @@
     "should_trigger": true
   },
   {
+    "query": "gcloudがReauthentication requiredになったので再ログインのリンクを出して",
+    "should_trigger": true
+  },
+  {
     "query": "gcloud auth loginの有効期限を説明して",
     "should_trigger": false
   },
